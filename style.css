@@ -77,4 +77,9 @@ body {
   100% { 
     transform: scale(1.05) rotateZ(45deg); 
   } 
-} 
+}
+
+.docs {
+  margin-top: 3rem;
+  text-align: left;
+}
