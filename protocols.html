@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<title>Protocols ☸️ Agregore Browser</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html charset=utf-8">
+<link rel="stylesheet" href="./style.css">
+<link rel="icon" type="image/svg+xml" href="./icon.svg"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="Protocols - Agregore - A minimal web browser for the distributed web.">
+
+<img class="logo" src="./icon.svg">
+<a href="index.html"><h1>Agregore</h1></a>
+<h2>A minimal web browser for the distributed web</h2>
+
+<section class="docs">
+<h3>Supported protocols</h3>
+
+<ul>
+    <li>☑️ <a href="https://hypercore-protocol.org/">Hypercore</a> (<code>hyper://</code>)</li>
+    <ul>
+        <li>Able to read from archives</li>
+        <li>Able to resolve <code>dat-dns</code> domains</li>
+        <li>Able to write, create and modify archives</li>
+    </ul>
+</ul>
+<ul>
+    <li>☑️ <a href="https://www.datprotocol.com/">Dat</a> (<code>dat://</code>)</li>
+    <ul>
+        <li>Able to read from archives</li>
+        <li>Able to resolve <code>dat-dns</code> domains</li>
+        <li>No <code>DatArchive</code> support</li>
+    </ul>
+</ul>
+<ul>
+    <li>☑️ <a href="https://gemini.circumlunar.space/">Gemini</a> (<code>gemini://</code>)</li>
+    <ul>
+        <li>Able to read from gemini servers</li>
+        <li>Render Gemini pages as HTMLs</li>
+        <li>No certificate management code yet</li>
+    </ul>
+</ul>
+<ul>
+    <li>☑️ <a href="https://ipfs.io/">IPFS</a> (<code>ipfs</code>)</li>
+    <ul>
+        <li>Able to read from <code>ipfs://</code> and <code>ipns://</code> URLs</li>
+        <li>Able to <code>POST</code> data into IPFS</li>
+        <li>Able to <code>PUBLISH</code> an infohash to IPNS</li>
+    </ul>
+</ul>
+
+<h3>Coming soon</h3>
+
+<ul>
+    <li><a href="https://github.com/earthstar-project/earthstar">EarthStar</a></li>
+    <li><a href="http://www.bittorrent.org/index.html">BitTorrent</a></li>
+    <li><a href="https://tildegit.org/PigeonProtocolConsortium/protocol_spec">Pigeon Protocol</a></li>
+</ul>
+
+<p>PRs for more protocols are welcome.</p>
+</section>
