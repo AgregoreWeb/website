@@ -55,6 +55,8 @@ h1 {
 
 img {
   width: 50%;
+  margin: 1rem auto;
+  display: block;
 }
 
 body {
@@ -72,14 +74,23 @@ body {
 
 @keyframes pulse { 
   0% { 
-    transform: scale(1) rotateZ(-45deg); 
+    transform: scale(1); 
   }
   100% { 
-    transform: scale(1.05) rotateZ(45deg); 
+    transform: scale(1.05); 
   } 
 }
 
 .docs {
   margin-top: 3rem;
+  text-align: left;
+}
+
+header a{
+  margin: 0.5em;
+}
+
+pre {
+  display: inline-block;
   text-align: left;
 }
