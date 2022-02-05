@@ -2,7 +2,7 @@
 
 name: CI
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
@@ -24,7 +24,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2-beta
         with:
-          node-version: '12'
-      # Runs a single command using the runners shell
+          node-version: '16'
+      - name: Compile website into HTML
+        run: npx agregore-site-generator
       - name: Run Publisher
         run: npx hyperdrive-publisher sync ${{ secrets.PUBLISHER_KEY }}
