@@ -26,6 +26,6 @@ jobs:
         with:
           node-version: '16'
       - name: Compile website into HTML
-        run: npx agregore-site-generator
+        run: npx agregore-markdown-site-generator
       - name: Run Publisher
         run: npx hyperdrive-publisher sync ${{ secrets.PUBLISHER_KEY }}
