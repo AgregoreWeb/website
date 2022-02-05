@@ -1,4 +1,4 @@
-# Theming - Agregore Browser
+## Theming - Agregore Browser
 
 Agregore provides CSS variables for themeing the browser at the URL `agregore://theme/vars.css`.
 
@@ -31,7 +31,7 @@ This is useful for styling markdown pages or other pages with basic HTML. You pr
 
 The style includes a class called agregore-header-anchor` which can be used on anchors within headers for linking to headings. Checkout the markdown extension
 
-## Customization
+### Customization
 
 The `--ag-theme-*` variables can me modified in the `.agregorerc` file by clicking `Help > Edit Configuration File` and adding the following content:
 
@@ -51,7 +51,7 @@ You can replace the various values with any valid CSS values like Hex codes: `#F
 
 More styles will be added here as needed. If you feel we should standardize on some sort of style, feel free to open an issue talking about what it is and why it should be added.
 
-## Highlight.js
+### Highlight.js
 
 For convenience, Agregore bundles highlight.js and a default theme for it.
 

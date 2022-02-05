@@ -1,8 +1,8 @@
-# Extensions - Agregore Browser
+## Extensions - Agregore Browser
 
 Here's some info about how to use web extensions in Agregore Browser.
 
-## Installing extensions
+### Installing extensions
 
 Agregore doesn't yet support loading extensions from app stores or zip files, but you can place the extracted extensions inside a folder for it to load.
 

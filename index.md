@@ -7,6 +7,7 @@ img {
 ![Agregore Logo](./icon.svg)
 
 # Agregore
+
 ## A minimal web browser for the distributed web
 
 [Explore](./explore)
