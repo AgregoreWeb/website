@@ -1,10 +1,24 @@
 <style>
-img {
-  width: 100%;
+.agregore-logo {
+  width: 50%;
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
 }
 </style>
 
-![Agregore Logo](./icon.svg)
+<img class="agregore-logo" title="Agregore Logo" src="./icon.svg">
 
 # Agregore
 
