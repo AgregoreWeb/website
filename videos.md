@@ -1,38 +1,23 @@
-<!DOCTYPE html>
-<title>Videos ☸️  Agregore Browser</title>
-<meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html charset=utf-8">
-<link rel="stylesheet" href="./style.css">
-<link rel="icon" type="image/svg+xml" href="./icon.svg"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="description" content="Videos - Agregore - A minimal web browser for the distributed web.">
+# Videos - Agregore Browser
 
-<img class="logo" src="./icon.svg">
-<a href="index.html"><h1>Agregore</h1></a>
-<h2>A minimal web browser for the distributed web</h2>
+Here's a collection of videos related to Agregore. If you'd like to schedule a presentation at your own meetup, feel free to reach out by sending us [an email](mailto:agregore@mauve.moe?subject=Booking%20a%20presentation).
 
-<p>
-Here's a collection of videos related to Agregore. If you'd like to schedule a presentation at your own meetup, feel free to reach out by sending us <a href="mailto:agregore@mauve.moe?subject=Booking%20a%20presentation">an email</a>.
-</p>
-
-<h3>5 Minute Lightning Talk / Overview - DWeb Meetup<h3>
+### 5 Minute Lightning Talk / Overview - DWeb Meetup
 
 <iframe width="560" height="315" src="https://archive.org/embed/dweb-meetup-dec-2020-dweb-lightning-talks?start=4212" title="Agregore 4 minute intro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<h3>How Decentralized Web Apps work - Bloom</h3>
+### How Decentralized Web Apps work - Bloom
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gHrul4jEHvs" title="How Decentralized Web Apps Work" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<h3>Making of Agregore - Speakeasy JS</h3>
+### Making of Agregore - Speakeasy JS
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ciRWmEhL8e8" title="Making of Agregore" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<h3>Agregore IPFS Intro (live demo) - IPFS Meetup</h3>
+### Agregore IPFS Intro (live demo) - IPFS Meetup
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kI9Issf3MNc?start=1625" title="Making of Agregore" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<h3>Initial release of Agregore - Dat Conference</h3>
+### Initial release of Agregore - Dat Conference
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/TnYKvOQB0ts" title="Making of Agregore" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
