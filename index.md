@@ -22,7 +22,7 @@
 
 # Agregore
 
-## A minimal web browser for the distributed web
+## Explore the distributed web
 
 [Explore](./explore)
 [Protocols](./protocols)
