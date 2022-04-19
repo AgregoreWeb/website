@@ -8,6 +8,9 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Chat example](https://github.com/AgregoreWeb/agregore-chat-example)
 - [Drag and drop file upload example](https://github.com/AgregoreWeb/agregore-drag-and-drop)
 
+### Extensions:
+- [DScan: Decentralized QR code generator](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
+
 ### Blogs / Homepages
 
 - [Mauve's Blog](hyper://blog.mauve.moe/)
