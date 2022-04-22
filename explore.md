@@ -15,6 +15,9 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 - [Mauve's Blog](hyper://blog.mauve.moe/)
 
+### Magazines
+
+- [COMPOST Issue One](ipns://one.compost.digital) and [Issue Two](ipns://two.compost.digital)
 ---
 
 [Home](/)
