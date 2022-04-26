@@ -22,9 +22,10 @@
 
 # Agregore
 
-## Explore the distributed web
+Explore the distributed web
 
 [Explore](./explore)
+[Blog](./blog)
 [Protocols](./protocols)
 [Extensions](./extensions)
 [Theming](./theming)
