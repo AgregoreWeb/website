@@ -1,0 +1,1 @@
+mdspell -naf ./blog/
