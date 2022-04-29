@@ -1,14 +1,14 @@
 # IPFS + Chromium = Agregore Mobile
 
 This is the first in a series of blog posts about Agregore Mobile's development.
-In this post we will be looking at how we got the initial version of the browser compiling and some of the challanges we faced in getting IPFS working with our fork of the Chromium Browser.
+In this post we will be looking at how we got the initial version of the browser compiling and some of the challenges we faced in getting IPFS working with our fork of the Chromium Browser.
 
-## Compiling and De-Googling Chromium
+## Compiling and DeGoogling Chromium
 
 One of the first steps of building Agregore Mobile was to choose a web browser engine to build on top of.
-Since the [desktop](https://github.com/AgregoreWeb/agregore-browser/) version of Agregore is based on the [Electron.js](https://www.electronjs.org/) framework, which in turm is built on top of Chromium, we opted to use [Chromium for Android](https://www.chromium.org/chromium-projects/) as the basis of our browser.
+Since the [desktop](https://github.com/AgregoreWeb/agregore-browser/) version of Agregore is based on the [Electron.js](https://www.electronjs.org/) framework, which in turn is built on top of Chromium, we opted to use [Chromium for Android](https://www.chromium.org/chromium-projects/) as the basis of our browser.
 
-However, we wanted to have a more private experience out of the box and to get rid of some of the Google-isms plus add some ad blocking and extension functionality to make it closer to the desktop expeirence.
+However, we wanted to have a more private experience out of the box and to get rid of some of the Google-isms plus add some ad blocking and extension functionality to make it closer to the desktop experience.
 
 ### Kiwi Browser
 
@@ -24,12 +24,12 @@ This seemed great on paper, and this is what we pitched in our initial [devgrant
 The main thing that drew us to Kiwi (other than it's actual features) was their [Github Actions](https://github.com/features/actions) based workflow.
 Chromium is a huge pain in the ass to work with due to it only being supported to compile on Ubuntu 18 and requiring at least 33 GB of space (for sparse clones!) for the repo (in practice it was more lik 76 GB).
 Kiwi's [latest build](https://github.com/kiwibrowser/src.next/) made use of a build server that would be notified of changes via Github Actions on a commit, and would then compile and publish APKs without needing to set up infrastructure on your own.
-It also enabled sparsely tracking just the parts of Chromium that are going to be modified and let developers drastically save on space when clining the repository to add their changes.
+It also enabled sparsely tracking just the parts of Chromium that are going to be modified and let developers drastically save on space when cloning the repository to add their changes.
 
 The thing we didn't anticipate was that this build server would only work within the Kiwi repo and that the source code for the server wouldn't get published anywhere.
 This meant that in order to compile Kiwi, we needed to set up our own build server without necessarily knowing what was required to make it possible.
 
-We spent about two weeks trying to get an initial build working which ended up delaying our timline significantly.
+We spent about two weeks trying to get an initial build working which ended up delaying our timeline significantly.
 Eventually, we had to abandon the idea of using Kiwi when we found out that [there were a bunch of source files that weren't actually in the source tree](https://github.com/kiwibrowser/src.next/issues/411) and that the build could not be made without them.
 
 Another concern was that there were manual exceptions in the ad blocker code to allow [Google, Bing, Yahoo, and some other advertisers](https://github.com/kiwibrowser/src.next/blob/kiwi/third_party/blink/renderer/core/layout/layout_object.cc#L306) to show their ads regardless.
@@ -39,7 +39,7 @@ Another concern was that there were manual exceptions in the ad blocker code to 
 Instead we focused on getting raw Chromium to compile at all.
 
 After setting up a beefy 8 GB RAM + 260 GB disk VM on Digital Ocean, we started following the [official documentation](https://chromium.googlesource.com/chromium/src/+/master/docs/android_build_instructions.md) for compiling Chromium.
-We made a decent amount of progress, but ended up running into some build issues related to the python version that came withour Ubuntu 18 machine.
+We made a decent amount of progress, but ended up running into some build issues related to the python version that came with our Ubuntu 18 machine.
 
 Specifically, the file `/chromium/src/tools/android/modularization/convenience/lookup_dep.py` was trying to load a module called `dataclasses` which wasn't actually available.
 We opted to do a dirty hack to keep things running by copying the module's source from `/usr/local/lib/python2.7/dist-packages/dataclasses.py` directly into this folder so it would be able to run.
@@ -52,13 +52,13 @@ Huge thanks to [@madrets](https://github.com/AgregoreWeb/agregore-mobile/issues/
 
 ### Bromite
 
-After getting the initial version working, we started looking at workflows for how to appy patches, and at other browsers we could use to improve privacy.
+After getting the initial version working, we started looking at workflows for how to apply patches, and at other browsers we could use to improve privacy.
 
-From some searching we found [Bromite](https://www.bromite.org/) which adds a bunch of privacy-enhacing features on top of Chromium, but doesn't add too many bells and whistles outside of that.
+From some searching we found [Bromite](https://www.bromite.org/) which adds a bunch of privacy-enhancing features on top of Chromium, but doesn't add too many bells and whistles outside of that.
 
 It uses a [git patch](https://mindmajix.com/patch-workflows-git) based workflow, where each feature they create is put into a separate [patch file](https://github.com/bromite/bromite/tree/master/build/patches) and then applied over top of the chrome source.
 
-This makes it easier to send around patches to other projects and to apply them over top of chromium without needing to worrya bout preserving git history.
+This makes it easier to send around patches to other projects and to apply them over top of chromium without needing to worry about preserving git history.
 
 We took a similar approach by automating the process in Agregore Mobile and having scripts to [generate](https://github.com/AgregoreWeb/agregore-mobile/blob/default/generate_patch.py) and [apply](https://github.com/AgregoreWeb/agregore-mobile/blob/default/apply_agregore_patches.py) patches.
 
@@ -67,7 +67,7 @@ We took a similar approach by automating the process in Agregore Mobile and havi
 Our build process ended up looking like this:
 
 - Clone and set up a `chromium/src` repository within the Agregore Mobile repository
-- Clone and set up a `bromite` repository wihtin the Agregore Mobile repository
+- Clone and set up a `bromite` repository within the Agregore Mobile repository
 - Checkout the correct version of Chromium that Bromite is currently building on
 - Apply Bromite's patch list (excluded some things we don't need) on top
 - Apply Agregore's patch list on top of that
@@ -85,14 +85,14 @@ The next part that took a while to figure out was how we could actually run an I
 
 ### Getting it to run
 
-Initially, we planned to compile a custom version of the gateway into a standalone executible which we would run on Android.
+Initially, we planned to compile a custom version of the gateway into a standalone executable which we would run on Android.
 
 However, due to some changes in Android 10 for "security" this method became impossible
 Initially we tried to hide the binary as a native library dependency to try to run it that way, but this approach also didn't work.
 
 Eventually we settled on compiling the gateway with [Gomobile](https://pkg.go.dev/golang.org/x/mobile/cmd/gomobile) into a regular Java module within an AAR which used JNI to invoke Go methods.
 This can be found in our [agregore-ipfs-daemon](https://github.com/AgregoreWeb/agregore-ipfs-daemon/) code, and particularly in the [Releases](https://github.com/AgregoreWeb/agregore-ipfs-daemon/releases) page.
-This was then added to Chromium via a [Patch](https://github.com/AgregoreWeb/agregore-mobile/blob/9e7fc70d94ec7ba731928657394bb6992e484f42/patches/0001-AG-IPFS-Daemon.patch) which created a new `third_party` folder in chromium with metadat about the AAR, added it to the relevant `BUILD.gn` files to be tracked in the build, and via a [python script] which downloads the relevant AAR file at runtime.
+This was then added to Chromium via a [Patch](https://github.com/AgregoreWeb/agregore-mobile/blob/9e7fc70d94ec7ba731928657394bb6992e484f42/patches/0001-AG-IPFS-Daemon.patch) which created a new `third_party` folder in chromium with metadata about the AAR, added it to the relevant `BUILD.gn` files to be tracked in the build, and via a [python script] which downloads the relevant AAR file at runtime.
 We split out the AAR with the data itself from the patch that adds support to chromium so that we could reduce the overall size of the patch and the git repo in general.
 
 ### Multicast-DNS quirks
@@ -120,11 +120,13 @@ Some of these features:
 
 You can find the full spec of the features we added [here](https://github.com/AgregoreWeb/agregore-ipfs-daemon/pull/4/files) and the eventual goal is to get this functionality upstreamed into the official IPFS gateway and into other browsers.
 
+Huge thanks to [@Makeworld](https://github.com/makeworld-the-better-one) for all the hard work on getting the gateway working so effectively!
+
 ## Next Steps
 
 With this in place we were able to get an initial version of the browser working which could enable us to load data from IPFS using a fully local node.
 
-Our next steps were to look into wiring up the gateway to `ipfs://` and `ipns://` protocol handlers, and to add the ability to connect phones together using ad-hoc wifi access points.
+Our next steps were to look into wiring up the gateway to `ipfs://` and `ipns://` protocol handlers, and to add the ability to connect phones together using ad-hoc WiFi access points.
 
 Stay tuned for the next blog post by following [@AgregoreBrowser](https://twitter.com/AgregoreBrowser/) on Twitter for updates, or join us on [Matrix](https://matrix.to/#/#agregore:mauve.moe) or [Discord](https://discord.gg/QMthd4Y) if you'd like to chat.
 
