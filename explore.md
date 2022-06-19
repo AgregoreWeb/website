@@ -7,6 +7,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 - [Chat example](https://github.com/AgregoreWeb/agregore-chat-example)
 - [Drag and drop file upload example](https://github.com/AgregoreWeb/agregore-drag-and-drop)
+- [Pin Manager](https://agregoreweb.github.io/pin-manager/) for talking to IPFS pinning service
 
 ### Extensions:
 - [DScan: Decentralized QR code generator](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
