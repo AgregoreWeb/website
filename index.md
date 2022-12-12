@@ -31,6 +31,7 @@ Explore the distributed web
 [Theming](./theming)
 [Videos](./videos)
 [Download](https://github.com/AgregoreWeb/agregore-browser/releases/latest)
+[Mobile](https://github.com/AgregoreWeb/agregore-mobile/)
 
 ### Watch the 5 Minute Intro</h3>
 
@@ -85,4 +86,5 @@ For more details and demos, check out the the [Videos](videos.html) page, or rea
 [Contact](mailto:agregore@mauve.moe)
 [Discord](https://discord.gg/QMthd4Y)
 [Matrix](https://matrix.to/#/#agregore:mauve.moe)
+[Mastodon](https://mastodon.mauve.moe/@agregore)
 [Twitter](https://twitter.com/AgregoreBrowser)
