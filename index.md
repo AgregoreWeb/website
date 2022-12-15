@@ -27,7 +27,7 @@ Explore the distributed web
 [Explore](./explore)
 [Blog](./blog/)
 [Protocols](./protocols)
-[Docs](./docs/index)
+[Docs](./docs/)
 [Extensions](./extensions)
 [Theming](./theming)
 [Videos](./videos)
