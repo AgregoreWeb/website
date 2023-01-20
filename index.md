@@ -26,10 +26,7 @@ Explore the distributed web
 
 [Explore](./explore)
 [Blog](./blog/)
-[Protocols](./protocols)
 [Docs](./docs/)
-[Extensions](./extensions)
-[Theming](./theming)
 [Videos](./videos)
 [Download](https://github.com/AgregoreWeb/agregore-browser/releases/latest)
 [Mobile](https://github.com/AgregoreWeb/agregore-mobile/)

@@ -28,4 +28,4 @@ This can be done by clicking `Help > Edit Configuration File`, then adding in th
 
 ---
 
-[Home](/)
+[Back](/)

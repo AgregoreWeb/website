@@ -3,51 +3,35 @@
 The `fetch()` API browsers use for HTTP, but for IPFS!
 **[Intro Video📺](https://youtu.be/kI9Issf3MNc?t=1629)**
 
-### Example
-```
-const IPFS = require('ipfs-core')
-const makeIpfsFetch = require('ipfs-fetch')
+Agregore integrates IPFS protocol handlers natively, meaning you can start using them out of the box, no extra set up necessary! Instead of using fetch to talk to HTTP servers, you can use it to talk to IPFS from within the browsers JS 💫
 
-const ipfs = await IPFS.create()
-const fetch = await makeIpfsFetch({ipfs})
+There are a few copy-pasteable examples throughout this doc, to use them you can use the browsers devtools! To open up the devtools you can do one of the following:
 
-const response = await fetch('ipfs://example CID here')
-const text = await response.text()
+- hit **ctrl + shift + I** (for mac, **cmd + shift + I**)
+- right-click anywhere and select **Inspect**
+- click the tab labelled files in the upper left corner, select **Open Devtools**
 
-console.log(text)
-```
-
-## JS API 💻
-
-```
-const fetch = await makeIpfsFetch({ipfs})`
-```
-
-The top level of the module exports a function to create instances of ipfs-fetch.
-
-It takes an initialized `ipfs` instance which you can initialize somewhere in your code.
-
-It will then return a `fetch()` function which conforms to [The Web API](https://developer.mozilla.org/en-US/docs/Web/API/fetch), but with the twist that it supports `ipns://` and `ipfs://` URLs! 
+Once you have done one of those things, select the tab labelled **Console** and then you're all set ✨
 
 # Introduction 👋
 
-## What is the Fetch API? 
+## What is the Fetch API?
 
 The Fetch API provides a JavaScript interface for accessing and manipulating parts of the protocol, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network. (taken from the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)) The MDN docs are a great way to learn about JS stuff in general, it's a good place to start if you want to know more about fetch!
 
-## What is IPFS? 
+## What is IPFS?
 
 In short, IPFS (which stands for 🌠🌓 InterPlanetary File System 🌗🌠) is a distributed system for storing and accessing files, sites, apps and data! If you'd like to learn more you can check out the [🪐 IPFS homepage](https://ipfs.tech/) or, if you want to dig deeper, you can check out the [🗒 IPFS Docs](https://docs.ipfs.tech/).
 
 ## Why is this useful? 🤔
 
-In short, it simplifies the web development process. With regular old centralized web dev there are servers and databases to deal with, but with this, if you've got some basic level of web dev knowlege (JS, HTML etc) you can start making web apps that can be shared around right away!
+In short, it simplifies the web development process. As long as you have a basic knowledge of web dev (JS, HTML etc.) you can make apps that are shareable right away!
 
 Definitely check out the [intro video](https://youtu.be/kI9Issf3MNc?t=1629) (same as the one linked above) for a look into the *whys* if that's something of interest. It also has a small demo if you'd like to see it in action!
 
 ## Resources and Further Reading 📖
 
-While some of these have already been linked, if you are new to any of this then taking a peek at the following sites and referencing back to them as you play around with these tools will be extremely beneficial. Relevant links will appear throughout the docs but going through some of them beforehand should prove helpful! 
+While some of these have already been linked, if you are new to any of this then taking a peek at the following sites and referencing back to them as you play around with these tools will be extremely beneficial. Relevant links will appear throughout the docs but going through some of them beforehand should prove helpful!
 
 - [👩‍💻 MDN Docs](https://developer.mozilla.org/en-US/)
 - [🪐 IPFS Homepage](https://ipfs.tech/)
@@ -58,6 +42,7 @@ While some of these have already been linked, if you are new to any of this then
 - [📚 LibP2P Docs](https://docs.libp2p.io/)
 
 # The API 📜
+
 ```
 await fetch(URL, options)
 ```
@@ -74,17 +59,19 @@ In the code snippets you'll see **CID** pop up frequently, this stands for **Con
 await fetch('ipfs://CID/example.txt')
 ```
 
-If you specify a URL for a file (no trailing slash) it will be loaded from IPFS and the content will be sent as the response body. 
+If you specify a URL for a file (no trailing slash) it will be loaded from IPFS and the content will be sent as the response body.
 
 The response headers will have a `Content-Length` header to set the size of the file.
 
 ### Example
+
 ```
 response = await fetch('ipfs://bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze/wiki/Elephant')
 await response.text()
 ```
 
-The above example is fetching the Wikipedia article (from the [IPFS Wikipedia Mirror 📚](https://github.com/ipfs/distributed-wikipedia-mirror)) for elephants and then spits the contents of the page in text form. You can then do `response.headers.get('Content-Length')` for the content length.
+The above example is fetching the Wikipedia article (from the [IPFS Wikipedia Mirror 📚](https://github.com/ipfs/distributed-wikipedia-mirror)) for elephants and then spits out the content of the page as text. You can then do `response.headers.get('Content-Length')` for getting the content length.
+
 ```
 await fetch('ipfs://CID/example/')
 ```
@@ -100,11 +87,13 @@ If the folder contains an `index.html` it will be served as a file instead of pe
 One of the options is to set the request method by default it is `GET` (meaning `await fetch('ipfs://CID/example.txt')` is functionally the same as `await fetch('ipfs://CID/example.txt', method: 'GET')`).
 
 ### Example
+
 ```
 var response = await fetch('ipfs://bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze/wiki/')
 await response.text()
 ```
-Like the previous example this will just spit out the contents of the page, in this case it is all of the pages available from the Wikipedia Mirror. 
+
+Like the previous example this will just spit out the contents of the page, in this case it is all of the pages available from the Wikipedia Mirror.
 
 ```
 await fetch('ipfs://CID/example.txt', method: 'HEAD')
@@ -161,10 +150,11 @@ Names will have a trailing slash for folders.
 ```
 var response = await fetch('ipfs://bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze/wiki/', {headers: {Accept: 'application/json'}})
 ```
-In this example we are once again using the IPFS Wikipedia mirror. Once that is done being fetched you may do `await response.json()` to see the file/folder list. 
+
+In this example we are once again using the IPFS Wikipedia mirror. Once that is done being fetched you may do `await response.json()` to see the file/folder list.
 
 ```
-var response = await fetch('ipfs://CID/example.txt', {headers: { Range: 'bytes=0-4' })
+var response = await fetch('ipfs://CID/example.txt', {headers: { Range: 'bytes=0-4' }})
 ```
 
 You can specify the `Range` header when making a request to load a subset of a file.
@@ -172,10 +162,11 @@ You can specify the `Range` header when making a request to load a subset of a f
 ## Using Fetch with IPNS 🚀
 
 ### What is IPNS?
+
 Since IPFS CIDs are generated based on the content of a file, if you ever want to change the content, then well, the CID changes too. Obviously there are many cases where one would need to update content frequently and it could become very cumbersome to have to send out a new CID everytime an update is made.
 
 That's where IPNS (which stands for 🌟🌎 InterPlanetary Naming System 🌏🌟) comes in! IPNS is a system for creating mutable pointers to CIDs. If you're interested in learning more, [here's a page](https://docs.ipfs.tech/concepts/ipns/) about it from the IPFS docs! ✨
- 
+
 ```
 await fetch('ipns://CID/example.txt')
 ```
@@ -211,6 +202,7 @@ Calling this method on an existing key will be a "no-op" and return a success re
 ```
 var response = await fetch('ipns://PUBLIC_KEY/', {method: 'POST', body: 'ipfs://CID/example.txt'})
 ```
+
 You can publish to IPNS using the `POST` method.
 
 The `body` should contain the `ipfs://` URL you want to point to.
@@ -258,7 +250,7 @@ The `Accept` header can be used to re-encode the data into a different format. V
 This lets you view IPLD data encoded as CBOR as JSON in your application without needing to decode it yourself.
 
 ```
-await fetch('ipld://localhost?format=dag-cbor', {method: 'POST', body, {headers: {'Content-Type': "application/json"}})
+await fetch('ipld://localhost?format=dag-cbor', {method: 'POST', body, {headers: {'Content-Type': "application/json"}}})
 ```
 
 You can upload data to the IPLD data model by doing a `POST` to `ipfs://localhost`.
@@ -298,3 +290,7 @@ You can publish a new message to subscribed peers for a `TOPIC` by doing a `POST
 The `TOPIC` can be any utf8 string and will be used to find peers on the network to send the data to.
 
 The `body` will be sent as a binary buffer to all other peers and it'll be up to them to decode the data.
+
+---
+
+[Back](/)
