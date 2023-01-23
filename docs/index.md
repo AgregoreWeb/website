@@ -1,6 +1,6 @@
 # Docs
 
-[Protocols](/protocols)
+[Protocols](./protocols)
 [Extensions](./extensions)
 [Theming](./theming)
 
