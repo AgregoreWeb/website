@@ -6,3 +6,4 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [Hypercore Protocol Handlers](./hypercore-protocol-handlers)
 - [Bittorrent Protocol Handlers](./bittorent-protocol-handlers)
 - [Examples](./examples)
+- [App and tutorial making process](./tutorials/process)
