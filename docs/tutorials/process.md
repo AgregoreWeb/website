@@ -45,7 +45,7 @@ These aren't hard restrictions and you're free to break outside of them whenever
 ### Process
 
  1. Describe the idea briefly
- 2. Create at least (at most?) one user story 
+ 2. Create at least one user story 
     - e.g. Sammy wants to keep notes on recipes. They go to ipns://cooknot.es to start a notebook. From here they can search for recipes to notate. When they select a recipe a not with the date and a link to the recipe is created
  3. Outline your concept. This could be the app ux, architecture, a description, a wireframe or mockups;
     - This should define what the prototype needs to have at a minimum (think about what accomplishes the goal vs. what you can do in two weeks!).
