@@ -33,7 +33,7 @@ Users should be able to install Agregore, and get going on adding code without n
 Ideally, it should be possible for a person to start off with either Agregore's built in Chromium DevTools, or to use some of the small apps developed as part of these docs.
 
 4: Avoid depending on centralized servers whenever possible.
-Sometimes you mgiht want to pull data from a server for something like an RSS reader, but you should make sure that your app will at least load, or hopefully be useful in some way if that server isn't available.
+Sometimes you might want to pull data from a server for something like an RSS reader, but you should make sure that your app will at least load, or hopefully be useful in some way if that server isn't available.
 
 5: When possible, try using Agregore's built in [theming support](https://agregore.mauve.moe/theming).
 This might involve importing the user-configurable CSS variables from `agregore://theme/vars.css` to add splashes of color, or using the entire `agregore://theme/style.css` file to add default styling to headers and code blocks.
