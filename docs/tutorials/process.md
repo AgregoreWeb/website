@@ -2,7 +2,7 @@
 
 ## Summary
 
-This document part of a [devgrant](https://github.com/ipfs/devgrants/pull/245) with the [Filecoin Foundation](https://fil.org/) for making demos and tutorials for making and using p2p web apps using [IPFS](https://ipfs.tech/) via [Agregore's](https://agregore.mauve.moe/) p2p protocol handler APIs.
+This document is part of a [devgrant](https://github.com/ipfs/devgrants/pull/245) with the [Filecoin Foundation](https://fil.org/) for making demos and tutorials for making and using p2p web apps using [IPFS](https://ipfs.tech/) via [Agregore's](https://agregore.mauve.moe/) p2p protocol handler APIs.
 
 The goal of this document is it outline the process we'll be taking for creating small web apps, making tutorials for the web apps, and writing up retrospectives on what we learn from the process.
 
