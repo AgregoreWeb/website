@@ -24,18 +24,18 @@ Useful doesn't necessarily mean that it has to be utilitarian. Apps that exist t
 2: Avoid external dependencies unless absolutely necessary.
 This means reducing your dependency on external CSS and JS libraries like Bootstrap or JQuery. If a library is absolutely necessary (say you're doing stuff with QR code reading and generation), then prefer to show users how to download source files and add them directly to their app's files. This is important to ensure that all the apps we build are fully local first and can load without depending on the cloud. Note that when prompting users to download libraries, you should be specific about which version to use to avoid trouble in the future.
 
-5: Use the web platform and it's built in APIs.
+3: Use the web platform and it's built in APIs.
 This means using stuff like Custom Elements for making reusable components.
 Showing people how to use built in CSS features such as [Sticky Headers](https://developer.mozilla.org/en-US/docs/Web/CSS/position#sticky). There's a lot of cool stuff built into browsers and we can get pretty far by showing people how to use this stuff.
 
-3: Avoid using any build tools like webpack/react/npm/etc.
+4: Avoid using any build tools like webpack/react/npm/etc.
 Users should be able to install Agregore, and get going on adding code without needing to worry about additional dependencies or build tools.
 Ideally, it should be possible for a person to start off with either Agregore's built in Chromium DevTools, or to use some of the small apps developed as part of these docs.
 
-4: Avoid depending on centralized servers whenever possible.
+5: Avoid depending on centralized servers whenever possible.
 Sometimes you might want to pull data from a server for something like an RSS reader, but you should make sure that your app will at least load, or hopefully be useful in some way if that server isn't available.
 
-5: When possible, try using Agregore's built in [theming support](https://agregore.mauve.moe/theming).
+6: When possible, try using Agregore's built in [theming support](https://agregore.mauve.moe/theming).
 This might involve importing the user-configurable CSS variables from `agregore://theme/vars.css` to add splashes of color, or using the entire `agregore://theme/style.css` file to add default styling to headers and code blocks.
 This is useful to give apps a similar "agregore-y" look and feel and gives users the option to configure the styles of all the apps they use on the local-first web by modifying their Agregore config with custom colors.
 
@@ -45,7 +45,7 @@ These aren't hard restrictions and you're free to break outside of them whenever
 ### Process
 
  1. Describe the idea briefly
- 2. Create at least one user story 
+ 2. Create at least one user story
     - e.g. Sammy wants to keep notes on recipes. They go to ipns://cooknot.es to start a notebook. From here they can search for recipes to notate. When they select a recipe a note with the date and a link to the recipe is created
  3. Outline your concept. This could be the app ux, architecture, a description, a wireframe or mockups;
     - This should define what the prototype needs to have at a minimum (think about what accomplishes the goal vs. what you can do in two weeks!).
@@ -58,9 +58,9 @@ We want to explore how long it takes devs of different backgrounds to make apps 
 
 ## Making Tutorials
 
+### Some guidelines:
 
-### Some guidelines: 
-Tutorials should be easy to follow. 
+Tutorials should be easy to follow.
 * There should always be a clear next step.
 * Common issues should be called out and visually distinct.
 
@@ -68,7 +68,7 @@ Err on the side of usability.
 * A complete beginner should be able to follow the tutorial but someone with more experience should get something out of it too.
 
 Give the reader a steady path of small wins.
-* Be generous with steps that let the reader change the code, refresh the page, and see something new. 
+* Be generous with steps that let the reader change the code, refresh the page, and see something new.
 
 A programming tutorial should not only teach you to accomplish a goal, but to debug along the way.
 * One useful interactive technique is to "follow the error". Your tutorial moves forward with intuition as one might when programming, and so you have the reader run into the same errors you might. The learner can see the error message and what caused it, and follow the tutorial for the fix.
@@ -103,3 +103,5 @@ We want to teach people how to design things, and don't need to spend time teach
 ## Publishing
 
 At the end of each sprint we will be publishing the tutorials on the Agregore [docs](https://agregore.mauve.moe/docs/) section of the website, and the retrospectives on the [Blog](https://agregore.mauve.moe/blog/) section. This will be done by submitting pull requests to the [Website's github repo](https://github.com/AgregoreWeb/website/) which will then auto-publish to the site upon merging.
+
+The source code for all the apps will be licensed under the [MIT License](https://en.wikipedia.org/wiki/MIT_License) so that it may be reused by others for any purpose.
