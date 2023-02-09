@@ -43,7 +43,7 @@ While some of these have already been linked, if you are new to any of this then
 
 # The API 📜
 
-```
+```JavaScript
 await fetch(URL, options)
 ```
 
@@ -55,7 +55,7 @@ In the code snippets you'll see **CID** pop up frequently, this stands for **Con
 
 ## Loading Data 📨
 
-```
+```JavaScript
 await fetch('ipfs://CID/example.txt')
 ```
 
@@ -65,14 +65,15 @@ The response headers will have a `Content-Length` header to set the size of the 
 
 ### Example
 
-```
-response = await fetch('ipfs://bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze/wiki/Elephant')
+```JavaScript
+url = 'ipfs://bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze/wiki/Elephant'
+response = await fetch(url)
 await response.text()
 ```
 
 The above example is fetching the Wikipedia article (from the [IPFS Wikipedia Mirror 📚](https://github.com/ipfs/distributed-wikipedia-mirror)) for elephants and then spits out the content of the page as text. You can then do `response.headers.get('Content-Length')` for getting the content length.
 
-```
+```JavaScript
 await fetch('ipfs://CID/example/')
 ```
 
@@ -88,8 +89,9 @@ One of the options is to set the request method by default it is `GET` (meaning 
 
 ### Example
 
-```
-var response = await fetch('ipfs://bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze/wiki/')
+```JavaScript
+url = 'ipfs://bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze/wiki/'
+response = await fetch(url)
 await response.text()
 ```
 
@@ -103,8 +105,12 @@ If you set the method to `HEAD` it will be like doing a `GET` request but withou
 
 ## Uploading Data 📤
 
-```
-var response = await fetch('ipfs://bafyaabakaieac/example.txt', {method: 'PUT', body: 'Hello World! 👋 🌎🌍🌏'})
+```JavaScript
+url = 'ipfs://bafyaabakaieac/example.txt'
+response = await fetch(url, {
+  method: 'PUT',
+  body: 'Hello World! 👋 🌎🌍🌏'
+})
 ```
 
 You can upload files to IPFS by setting the method to `PUT`.
@@ -115,8 +121,11 @@ Note that `ipfs://bafyaabakaieac/` is an IPFS URL representing an empty director
 
 In the code snippet above we also see the `body` option for the first time, it's used to give your request a body, in this case just being some text.
 
-```
-var response = await fetch('ipfs://bafyaabakaieac/', {method: 'PUT', body: new FormData()})
+```JavaScript
+response = await fetch('ipfs://bafyaabakaieac/', {
+  method: 'PUT',
+  body: new FormData()
+})
 ```
 
 You can upload several files to IPFS by using `PUT` messages with a [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) body.
@@ -129,8 +138,10 @@ Note that `ipfs://bafyaabakaieac/` is an IPFS URL representing an empty director
 
 ## Common Headers 🤠
 
-```
-var response = await fetch('ipfs://CID/example/', {headers: {'X-Resolve': none}})
+```JavaScript
+response = await fetch('ipfs://CID/example/', {
+  headers: {'X-Resolve': none}
+})
 ```
 
 If you specify the `X-Resolve: none` header in your request, the resolution of `index.html` will be ignored and a directory listing will always be performed.
@@ -147,14 +158,21 @@ Names will have a trailing slash for folders.
 
 ### Example
 
-```
-var response = await fetch('ipfs://bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze/wiki/', {headers: {Accept: 'application/json'}})
+```JavaScript
+url = 'ipfs://bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze/wiki/'
+response = await fetch(url, {
+  headers: {
+    Accept: 'application/json'
+  }
+})
 ```
 
 In this example we are once again using the IPFS Wikipedia mirror. Once that is done being fetched you may do `await response.json()` to see the file/folder list.
 
-```
-var response = await fetch('ipfs://CID/example.txt', {headers: { Range: 'bytes=0-4' }})
+```JavaScript
+response = await fetch('ipfs://CID/example.txt', {
+  headers: { Range: 'bytes=0-4' }
+})
 ```
 
 You can specify the `Range` header when making a request to load a subset of a file.
@@ -167,13 +185,13 @@ Since IPFS CIDs are generated based on the content of a file, if you ever want t
 
 That's where IPNS (which stands for 🌟🌎 InterPlanetary Naming System 🌏🌟) comes in! IPNS is a system for creating mutable pointers to CIDs. If you're interested in learning more, [here's a page](https://docs.ipfs.tech/concepts/ipns/) about it from the IPFS docs! ✨
 
-```
+```JavaScript
 await fetch('ipns://CID/example.txt')
 ```
 
 You can specify an IPNS URL to have it resolve to whatever resource you wanted using IPNS.
 
-```
+```JavaScript
 await fetch('ipns://localhost/?key=example_key')
 ```
 
@@ -199,8 +217,11 @@ The response will contain a `Location` header which will have your `ipns://k2k4r
 
 Calling this method on an existing key will be a "no-op" and return a success regardless.
 
-```
-var response = await fetch('ipns://PUBLIC_KEY/', {method: 'POST', body: 'ipfs://CID/example.txt'})
+```JavaScript
+response = await fetch('ipns://PUBLIC_KEY/', {
+  method: 'POST',
+  body: 'ipfs://CID/example.txt'
+})
 ```
 
 You can publish to IPNS using the `POST` method.
@@ -215,8 +236,11 @@ The key in the origin must be the public `ipns://k2k4r...` style key that you cr
 
 *If you have ideas for how to do key import and export, please open a GitHub issue about it!* 💞
 
-```
-var response = await fetch('ipns://PUBLIC_KEY/example.txt', {method: 'PUT', body: 'Hello World!'})
+```JavaScript
+response = await fetch('ipns://PUBLIC_KEY/example.txt', {
+  method: 'PUT',
+  body: 'Hello World!'
+})
 ```
 
 You can update some data in an IPNS directory using the `PUT` method and a file path.
@@ -235,8 +259,13 @@ This enables you to have mutable folders of data on top of IPFS+IPNS without hav
 
 IPLD (which stands for 💫🔗 InterPlanetary Linked Data 🔗💫) is the data model that IPFS is built upon. It is a bit much to get into so if you'd like a more detailed explanation there's [this page](https://blog.ipfs.tech/what-is-ipld/) from the IPFS blog and there's always the [🛰 IPLD homepage](https://ipld.io/) as well as the [📘 IPLD Docs](https://ipld.io/docs/). 
 
-```
-await fetch('ipld://CID/example', {method: 'GET', headers: {'Accept': "application/json"})
+```JavaScript
+await fetch('ipld://CID/example', {
+  method: 'GET',
+  headers: {
+    'Accept': "application/json"
+  }
+})
 ```
 
 You can get get raw IPLD data from a CID using the `ipld` protocol scheme.
@@ -249,8 +278,14 @@ The `Accept` header can be used to re-encode the data into a different format. V
 
 This lets you view IPLD data encoded as CBOR as JSON in your application without needing to decode it yourself.
 
-```
-await fetch('ipld://localhost?format=dag-cbor', {method: 'POST', body, {headers: {'Content-Type': "application/json"}}})
+```JavaScript
+await fetch('ipld://localhost?format=dag-cbor', {
+  method: 'POST',
+  body,
+  headers: {
+    'Content-Type': "application/json"
+  }
+})
 ```
 
 You can upload data to the IPLD data model by doing a `POST` to `ipfs://localhost`.
@@ -265,13 +300,17 @@ The resulting data will be returned in the `Location` header in the format of `i
 
 ## LibP2P's PubSub Protocol 📰
 
-```
-new EventSource('pubsub://TOPIC/?format=base64') / fetch('pubsub://TOPIC/', {headers: {Accept: "text/event-stream"}})
+```JavaScript
+new EventSource('pubsub://TOPIC/?format=base64')
+// Or
+fetch('pubsub://TOPIC/', {headers: {Accept: "text/event-stream"}})
 ```
 
 You can subscribe to [LibP2P's Publish/Subscribe](https://docs.libp2p.io/concepts/pubsub/overview/) topics when using the `pubsub` protocol, and using the `text/event-stream` Accept header.
 
-If you have access to the Browser's [EventSource API](https://developer.mozilla.org/en-US/docs/Web/API/EventSource), or use something like [fetch-event-source](https://github.com/RangerMauve/fetch-event-source/) you can automatically parse the resulting events. Otherwise you'll need to read from the response `body` and parse the stream body manually.
+
+If you have access to the Browser's [EventSource API](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) you can automatically parse the resulting events.
+Otherwise you'll need to read from the response `body` and parse the stream body manually.
 
 The `TOPIC` can be any utf-8 string and will be used to connect to peers from accross the network.
 
@@ -281,7 +320,7 @@ The `EventSource` will emit message events whose `data` is a JSON object which c
 - `topics`: What topics the peer that sent this event is also gossiping on
 - `data`: The encoded `data` for the message. By default it is a base64 encoded string.
 
-```
+```JavaScript
 await fetch('pubsub://TOPIC/', {method: 'POST', data})
 ```
 
