@@ -98,7 +98,7 @@ await response.text()
 Like the previous example this will just spit out the contents of the page, in this case it is all of the pages available from the Wikipedia Mirror.
 
 ```
-await fetch('ipfs://CID/example.txt', method: 'HEAD')
+await fetch('ipfs://CID/example.txt', { method: 'HEAD' })
 ```
 
 If you set the method to `HEAD` it will be like doing a `GET` request but without actually loading the data. This is useful for getting the `Content-Length` or checking to see if a file exists.
