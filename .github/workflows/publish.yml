@@ -27,5 +27,10 @@ jobs:
           node-version: '18'
       - name: Compile website into HTML
         run: npx agregore-markdown-site-generator
-      - name: Run Publisher
-        run: npx hyperdrive-publisher sync ${{ secrets.PUBLISHER_KEY }}
+      - name: Publish to Distributed Press
+        uses: jackyzha0/actions-distributed-press@v1.1.0
+        with:
+          publish_dir: ./
+          dp_url: https://press.mauve.moe
+          refresh_token: ${{ secrets.DISTRIBUTED_PRESS_TOKEN }}
+          site_url: agregore.mauve.moe
