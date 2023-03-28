@@ -19,6 +19,11 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 ### Magazines
 
 - [COMPOST Issue One](ipns://one.compost.digital) and [Issue Two](ipns://two.compost.digital)
+
+### Tutorials
+
+- [Making a P2P Gemini blog](https://mastodon.mauve.moe/@mauve/110099166164967631)
+
 ---
 
 [Home](/)
