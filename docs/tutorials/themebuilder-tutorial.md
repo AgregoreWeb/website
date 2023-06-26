@@ -1,4 +1,5 @@
-# App 1 - Theme Builder Tutorial
+# Theme Builder Tutorial
+
 
 ## The Idea ✨
 
