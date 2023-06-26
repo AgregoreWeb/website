@@ -24,7 +24,8 @@ First let's set up our file, if you navigate to agregore://theme/style.css we're
 
 Once you've done that, delete the second line (the `@import url("agregore://theme/vars.css")`) and replace it with the following:
 
-```javascript
+```css
+
 :root {
   --ag-theme-font-family: system-ui;
   --ag-theme-background: #111;
