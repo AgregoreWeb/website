@@ -428,7 +428,8 @@ First open that up in Agregore and then open up the console. We'll need to creat
 
 ```javascript
 let res = await fetch('ipns://localhost/?key=themebuilder', {method: 'POST'})
-let key = 
+let key = await res.text()
+
 ```
 
 ### Recap 🔍
