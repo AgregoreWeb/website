@@ -35,7 +35,7 @@ Ideally, it should be possible for a person to start off with either Agregore's 
 5: Avoid depending on centralized servers whenever possible.
 Sometimes you might want to pull data from a server for something like an RSS reader, but you should make sure that your app will at least load, or hopefully be useful in some way if that server isn't available.
 
-6: When possible, try using Agregore's built in [theming support](https://agregore.mauve.moe/theming).
+6: When possible, try using Agregore's built in [theming support](./theming).
 This might involve importing the user-configurable CSS variables from `agregore://theme/vars.css` to add splashes of color, or using the entire `agregore://theme/style.css` file to add default styling to headers and code blocks.
 This is useful to give apps a similar "agregore-y" look and feel and gives users the option to configure the styles of all the apps they use on the local-first web by modifying their Agregore config with custom colors.
 
