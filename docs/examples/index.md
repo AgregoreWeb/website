@@ -1,3 +1,4 @@
 # Example P2P Apps
 
-🚧 TODO 🚧
+- [Blocks App](./blocks-app/)
+- [Theme Builder](./themebuilder.html)
