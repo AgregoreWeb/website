@@ -177,3 +177,5 @@ async function showEditor(){
     }
 }
 ```
+
+The code can also be found in the [example directory](./example).
