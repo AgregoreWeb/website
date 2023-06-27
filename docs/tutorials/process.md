@@ -81,8 +81,10 @@ We want to teach people how to design things, and don't need to spend time teach
 
 #### What was the outcome?
 
-1. To share your app with the group, first walk us through the original goal and what you ended up making. 
-2. Did you accomplish more or less than the original app idea? If you started out with a user story, were those aims accomplished? 
+1. To share your app with the group, first walk us through the original goal and what you ended up making.
+
+2. Did you accomplish more or less than the original app idea? If you started out with a user story, were those aims accomplished?
+
 3. Did the idea evolve or change drastically through the process? If so, how did these changes affect the outcome?
 
 #### What was the process like?
@@ -96,7 +98,9 @@ We want to teach people how to design things, and don't need to spend time teach
 
 #### Discussion
 
-1. What would you do with this app if you kept working on it? E.g. future improvements? Demo it with users (if so, who would the users be)?  
+1. What would you do with this app if you kept working on it? E.g. future improvements? Demo it with users (if so, who would the users be)?
+
+
 2. If any technical improvements to Agregore or the underlying protocols could make development easier for this app, please describe them here.
 
 
