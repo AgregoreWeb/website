@@ -10,8 +10,13 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [🪐 IPFS Protocol Handlers](./ipfs-protocol-handlers)
 - [🌀 Hypercore Protocol Handlers](./hypercore-protocol-handlers)
 - [🌊 Bittorrent Protocol Handlers](./bittorent-protocol-handlers)
-- [🔍 Examples](./examples)
-- [App and tutorial making process](./tutorials/process)
+- [🔍 Examples](./examples/)
+
+## Tutorials:
+
+- [🧱 App and tutorial making process](./tutorials/process)
+- [Theme Builder](./tutorials/themebuilder-tutorial)
+- IPFS Development Environment [Part 1 & 2](./tutorials/ipfs-browser-devenv/part-1), [Part 3](./tutorials/ipfs-browser-devenv/part-3), [Part 4](./tutorials/ipfs-browser-devenv/part-4)
 
 ---
 
