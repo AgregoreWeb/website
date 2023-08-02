@@ -1,6 +1,6 @@
 # Agregore Demos and Tutorials Round One
 
-After working on it for a few months we've finished our first milestone for our [Demos and Tutorials devgrant](/2023/01/demos-and-tutorials-announcement)!
+After working on it for a few months we've finished our first milestone for our [Demos and Tutorials devgrant](/blog//2023/01/demos-and-tutorials-announcement)!
 As outputs from this we have two tutorials, and 4 small apps for folks to try out.
 
 ## What we made
@@ -8,7 +8,7 @@ As outputs from this we have two tutorials, and 4 small apps for folks to try ou
 ### Dirk's DBrowser Development Environment
 
 [@DirkCuys](https://github.com/dirkcuys) put together a step by step guide for bootstrapping a development environment from just the devtools interface in Agregore.
-You can see a live version of the final app [here](/docs/examples/browser-devenv/) or follow step by step from the [tutoial](/docs/tutorials/ipfs-browser-devenv/part-1).
+You can see a live version of the final app [here](/docs/examples/browser-devenv/) or follow step by step from the [tutorial](/docs/tutorials/ipfs-browser-devenv/part-1).
 This app builds up from uploading your logic via devtools all the way to a fully fledgged GUI which you can use to edit files within your IPFS sites.
 
 ### Ankeet's Blocks App
