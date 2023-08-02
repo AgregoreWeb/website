@@ -17,8 +17,8 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 ### Blogs / Homepages
 
-- [Mauve's Blog](://blog.mauve.moe/)
-- [Hypha Worker Coop](://hypha.coop)
+- [Mauve's Blog](//blog.mauve.moe)
+- [Hypha Worker Coop](//hypha.coop)
 
 ### Magazines
 
