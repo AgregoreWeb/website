@@ -16,7 +16,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 
 - [🧱 App and tutorial making process](./tutorials/process)
 - [Theme Builder](./tutorials/themebuilder-tutorial)
-- IPFS Development Environment [Part 1 & 2](./tutorials/ipfs-browser-devenv/part-1), [Part 3](./tutorials/ipfs-browser-devenv/part-3), [Part 4](./tutorials/ipfs-browser-devenv/part-4)
+- IPFS Development Environment [Part 1](./tutorials/ipfs-browser-devenv/part-1), [Part 2](./tutorials/ipfs-browser-devenv/part-2) and [Part 3](./tutorials/ipfs-browser-devenv/part-3)
 
 ---
 
