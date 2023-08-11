@@ -1,6 +1,6 @@
 # Agregore Browser IPFS Development Environment
 
-In this tutorial you will create a basic development environment by working exclusively in the Agregore Browser. The tutorial has 3 parts - [part 1](./part-1), [part 2](./part-2), and [part 3](./part-3). Although they were written to be self-contained, it is recommended that you complete them in order.
+In this tutorial you will create a basic development environment for a site hosted on [IPFS](https://ipfs.tech) by working exclusively in the Agregore Browser. The tutorial has 3 parts - [part 1](./part-1), [part 2](./part-2), and [part 3](./part-3). Although they were written to be self-contained, it is recommended that you complete them in order.
 
 ## Part 1
 
@@ -31,9 +31,9 @@ const newLocation = resp.headers.get('location')
 window.location = newLocation
 ```
 
-Okay, now we have our very first website saved to IPFS! We achieved this my using the `fetch` function to do a PUT request to the current IPFS content ID (CID for short) as the base URL and the filename we wanted to create/update. Fetch returned the CID for the updated content in the location header.
+Okay, now we have our very first website saved to IPFS! We achieved this my using the `fetch` function to do a PUT request to the current IPFS [content ID](https://docs.ipfs.tech/concepts/content-addressing/#what-is-a-cid) (CID for short) as the base URL and the filename we wanted to create/update. Fetch returned the CID for the updated content in the location header.
 
-This is possible because the Agregore Browser runs it's own IPFS node and implements the `fetch` function for IPFS protocols like `ipfs://` and `ipns://`. You can read more about this on the [Agregore website](https://agregore.mauve.moe/).
+This is possible because the Agregore Browser runs it's own IPFS node and implements the `fetch` function for IPFS protocols like `ipfs://` and `ipns://`. You can read more about this in the [IPFS documentation](https://docs.ipfs.tech/).
 
 We can update the content of the site by doing the same. Let's turn that into a function that we can reuse!
 

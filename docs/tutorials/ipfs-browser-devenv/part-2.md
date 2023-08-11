@@ -1,6 +1,6 @@
 # Agregore Browser IPFS Development Environment
 
-In this tutorial you will create a basic development environment by working exclusively in the Agregore Browser. The tutorial has 3 parts - [part 1](./part-1), [part 2](./part-2), and [part 3](./part-3). Although they were written to be self-contained, it is recommended that you complete them in order.
+In this tutorial you will create a basic development environment for a site hosted on [IPFS](https://ipfs.tech) by working exclusively in the Agregore Browser. The tutorial has 3 parts - [part 1](./part-1), [part 2](./part-2), and [part 3](./part-3). Although they were written to be self-contained, it is recommended that you complete them in order.
 
 ## Part 2
 

@@ -1,6 +1,6 @@
 # Agregore Browser IPFS Development Environment
 
-In this tutorial you will create a basic development environment by working exclusively in the Agregore Browser. The tutorial has 3 parts - [part 1](./part-1), [part 2](./part-2), and [part 3](./part-3). Although they were written to be self-contained, it is recommended that you complete them in order.
+In this tutorial you will create a basic development environment for a site hosted on [IPFS](https://ipfs.tech) by working exclusively in the Agregore Browser. The tutorial has 3 parts - [part 1](./part-1), [part 2](./part-2), and [part 3](./part-3). Although they were written to be self-contained, it is recommended that you complete them in order.
 
 ## Part 3
 
@@ -36,7 +36,7 @@ addFiles([
 
 The last piece that we are still missing to have a usable website is giving it an address. You've probably noticed that each time we've made a change to our site, the address changed to a new address in the format `ipfs://blahblahtoolongandunreadabletoreallypayattentionlinknoteveninthebio`. If we want to share our site with other people, we need an unchanging URL to share with other people.
 
-To do that, we can publish our site using a key and obtain an IPNS address that stays the same!!
+To do that, we can publish our site using a key and obtain an [IPNS address](https://docs.ipfs.tech/concepts/ipns/#mutability-in-ipfs) that stays the same!!
 
 Lets create the key:
 
@@ -179,6 +179,6 @@ async function showEditor(){
 }
 ```
 
-The final code can be found here:
+The code can also be found here:
 - [index.html](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/index.html.template')
 - [lib.js](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/lib.js.template')
