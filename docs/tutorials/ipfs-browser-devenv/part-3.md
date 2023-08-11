@@ -179,4 +179,6 @@ async function showEditor(){
 }
 ```
 
-The code can also be found in [here](https://github.com/AgregoreWeb/website/tree/main/docs/examples/browser-devenv).
+The final code can be found here:
+- [index.html](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/index.html.template')
+- [lib.js](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/lib.js.template')

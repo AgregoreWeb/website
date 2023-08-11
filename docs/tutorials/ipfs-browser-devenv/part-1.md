@@ -8,7 +8,7 @@ Before we get started, you need to download the Agregore Browser. You can downlo
 
 Once you've downloaded Agregore Browser, open the Browser to get started.
 
-We're starting with a clean slate so we can introduce things step for step. In the address bar, enter the following address: [ipfs://bafyaabakaieac/](ipfs://bafyaabakaieac/). This is the IPFS address of an empty directory. You should see a page showing the following:
+We're starting with a clean slate so we can introduce things step by step. In the address bar, enter the following address: [ipfs://bafyaabakaieac/](ipfs://bafyaabakaieac/). This is a special IPFS address for an empty directory. You should see a page showing the following:
 
 > Index of /
 > - ../

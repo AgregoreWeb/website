@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Editor Example</title></head>
+  <body>
+    <h1>Hello world</h1>
+    <button onclick="window.showEditor()">Show Editor</button>
+    <script src="lib.js"></script>
+  </body>
+</html>
