@@ -1,6 +1,6 @@
 # Agregore Browser IPFS Development Environment
 
-In this tutorial we are going to create a basic development environment you can use by working exclusively in the Agregore Browser.
+In this tutorial you will create a basic development environment for a site hosted on [IPFS](https://ipfs.tech) by working exclusively in the Agregore Browser. The tutorial has 3 parts - [part 1](./part-1), [part 2](./part-2), and [part 3](./part-3). Although they were written to be self-contained, it is recommended that you complete them in order.
 
 ## Part 1
 
@@ -8,7 +8,7 @@ Before we get started, you need to download the Agregore Browser. You can downlo
 
 Once you've downloaded Agregore Browser, open the Browser to get started.
 
-We're starting with a clean slate so we can introduce things step for step. In the address bar, enter the following address: [ipfs://bafyaabakaieac/](ipfs://bafyaabakaieac/). This is the IPFS address of an empty directory. You should see a page showing the following:
+We're starting with a clean slate so we can introduce things step by step. In the address bar, enter the following address: [ipfs://bafyaabakaieac/](ipfs://bafyaabakaieac/). This is a special IPFS address for an empty directory. You should see a page showing the following:
 
 > Index of /
 > - ../
@@ -31,9 +31,9 @@ const newLocation = resp.headers.get('location')
 window.location = newLocation
 ```
 
-Okay, now we have our very first website saved to IPFS! We achieved this my using the `fetch` function to do a PUT request to the current IPFS content ID (CID for short) as the base URL and the filename we wanted to create/update. Fetch returned the CID for the updated content in the location header.
+Okay, now we have our very first website saved to IPFS! We achieved this my using the `fetch` function to do a PUT request to the current IPFS [content ID](https://docs.ipfs.tech/concepts/content-addressing/#what-is-a-cid) (CID for short) as the base URL and the filename we wanted to create/update. Fetch returned the CID for the updated content in the location header.
 
-This is possible because the Agregore Browser runs it's own IPFS node and implements the `fetch` function for IPFS protocols like `ipfs://` and `ipns://`. You can read more about this on the [Agregore website](https://agregore.mauve.moe/).
+This is possible because the Agregore Browser runs it's own IPFS node and implements the `fetch` function for IPFS protocols like `ipfs://` and `ipns://`. You can read more about this in the [IPFS documentation](https://docs.ipfs.tech/).
 
 We can update the content of the site by doing the same. Let's turn that into a function that we can reuse!
 
@@ -201,7 +201,7 @@ setTimeout( () => updateSite('index.html', `<html>
 So we've used only the dev tools in Agregore to create a basic web page. We've started making it a little easier to build on this, but it's still tedious to update content. But we can improve this using the tools we have!
 
 
-## Part II
+## Part 1 (continued)
 
 To edit content, there are many options! We could load content into a `textarea`, use `content-editable`, or directly manipulate the page content using javascript or the dev tools. We could also use another editor and upload the content if we wanted to, but lets focus on options that doesn't require any other tools.
 
@@ -416,4 +416,4 @@ async function editFile(filename){
 }
 ```
 
-Follow along with [part 3](./part-3).
+Follow along with [part 2](./part-2).
