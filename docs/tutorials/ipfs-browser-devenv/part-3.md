@@ -180,5 +180,5 @@ async function showEditor(){
 ```
 
 The code can also be found here:
-- [index.html](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/index.html.template')
-- [lib.js](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/lib.js.template')
+- [index.html](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/index.html.template)
+- [lib.js](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/lib.js.template)
