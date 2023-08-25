@@ -9,6 +9,8 @@ body {
     background-color: #000000;
     color: #ffffff;
     font-family: sans-serif;
+    width: 94%;
+    margin: 0 3%;
 }
 
 img, picture, video, canvas, svg {
@@ -22,14 +24,15 @@ input, button, textarea, select {
 
 #root {
     display: block;
-    width: 94%;
-    margin: 0 3%;
 }
 
 #shelf {
     display: grid;
     grid-gap: 10%;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* to make sure there's at least two elements in a row: */
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+    min-width: 100%;
+
 }
 
 .block {
@@ -48,7 +51,7 @@ input, button, textarea, select {
     padding: 5%;
 }
 
-.confirm-edit-button {
+.confirm-edit-button {k
     text-decoration: none;
     color: white;
 }
@@ -76,3 +79,10 @@ a.edit-button, a.delete-button {
     text-decoration: none;
     padding: 0 5%;
 }
+
+.copy-button {
+    text-decoration: none;
+    margin: 0 5%;
+    float: right;
+}
+

@@ -153,6 +153,10 @@ function makeAndSaveNewBlock (link, position = -1) {
   saveBlocks()
 }
 
+function makeNewBlock (link) {
+  blocksToDraw.push(new Block(link))
+}
+
 function drawBlocks () {
   const shelf = document.getElementById('shelf')
   while (shelf.firstChild) {
@@ -200,6 +204,11 @@ async function initOwnSite () {
 }
 
 async function saveBlocks () {
+  copyButton = document.getElementsByClassName('copy-button')[0]
+  console.log(copyButton)
+  copyButton.textContent = 'Saving... ⏳'
+  
+
   const data = []
   for (const block of blocksToDraw) {
     data.push(block.data)
@@ -211,6 +220,7 @@ async function saveBlocks () {
     method: 'put',
     body: JSON.stringify(data)
   })
+  copyButton.textContent = 'Saved! ✅'
 
   if (!window.location.href.includes(siteURL)) {
     window.location.href = siteURL
@@ -219,6 +229,7 @@ async function saveBlocks () {
 
 async function loadBlocks () {
   const blockFileURL = new URL(BLOCKS_JSON_FILE, window.location.href).href
+  try {
   const dataResponse = await fetch(blockFileURL)
 
   if (dataResponse.ok) {
@@ -228,8 +239,12 @@ async function loadBlocks () {
     }
     drawBlocks()
   } else {
-    console.error(`Could not load blocks: ${dataResponse.status} - ${await dataResponse.text()}`)
-    makeAndSaveNewBlock('https://ipfs-search.com/')
+    throw new Error(dataResponse)
+    }
+  } catch(dataResponse) {
+    console.error(`Could not load blocks: ${dataResponse.status} - ${await dataResponse.text}`)
+    makeNewBlock('https://ipfs-search.com/')
+    drawBlocks()
   }
 }
 
@@ -238,6 +253,17 @@ const blocksToDraw = []
 function initializeRoot () {
   const rootDiv = document.getElementById('root')
   rootDiv.textContent = 'My Collection'
+
+  const createCopy = document.createElement('button')
+    createCopy.setAttribute('href', '#')
+    createCopy.setAttribute('class', 'copy-button')
+    createCopy.append(document.createTextNode('Save Blocks 📝'))
+    createCopy.addEventListener('click', async () => {
+      saveBlocks()
+    })
+
+  rootDiv.append(createCopy)
+
 
   const shelf = document.createElement('div')
   shelf.setAttribute('id', 'shelf')
