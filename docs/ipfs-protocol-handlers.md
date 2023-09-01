@@ -321,7 +321,7 @@ The `EventSource` will emit message events whose `data` is a JSON object which c
 - `data`: The encoded `data` for the message. By default it is a base64 encoded string.
 
 ```JavaScript
-await fetch('pubsub://TOPIC/', {method: 'POST', data})
+await fetch('pubsub://TOPIC/', {method: 'POST', body: 'Hello World!'})
 ```
 
 You can publish a new message to subscribed peers for a `TOPIC` by doing a `POST` to the `pubsub` protocol.
