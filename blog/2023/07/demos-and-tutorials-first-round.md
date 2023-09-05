@@ -21,8 +21,7 @@ The live code also contains reusable bits for cloning a page into a new IPNS sit
 ### Judy's Game TODO List
 
 [@JudyTuna](https://github.com/judytuna) put together a TODO list for managing the games she's planning to play.
-You can find the source code [on GitHub](https://github.com/judytuna/ipfs-multido) or published [on
-IPNS](ipns://k2k4r8lxh5dxfu0e56338t2q6zw0lk7w9jbae56cde1pzx8nz05dlz45/).
+You can find the source code [on GitHub](https://github.com/judytuna/ipfs-multido) or published [on in the examples folder](/docs/examples/multitodo/).
 This app was made as a single HTML file and uses a bash script for publishing it to IPFS via Agregore's built in daemon.
 
 ### Caprice's Theme Builder
