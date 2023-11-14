@@ -91,7 +91,11 @@ select, select * {
     color: var(--ag-theme-text);
 }
 ```
-- Notice the @import that loads agregore's theme style
+- In our `styles.css`, you'll notice the line `@import url("agregore://theme/vars.css");`. This imports a set of CSS variables defined by the Agregore browser, allowing us to use consistent theming across our application. These variables include colors, font family, and more, which are used to style various elements of our app.
+
+- By using these variables, our app's look and feel will align with the user's configured theme in the Agregore browser, providing a seamless and integrated experience.
+
+- For more detailed information on theming in Agregore, check out the [Agregore Theming Documentation](https://agregore.mauve.moe/docs/theming).
 
 ### Step 3: JavaScript for Drag-and-Drop
 In your `script.js` file, add the JavaScript code:  
