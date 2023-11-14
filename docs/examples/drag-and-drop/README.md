@@ -1,5 +1,5 @@
 # Drag and Drop
-# Drag and Drop to IPFS and Hypercore
+## Drag and Drop to IPFS and Hypercore
 
 ## Introduction
 This tutorial guides you through building a simple yet powerful web application that allows users to drag and drop files, publishing them directly to IPFS and Hypercore. Imagine Alice, an artist who wants to share her digital art easily. With this app, she can drag her artwork into the browser, and it's instantly available on the decentralized web.
@@ -42,7 +42,7 @@ Create an `index.html` file in your project folder and add the following HTML st
 Notice the simplicity of our HTML file.
 - A dropdown element to select the protocol
 - A section to drop the file
-- A list element to contain our uploaded files
+- A list element to contain the URL to our uploaded files
 - Both the CSS and Javascript are loaded from external files for simplicity and maintainability
 
 ### Step 2: Adding styles
@@ -74,11 +74,9 @@ a:hover {
     background-color: var(--ag-theme-secondary);
     text-decoration: none;
 }		
-
 main {
     margin: 1em;
 }
-
 select, select * {
     background: var(--ag-theme-background);
     font-size: inherit;
@@ -88,12 +86,12 @@ select, select * {
     padding:0.25em;
     border-radius: 0.25em;
 }
-
 *::selection, option:hover {
     background: var(--ag-theme-primary);
     color: var(--ag-theme-text);
 }
 ```
+- Notice the @import that loads agregore's theme style
 
 ### Step 3: JavaScript for Drag-and-Drop
 In your `script.js` file, add the JavaScript code:  
@@ -116,7 +114,6 @@ uploadBox.ondrop = async (e) => {
 }
 
 const uploadListBox = $('#uploadListBox')
-
 const protocolSelect = $('#protocolSelect')
 
 async function uploadFile(file) {
@@ -126,7 +123,6 @@ async function uploadFile(file) {
 
     // Create a Blob from the ArrayBuffer
     let mimeType = 'application/octet-stream'; // Default MIME type
-
     // Use the MIME type from the File object if available
     if (file instanceof File) {
         mimeType = file.type || mimeType;
@@ -187,7 +183,6 @@ function addError(name, text) {
 ```
 
 ### Explaining the code 
-
 First, we define a function to simplify document.querySelector
 ```javascript
 function $(query) {
@@ -222,7 +217,7 @@ const protocolSelect = $('#protocolSelect');
 We create a function to upload the files.
 ```javascript
 async function uploadFile(file) {
-    // ... [code above]
+    // ... [full code above]
 }
 ```
 - This function handles the file uploading. It creates a Blob from the file's buffer and sets up the correct headers. Depending on the selected protocol, it generates a Hyperdrive key for Hypercore or constructs an IPFS URL, then performs the fetch request to upload the file.
@@ -230,7 +225,7 @@ async function uploadFile(file) {
 For Hypercore uploads, we generate a Hyperdrive key.
 ```javascript
 async function generateHyperdriveKey(name) {
-    // ... [code above]
+    // ... [full code above]
 }
 ```
 - The function above generates a Hyperdrive key by making a POST request to hyper://localhost. The generated URL is returned for use in the uploadFile function.
