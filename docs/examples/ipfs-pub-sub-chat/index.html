@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head><title>PUBSUB chat</title></head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <body>
+
+    <div class="container" id="setup">
+      <h1>IPFS PUBSUB chat</h1>
+      <form id="roomNameForm">
+        <input name="channelName" id="channelNameInput" placeholder="Pick a room name" />
+        <p><button type="submit">Set name</button></p>
+      </form>
+    </div>
+
+    <div class="container hidden" id="chat">
+        <h1 id="roomName">Room name</h1>
+        <textarea readonly></textarea>
+        <form id="chatForm">
+            <input id="messageInput" placeholder="Type your message here" />
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script src="lib.js"></script>
+    <script src="pubsub.js"></script>
+  </body>
+</html>
+
