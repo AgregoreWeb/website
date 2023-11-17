@@ -1,228 +1,110 @@
+# Agregore Browser IPFS Development Environment
+
+In this tutorial you will create a basic development environment for a site hosted on [IPFS](https://ipfs.tech) by working exclusively in the Agregore Browser. The tutorial has 3 parts - [part 1](./part-1), [part 2](./part-2), and [part 3](./part-3). Although they were written to be self-contained, it is recommended that you complete them in order.
+
 ## Part 3
 
-Starting out, we'll assume we lost the code from part [1 & 2](./part-1), let's quickly bootstrap. Open an [empty IPFS folder](ipfs://bafyaabakaieac/) in Agregore Browser and open the dev tools (Ctrl+Shift+I) and go to the console tab. Enter the following:
+Let's start again, but this time instead of copy and pasting the code, we'll copy some files from the web to our own site. Go to [the empty IPFS folder](ipfs://bafyaabakaieac/) using Agregore Browser, open your dev tools (`Ctrl+Shift+I`) and go to the console.
+
+First we'll create a function that takes an array of File objects and adds it to our site. To add multiple files at once, we need to use a PUT request with a `FormData` instance as the body. The `FormData` object will contain a list of the files we're adding. You can read the more about this on the [documentation site](https://github.com/RangerMauve/js-ipfs-fetch#await-fetchipfsbafyaabakaieac-method-put-body-new-formdata).
 
 ```js
-async function updateSite(filename, content){
-    let cid = window.location.hostname
-    const resp = await fetch(`ipfs://${cid}/${filename}`, {method: 'put', body: content})
+async function addFiles(files){
+    const formData = new FormData()
+    files.forEach( (file, index) => {
+       formData.append(`file-${index}`, file) 
+    })
+    const resp = await fetch(window.origin, {method: 'put', body: formData})
     const newLocation = resp.headers.get('location')
     window.location = new URL(newLocation).origin
 }
-
-async function openEditor(){
-    let editorDiv = document.getElementById("editor")
-    if (!editorDiv){
-        editorDiv = document.createElement('div')
-        editorDiv.id = 'editor'
-    }
-    editorDiv.innerHTML = `<form id="idForm" style="display: flex; flex-direction: column;">
-        <label for="idFilenameInput">Filename</label>
-        <input type="text" name="filename" id="idFilenameInput"></input>
-        <label for="idContentInput">Content</label>
-        <textarea id="idContentInput" rows="20"></textarea>
-        <input type="submit" value="Save"></input>
-    </form>`
-    document.body.appendChild(editorDiv)
-    const form = document.getElementById('idForm')
-    form.onsubmit = e => {
-        e.preventDefault()
-        const filename = document.getElementById('idFilenameInput').value
-        const content = document.getElementById('idContentInput').value
-        updateSite(filename, content)
-    }
-}
-
-async function loadFile(filename){
-    const resp = await fetch(filename)
-    const content = await resp.text()
-    document.getElementById('idFilenameInput').value = filename
-    document.getElementById('idContentInput').value = content
-}
-
-async function editFile(filename){
-    openEditor()
-    loadFile(filename)
-}
 ```
 
-Now open the editor `editFile('lib.js')` and copy-and-past the code above. You might see an error about the file not existing ('lib.js', we'll fix that later), but thins should work. Once you hit save, you should now see a directory listing.
-
-To get the basic HTML document back, load `lib.js` and then edit `index.html`:
+And now let's get the `index.html` and `lib.js` from the web and add them to our site using the function we just defined.
 
 ```js
-let script = document.createElement('script')
-script.src = 'lib.js'
-document.head.appendChild(script)
-setTimeout( () => editFile('index.html'), 1000)
+let resp = await fetch('https://www.thebacklog.net/projects/agregore-web-apps/amt3.js')
+const libjs = await resp.text()
+resp = await fetch('https://www.thebacklog.net/projects/agregore-web-apps/amt3-index.tmpl')
+const indexhtml = await resp.text()
+
+addFiles([
+    new File([indexhtml], 'index.html', {type: 'text/html'}),
+    new File([libjs], 'lib.js', {type: 'text/javascript'}),
+])
 ```
 
-Again you will see some error text in the text area. Replace that with the code below and save again.
+The last piece that we are still missing to have a usable website is giving it an address. You've probably noticed that each time we've made a change to our site, the address changed to a new address in the format `ipfs://blahblahtoolongandunreadabletoreallypayattentionlinknoteveninthebio`. If we want to share our site with other people, we need an unchanging URL to share with other people.
 
-```html
-<html>
-  <head><title>Page title</title></head>
-  <body>
-    <h1>Hello world</h1>
-    <script src="lib.js"></script>
-  </body>
-</html>
-```
+To do that, we can publish our site using a key and obtain an [IPNS address](https://docs.ipfs.tech/concepts/ipns/#mutability-in-ipfs) that stays the same!!
 
-We're back at the end of part II!
-
-A typical website consist of more than one file, in our example we have 'index.html' and 'lib.js'. Lets add a sidebar that lists all the files on our site. We can get a list of list of all the files in a directory in IPFS by adding '?noResolve' to the path. Try it by adding '?noResolve' to the current ipfs URL in the address bar, you should see a list that includes '../', './index.html' and './lib.js'. These are all the files for our site!
-
-Let's create a function to fetch the contents of a directory. Normally when we fetch an IPFS directory in the Agregore Browser, it checks to see if there is an index file present and if so, it returns that file. To disable that, we add the querystring `?noResolve` to the end of the directory URL
+Lets create the key:
 
 ```js
-async function listDir(path){
-    const resp = await fetch(path + '?noResolve')
-    const files = await resp.json()
-    return files
-}
+let resp = await fetch('ipns://localhost/?key=mysite', {method: 'POST'})
+const key = resp.headers.get('location')
 ```
 
-We can test this function in the console by running, it should return the array `["index.html", "lib.js"]`.
+The value of key is the IPNS address that we can share with other people. It will start with the protocol part of the URL `ipns://` followed by alpha numeric characters.
 
-```
-await listDir(window.origin)
-```
-
-Now add the function './lib.js' using `editFile('lib.js')` in the dev console and adding the function body to the file.
-
-We want to load this data into a sidebar, so we need to restructure the HTML for the editor a bit. We'll have to update the HTML we've assigned to the editor. Change the part
+We've created the key, but it doesn't yet point at anything. Let's point it at the `ipfs://` address of our site. This can take a while (~30s) so be patient.
 
 ```js
-editorDiv.innerHTML = `
-    ...
-`
+resp = await fetch(key, {method: 'POST', body: window.origin})
 ```
 
-to the following:
+Once the request succeeds, you can visit your published site by going to the `ipns://...` URL or by running `window.location = key` in the console. You can also use an IPFS capable browser on a different device to view the site.
 
-```js
-editorDiv.innerHTML = `<div style="display: flex; flex-grow: 1; padding: 1em">
-    <div id="idSidebar" style="padding-right: 1em;"><h2>Files</h2>
-    </div>
-    <form id="idForm" style="flex-grow: 1; display: flex; flex-direction: column;">
-        <label for="idFilenameInput">Filename</label>
-        <input type="text" name="filename" id="idFilenameInput"></input>
-        <label for="idContentInput">Content</label>
-        <textarea id="idContentInput" style="flex-grow: 1;" rows="20"></textarea>
-        <input type="submit" value="Save"></input>
-    </form>
-</div>`
-```
+Lets see if we can update the site from the IPNS URL. Run `showEditor()` in the console, make an edit to index.html and see what happens.
 
-And add the logic to create a list with all the files and add it to the sidebar at the end of the 'showEditor' function:
-
-```js
-const sidebar = document.getElementById('idSidebar')
-const files = await listDir(window.origin)
-const list = document.createElement('ul')
-list.style =  "list-style: none; padding-inline-start: 0;"
-files.map( file => {
-    let li = document.createElement('li')
-    li.innerHTML = `<a href="#">${file}</a>`
-    li.querySelector('a').onclick = e => loadFile(file)
-    list.appendChild(li)
-})
-sidebar.appendChild(list)
-```
-
-Instead of typing in `editFile('lib.js')` or `editFile('index.html')` we can now simply use `openEditor()` and then select the file we want. This is easier, so it's safe to delete the `editFile()` function now. You can always use `loadFile()` to load a file once the editor is already open.
-
-To add a new file, you can open the editor, write a new filename and it should be created when you save. You can play around a little, maybe update the HTML, add more pages, add another JavaScript file, create a stylesheet, etc. 
-
-I've added a file called 'site.js' that opens the editor once the document is loaded.
-
-```js
-window.addEventListener("load", (event) => {
-  showEditor()
-});
-```
-
-And then I added the script to 'index.html'
-
-```html
-<script src="site.js"></script>
-```
-
-You might be asking what happens if we have nested directories, the short answer is that things will probably not work as expected. The current site doesn't have any directories, we can create one by opening 'lib.js' and changing the filename to 'dir/lib.js' before saving. Now you should see 'dir/' listed in the sidebar. If you open it, you'll see the array of files in `dir` rather than the files themselves.
-
-To load directories, we need to update the part that loads the sidebar. Before we do that, let's move that code into a separate function:
-
-```js
-async function loadSidebar(){
-    const sidebar = document.getElementById('idSidebar')
-    const files = await listDir(window.origin)
-    const list = document.createElement('ul')
-    list.style =  "list-style: none; padding-inline-start: 0;"
-    files.map( file => {
-        let li = document.createElement('li')
-        li.innerHTML = `<a href="#">${file}</a>`
-        li.querySelector('a').onclick = e => loadFile(file)
-        list.appendChild(li)
-    })
-    sidebar.appendChild(list)
-}
-```
-
-And replace the code you added to the `showEditor()` function with a call to `loadSidebar()` like this
-
-```js
-await loadSidebar()
-```
-
-To make the sidebar work, we should check if a file is a directory and if it is, create an element for each file or repeat the process for any directories it contains. For now we will create a list that will look something like this:
-
-> index.html
-> dir/lib.js
-> lib.js
-
-So let's update the element creation logic in `loadSidebar()`. We'll extract the logic for creating an HTML element for each entry in a directory into a separate function. This function will return a list with a single element (a link that will open the file) if the directory entry is a file. If it is a directory, it will read the files in that directory call itself on each of those files/directories.
-
-```js
-async function loadSidebar(){
-    const sidebar = document.getElementById('idSidebar')
-    const files = await listDir(window.origin)
-    const list = document.createElement('ul')
-    list.style =  "list-style: none; padding-inline-start: 0;"
-
-    async function makeFileListElements(path, file) {
-        if (file.endsWith('/')){
-            let subfiles = await listDir(window.origin + path + file)
-            let elements = await Promise.all(
-                subfiles.map(subfile => 
-                    makeFileListElements(path + file, subfile)
-                )
-            )
-            return elements.reduce( (arr, el) => [...arr, ...el] )
-        }
-        let li = document.createElement('li')
-        li.innerHTML = `<a href="#">${path}${file}</a>`
-        li.querySelector('a').onclick = e => loadFile(path + file)
-        return [li]
-    }
-
-    await Promise.all(
-        files.map(async file => {
-            let elements = await makeFileListElements('/', file)
-            elements.map(li => list.appendChild(li))
-        })
-    )
-
-    sidebar.appendChild(list)
-}
-```
-
-Here is what the final 'lib.js' looks like:
+That took a while and didn't succeed. Looking at the error message in the console, it seems the error is on line 3 of the `updateSite` function, we hard coded the protocol part of the URL we're using in fetch. Lets fix that now. Since we can't save, we need to go back to the last version with an `ipfs://...` URL. Then change the `updateSite` function as follows:
 
 ```js
 async function updateSite(filename, content){
-    let cid = window.location.hostname
-    const resp = await fetch(`ipfs://${cid}/${filename}`, {method: 'put', body: content})
+    const resp = await fetch(`${window.origin}/${filename}`, {method: 'put', body: content})
+    const newLocation = resp.headers.get('location')
+    window.location = new URL(newLocation).origin
+```
+
+Before we publish the site again, let's add that functionality to 'lib.js'. Add the following function:
+
+```js
+async function publishSite(){
+    let resp = await fetch('ipns://localhost/?key=mysite', {method: 'POST'})
+    const key = resp.headers.get('location')
+    resp = await fetch(key, {method: 'POST', body: window.origin})
+    window.location = new URL(resp.headers.get('location')).origin
+}
+```
+
+Now run `publishSite()` in the console, again it will take some time to work. But now once you're redirected to your site you should be able to update the ipns site!
+
+And lastly, lets add a button to publish our site. Add the following code to the `showEditor` function:
+
+```js
+if (window.origin.startsWith('ipfs://')){
+    const button = document.createElement('button')
+    button.innerHTML = 'Publish site'
+    button.onclick = e => {
+        e.preventDefault()
+        publishSite()
+    }
+    sidebar.appendChild(button)
+}
+```
+
+Here is the final code of lib.js:
+
+```js
+async function publishSite(){
+    let resp = await fetch('ipns://localhost/?key=mysite', {method: 'POST'})
+    const key = resp.headers.get('location')
+    resp = await fetch(key, {method: 'POST', body: window.origin})
+    window.location = new URL(resp.headers.get('location')).origin
+}
+
+async function updateSite(filename, content){
+    const resp = await fetch(`${window.origin}/${filename}`, {method: 'put', body: content})
     const newLocation = resp.headers.get('location')
     window.location = new URL(newLocation).origin
 }
@@ -285,7 +167,18 @@ async function showEditor(){
         list.appendChild(li)
     })
     sidebar.appendChild(list)
+    if (window.origin.startsWith('ipfs://')){
+        const button = document.createElement('button')
+        button.innerHTML = 'Publish site'
+        button.onclick = e => {
+            e.preventDefault()
+            publishSite()
+        }
+        sidebar.appendChild(button)
+    }
 }
 ```
 
-Next up is [part 4](./part-4)
+The code can also be found here:
+- [index.html](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/index.html.template)
+- [lib.js](https://github.com/AgregoreWeb/website/blob/main/docs/examples/browser-devenv/lib.js.template)
