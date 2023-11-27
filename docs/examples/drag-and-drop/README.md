@@ -73,6 +73,13 @@ main {
     margin: 1em;
 }
 ```
+#### Explanation of Flex Properties in `#uploadBox`
+
+- In the `#uploadBox` style, the `display: flex;` declaration sets the box as a flex container, enabling the use of Flexbox layout. This makes it easier to design a flexible responsive layout structure without using float or positioning.
+
+- Inside this flex container, `justify-content: center;` horizontally centers the child elements, and `align-items: center;` vertically centers them. Together, these properties ensure that any content within `#uploadBox`, the `<h1>` element in our case, is centered both horizontally and vertically.
+
+#### Importing the Global Agregore Theme
 - In our `styles.css`, you'll notice the line `@import url("agregore://theme/vars.css");`. This imports a set of CSS variables defined by the Agregore browser, allowing us to use consistent theming across our application. These variables include colors, font family, and more, which are used to style various elements of our app.
 
 - By using these variables, our app's look and feel will align with the user's configured theme in the Agregore browser, providing a seamless and integrated experience.
