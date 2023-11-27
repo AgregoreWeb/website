@@ -5,7 +5,7 @@
 This tutorial guides you through building a simple yet powerful web application that allows users to drag and drop files, publishing them directly to IPFS and Hypercore. Imagine Alice, an artist who wants to share her digital art easily. With this app, she can drag her artwork into the browser, and it's instantly available on the decentralized web.
 
 ## Prerequisites
-- Basic knowledge of HTML, CSS, and JavaScript.
+- Basic knowledge of [HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS), and [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript).
 - Agregore browser installed on your machine.
 
 ## Setting Up Your Environment
