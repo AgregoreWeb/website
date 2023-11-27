@@ -36,19 +36,17 @@ Now lets update the HTML for the app and remove that button. Open `index.html` a
 
 ```html
 <!DOCTYPE html>
-<html>
-  <head><title>PUBSUB chat</title></head>
+<html lang="en">
+  <title>PUBSUB chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <body>
-    <div class="container" id="setup">
-      <h1>IPFS PUBSUB chat</h1>
-      <form id="roomNameForm">
-        <input name="channelName" id="channelNameInput" placeholder="Pick a room name" />
-        <p><button type="submit">Set name</button></p>
-      </form>
-    </div>
-    <script src="lib.js"></script> 
-  </body>
+  <div class="container" id="setup">
+    <h1>IPFS PUBSUB chat</h1>
+    <form id="roomNameForm">
+      <input name="channelName" id="channelNameInput" placeholder="Pick a room name" />
+      <p><button type="submit">Set name</button></p>
+    </form>
+  </div>
+  <script src="lib.js"></script> 
 </html>
 ```
 
@@ -204,9 +202,6 @@ class PubSub {
     //...
 }
 ``` 
-ipfs://bafybeigluaugn5nzjb6xattprvsylrvhlidpwxawz4rimnkapxfssmse4e/
-ipfs://bafybeiawi7rujscm4ynagb7s56nphvzcoo2qpgxvs3c5k5b23o6hqskppa/#
-
 You can read more about how this binding [on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this).
 
 Now when we receive our message, we can save the from address. Let's update the `onmessage` callback to save our own address.
@@ -322,7 +317,5 @@ And finally we should handle message we are receiving and add it to the chat dis
 
 If you haven't already, open up Agregore Browser on a different device and navigate to the ipfs:// URL of your application. If you choose the same channel name, you should be able to chat with each other!!
 
-
 End result of tutorial: ipfs://bafybeifcnneyw2gp7cqtiltab44jsf6zzkpakxvx7kwxary6dsax5462na/
 Premade ex. ipfs://bafybeiawi7rujscm4ynagb7s56nphvzcoo2qpgxvs3c5k5b23o6hqskppa/
-
