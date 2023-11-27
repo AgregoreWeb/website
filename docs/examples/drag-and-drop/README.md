@@ -69,26 +69,8 @@ a {
     padding:0.15em 0.5em;
     border-radius: 0.5em;
 }
-a:hover {
-    color: var(--ag-theme-background);
-    background-color: var(--ag-theme-secondary);
-    text-decoration: none;
-}		
 main {
     margin: 1em;
-}
-select, select * {
-    background: var(--ag-theme-background);
-    font-size: inherit;
-    margin-bottom: 1em;
-    color: var(--ag-theme-text);
-    border: 0.05em solid var(--ag-theme-secondary);
-    padding:0.25em;
-    border-radius: 0.25em;
-}
-*::selection, option:hover {
-    background: var(--ag-theme-primary);
-    color: var(--ag-theme-text);
 }
 ```
 - In our `styles.css`, you'll notice the line `@import url("agregore://theme/vars.css");`. This imports a set of CSS variables defined by the Agregore browser, allowing us to use consistent theming across our application. These variables include colors, font family, and more, which are used to style various elements of our app.
