@@ -48,63 +48,51 @@ async function generateHyperdriveKey(name) {
 }
 ```
 
-### Uploading a File to Hyperdrive
+### Uploading a File to Hyperdrive 📤
 
-Once you have a Hyperdrive key, you can upload files using fetch. Here's an example function to upload a file:
+Once you have a Hyperdrive key, you can upload files using fetch. 
+
+The latest hypercore-fetch API supports various data types for the request body, including `String`, `Blob`, `FormData`, or `ReadableStream`. In this guide, we focus on using FormData for uploading files, which is particularly useful for handling multiple files.
+
+### Uploading Using FormData
+
+When uploading files, FormData is an efficient way to bundle and send multiple files in a single request. Here's an updated example illustrating how to upload files using FormData:
 
 ```javascript
-async function uploadFile(file) {
-    const name = file.name;
-    const buffer = await file.arrayBuffer();
-    const protocol = protocolSelect.value; // Assume this is defined elsewhere
+async function uploadFile(files) {
+    
+    const formData = new FormData();
 
-    // Create a Blob from the ArrayBuffer
-    let mimeType = file.type || 'application/octet-stream'; // Use MIME type from File, default to octet-stream
-    const blob = new Blob([buffer], { type: mimeType });
-
-    // Headers
-    const headers = { 'Content-Type': mimeType };
+    // Append each file to the FormData
+    for (const file of files) {
+        formData.append('file', file, file.name);
+    }
 
     // Construct URL with hypercore key (see section above for key generating function)
     let url;
-    if (protocol === 'hyper') {
-        const hyperdriveUrl = await generateHyperdriveKey(name);
-        url = `${hyperdriveUrl}${name}`;
+    const hyperdriveUrl = await generateHyperdriveKey(name);
+    url = `${hyperdriveUrl}${name}`;
+
+
+    // Perform the upload for each file
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            addError(files, await response.text());
+        }
+        const urlResponse = protocol === 'hyper' ? response.url : response.headers.get('Location');
+        addURL(urlResponse);
+    } catch (error) {
+        console.error(`Error uploading ${files}:`, error);
     }
-
-    console.log('Uploading', { name, protocol, headers });
-
-    // Perform the PUT request
-    const response = await fetch(url, {
-        method: 'PUT',
-        body: blob,
-        headers 
-    });
-
-    if (!response.ok) throw new Error(`Upload failed: ${await response.text()}`);
-    const uploadedUrl = response.url; // URL of the uploaded file
-    console.log('File uploaded:', uploadedUrl);
 }
 ```
 
-### Example Usage
-
-To use these functions in your Agregore browser application, you can call `uploadFile` with a file object:
-
-```javascript
-// Example file upload
-const fileInput = document.querySelector('#fileInput'); // Assume file input is in your HTML
-fileInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        uploadFile(file).then(() => {
-            console.log('File uploaded successfully.');
-        }).catch(error => {
-            console.error('Error uploading file:', error);
-        });
-    }
-});
-```
+This function demonstrates how to upload files using FormData, which simplifies the process of sending multiple files in a single HTTP request.
 
 ## Deleting Data 🗑️
 
