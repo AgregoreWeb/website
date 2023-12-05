@@ -13,7 +13,6 @@ The Hypercore Fetch API is a JavaScript interface that extends the familiar Fetc
 This API simplifies the process of loading and managing p2p content, making it an essential tool for developers working with decentralized data structures.
 
 
-
 ## Using Fetch with Hypercore 🌐
 
 The Hypercore Fetch API allows you to interact with hyperdrives and hypercores using familiar HTTP-like methods. Here are some of the key operations you can perform:
@@ -106,6 +105,37 @@ fileInput.addEventListener('change', (event) => {
     }
 });
 ```
+
+## Deleting Data 🗑️
+
+The `hypercore-fetch` API allows for deleting files or entire directories within a hyperdrive. Note that these operations require the hyperdrive to be writable (`writable: true`).
+
+### Deleting a Single File
+
+To delete a specific file:
+
+```javascript
+fetch('hyper://KEY/example.txt', {method: 'DELETE'})
+```
+
+This sends a DELETE request to remove example.txt from the hyperdrive specified by KEY.
+
+KEY can be a 52 character z32 encoded key or a domain parsed with DNSLink.
+
+### Purging All Data in a Hyperdrive
+
+To delete all contents of a hyperdrive:
+
+```javascript
+fetch('hyper://KEY/', {method: 'DELETE'})
+```
+
+A DELETE request to the root of the hyperdrive clears all its stored data.
+    
+If it's a writable drive, data will be fully cleared. Attempting to write again may lead to data corruption.
+
+**Important**: Be cautious when using these delete operations as they cannot be undone and might lead to permanent data loss.
+
 
 ## Resources and Further Reading 📖
 
