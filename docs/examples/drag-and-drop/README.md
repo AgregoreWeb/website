@@ -101,56 +101,46 @@ uploadBox.ondrop = async (e) => {
     const { dataTransfer } = e
     if(!dataTransfer) return
 
-    for(const file of dataTransfer.files) {
-        await uploadFile(file)
-    }
+    await uploadFiles(dataTransfer.files);
 }
 
 const uploadListBox = $('#uploadListBox')
+
 const protocolSelect = $('#protocolSelect')
 
-async function uploadFile(file) {
-    const name = file.name;
-    const buffer = await file.arrayBuffer();
+async function uploadFiles(files) {
     const protocol = protocolSelect.value;
 
-    // Create a Blob from the ArrayBuffer
-    let mimeType = 'application/octet-stream'; // Default MIME type
-    // Use the MIME type from the File object if available
-    if (file instanceof File) {
-        mimeType = file.type || mimeType;
+    const formData = new FormData();
+    // Append each file to the FormData
+    for (const file of files) {
+        formData.append('file', file, file.name);
     }
 
-    const blob = new Blob([buffer], { type: mimeType }); // Create a blob from the array buffer
-
-    // Headers
-    const headers = {
-        'Content-Type': mimeType,
-    };
-
-    // Construct the URL with the actual hypercore key
+    // Construct the URL based on the protocol
     let url;
-    let hyperdriveUrl;
-    let body = file instanceof File ? blob : buffer;
-
     if (protocol === 'hyper') {
-        hyperdriveUrl = await generateHyperdriveKey(name);
-        url = `${hyperdriveUrl}${name}`;
+        const hyperdriveUrl = await generateHyperdriveKey('drag-and-drop');
+        url = `${hyperdriveUrl}`;
     } else {
-        url = `ipfs://bafyaabakaieac/${name}`;
+        url = `ipfs://bafyaabakaieac/`;
     }
 
-    console.log('Uploading', { name, body, protocol, headers });
+    // Perform the upload for each file
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: formData,
+        });
 
-    const response = await fetch(url, {
-        method: 'PUT',
-        body,
-        headers 
-    });
-
-    if (!response.ok) return addError(name, await response.text());
-    const urlResponse = protocol === 'hyper' ? response.url : response.headers.get('Location');
-    addURL(urlResponse);
+        if (!response.ok) {
+            addError(files, await response.text());
+        }
+        const urlResponse = protocol === 'hyper' ? response.url : response.headers.get('Location');
+        addURL(urlResponse);
+    } catch (error) {
+        console.error(`Error uploading ${files}:`, error);
+    }
 }
 
 async function generateHyperdriveKey(name) {
