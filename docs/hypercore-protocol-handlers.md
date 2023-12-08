@@ -84,8 +84,8 @@ async function uploadFile(files) {
         if (!response.ok) {
             addError(files, await response.text());
         }
-        const urlResponse = protocol === 'hyper' ? response.url : response.headers.get('Location');
-        addURL(urlResponse);
+
+        addURL(response.url);
     } catch (error) {
         console.error(`Error uploading ${files}:`, error);
     }
