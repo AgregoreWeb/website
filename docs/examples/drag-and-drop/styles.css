@@ -1,0 +1,24 @@
+@import url("agregore://theme/vars.css");
+html {
+    background: var(--ag-theme-background);
+    color: var(--ag-theme-text);
+    font-family: var(--ag-theme-font-family);
+}
+#uploadBox {
+    padding: 1em;
+    border: 0.25em solid var(--ag-theme-primary);
+    border-radius: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: var(--ag-theme-secondary);
+    padding:0.15em 0.5em;
+    border-radius: 0.5em;
+}
+
+main {
+    margin: 1em;
+}

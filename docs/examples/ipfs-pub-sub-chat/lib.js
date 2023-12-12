@@ -19,51 +19,9 @@ async function loadFile(filename){
 }
 
 async function listDir(path){
-    const resp = await fetch(path + '?noResolve')
+    const resp = await fetch(window.origin + '?noResolve')
     const files = await resp.json()
     return files
-}
-
-async function loadSidebar(){
-    const sidebar = document.getElementById('idSidebar')
-    const files = await listDir(window.origin)
-    const list = document.createElement('ul')
-    list.style =  "list-style: none; padding-inline-start: 0;"
-
-    async function makeFileListElements(path, file) {
-        if (file.endsWith('/')){
-            let subfiles = await listDir(window.origin + path + file)
-            let elements = await Promise.all(
-                subfiles.map(subfile => 
-                    makeFileListElements(path + file, subfile)
-                )
-            )
-            return elements.reduce( (arr, el) => [...arr, ...el] )
-        }
-        let li = document.createElement('li')
-        li.innerHTML = `<a href="#">${path}${file}</a>`
-        li.querySelector('a').onclick = e => loadFile(path + file)
-        return [li]
-    }
-
-    await Promise.all(
-        files.map(async file => {
-            let elements = await makeFileListElements('/', file)
-            elements.map(li => list.appendChild(li))
-        })
-    )
-
-    sidebar.appendChild(list)
-    
-    if (window.origin.startsWith('ipfs://')){
-        const button = document.createElement('button')
-        button.innerHTML = 'Publish site'
-        button.onclick = e => {
-            e.preventDefault()
-            publishSite()
-        }
-        sidebar.appendChild(button)
-    }
 }
 
 async function showEditor(){
@@ -100,7 +58,34 @@ async function showEditor(){
         const content = document.getElementById('idContentInput').value
         updateSite(filename, content)
     }
+    const sidebar = document.getElementById('idSidebar')
+    const files = await listDir(window.origin)
+    const list = document.createElement('ul')
+    list.style =  "list-style: none; padding-inline-start: 0;"
+    files.map( file => {
+        let li = document.createElement('li')
+        li.innerHTML = `<a href="#">${file}</a>`
+        li.querySelector('a').onclick = e => loadFile(file)
+        list.appendChild(li)
+    })
+    sidebar.appendChild(list)
 
-    await loadSidebar()
-
+    if (window.origin.startsWith('ipfs://')){
+        const button = document.createElement('button')
+        button.innerHTML = 'Publish site'
+        button.onclick = e => {
+            e.preventDefault()
+            publishSite()
+        }
+        sidebar.appendChild(button)
+    }
 }
+
+window.addEventListener('load', e => {
+    document.addEventListener('keydown', e => {
+        if( e.ctrlKey && e.key == 'i' ){
+            showEditor().catch(console.error)
+        }
+    })
+})
+
