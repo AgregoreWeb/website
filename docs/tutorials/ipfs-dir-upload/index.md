@@ -2,11 +2,11 @@ In this tutorial we will create an app that allows you to upload a whole directo
 
 ## Getting started!
 
-We will be using a [self-hosted development environment](https://agregore.mauve.moe/docs/examples/browser-devenv/) for Agregore that we created in a [previous tutorial](https://agregore.mauve.moe/docs/tutorials/ipfs-browser-devenv/part-1). 
+We will be using a [self-hosted development environment](/docs/examples/browser-devenv/) for Agregore that we created in a [previous tutorial](/docs/tutorials/ipfs-browser-devenv/part-1). 
 
 To complete this tutorial, you will need to download and the latest version of the [Agregore Browser](https://github.com/AgregoreWeb/agregore-browser).
 
-Open up the [development environment](https://agregore.mauve.moe/docs/examples/browser-devenv/) in the Agregore Browser and click on "Start". This will copy the development environment for you to start working on your own IPFS hosted site. Once the site successfully loaded, you should see:
+Open up the [development environment](/docs/examples/browser-devenv/) in the Agregore Browser and click on "Start". This will copy the development environment for you to start working on your own IPFS hosted site. Once the site successfully loaded, you should see:
 
 ![annotated dev env](./template-site.png)
 
@@ -421,4 +421,4 @@ When you upload a bunch of files, you might notice that this creates some issues
     </div>`
 ```
 
-The final code can be found on [GitHub](https://github.com/AgregoreWeb/website/tree/main/docs/examples/browser-devenv-v2/files/). There is also an updated [self-hosted development environment](https://agregore.mauve.moe/docs/examples/browser-devenv-v2/) you can use!
+The final code can be found on [GitHub](https://github.com/AgregoreWeb/website/tree/main/docs/examples/browser-devenv-v2/files/). There is also an updated [self-hosted development environment](/docs/examples/browser-devenv-v2/) you can use!
