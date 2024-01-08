@@ -86,7 +86,8 @@ async function assembleCode() {
     <!DOCTYPE html>
     <html>
     <head>
-        <style>${basicCSS}${document.getElementById("cssCode").value}</style>
+        <style>${basicCSS}</style>
+        <style>${document.getElementById("cssCode").value}</style>
     </head>
     <body>
         ${document.getElementById("htmlCode").value}
@@ -198,8 +199,16 @@ function parseAndDisplayData(data) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(data, 'text/html');
 
-    // Extracting CSS and JavaScript
-    const cssContent = doc.querySelector('style') ? doc.querySelector('style').innerHTML : '';
+    // Extracting CSS
+    const styleElements = Array.from(doc.querySelectorAll('style'));
+
+    // Remove the first element (agregore theme CSS)
+    styleElements.shift();
+
+    // Now combine the CSS from the remaining <style> elements
+    let cssContent = styleElements.map(style => style.innerHTML).join('');
+    
+    // Extracting JavaScript
     const jsContent = doc.querySelector('script') ? doc.querySelector('script').innerHTML : '';
 
     // Remove script and style tags from the HTML content
