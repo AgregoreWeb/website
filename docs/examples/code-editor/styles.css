@@ -58,7 +58,8 @@ div textarea:focus {
 #dweb-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center
 }
 
 #loadingSpinner, #backdrop {
