@@ -163,36 +163,37 @@ function addURL(url) {
 function addError(name, text) {
     uploadListBox.innerHTML += `<li class="log">Error in ${name}: ${text}</li>`
 }
-
-fetchButton.addEventListener('click', async () => {
-    const cidOrName = fetchCidInput.value;
+// The new fetchFromDWeb function
+async function fetchFromDWeb(cidOrName) {
     if (!cidOrName) {
         alert("Please enter a CID or Name.");
         return;
     }
 
     let url;
-    const protocol = protocolSelect.value;
-
-    if (protocol === 'ipfs') {
-        url = `ipfs://${cidOrName}`;
-    } else if (protocol === 'hyper') {
-        url = `hyper://${cidOrName}`;
+    if (cidOrName.startsWith('ipfs://')) {
+        url = cidOrName;
+    } else if (cidOrName.startsWith('hyper://')) {
+        url = cidOrName;
     } else {
-        alert("Invalid protocol selected.");
+        alert("Invalid protocol. URL must start with ipfs:// or hyper://");
         return;
     }
 
     try {
         const response = await fetch(url);
         const data = await response.text();
-
-        // Parse and display the data in your editor
         parseAndDisplayData(data);
     } catch (error) {
-        console.error("Error fetching from IPFS:", error);
-        alert("Failed to fetch from IPFS.");
+        console.error("Error fetching from DWeb:", error);
+        alert("Failed to fetch from DWeb.");
     }
+}
+
+// Modified event listener for fetchButton
+fetchButton.addEventListener('click', () => {
+    const cidOrName = fetchCidInput.value;
+    fetchFromDWeb(cidOrName);
 });
 
 function parseAndDisplayData(data) {
