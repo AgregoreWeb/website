@@ -1,0 +1,84 @@
+@import url("agregore://theme/vars.css");
+
+:root {
+    --gap: 5px;
+    --half-gap: calc(var(--gap) / 2);
+}
+
+body, * {
+    padding: 0;
+    margin: 0;
+    font-family: var(--ag-theme-font-family);
+    background: var(--ag-theme-background);
+    color: var(--ag-theme-text);
+    box-sizing: border-box;
+}
+
+main {
+    padding: var(--gap);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--ag-theme-background);
+    color: var(--ag-theme-text);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    grid-template-rows: 1fr 1fr; /* Two rows */
+    height: 95vh;
+    padding: var(--half-gap);
+    row-gap: var(--gap);
+    column-gap: var(--gap);
+}
+
+.grid-container > * {
+    padding: var(--gap);
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* To handle content overflow */
+    border: 1px solid var(--ag-theme-primary);
+}
+
+.grid-container > textarea {
+    resize: none;
+    font-size: 1.2rem;
+}
+
+#viewer {
+    color: var(--ag-theme-text);
+}
+
+div textarea:focus {
+    outline: 2px solid var(--ag-theme-secondary);
+    color: var(--ag-theme-text);
+}
+
+#dweb-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#loadingSpinner, #backdrop {
+    display: none;  
+}
+
+#loadingSpinner {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1000; 
+}
+
+#backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 999; 
+}
