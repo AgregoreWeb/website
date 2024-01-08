@@ -31,7 +31,7 @@
     
     </div>
     <div id="dweb-container">
-        <div>
+        <div style="display:flex;flex-direction:row;">
             <label for="protocolSelect">
                 Protocol:
                 <select id="protocolSelect">
@@ -39,11 +39,10 @@
                     <option value="hyper">Hypercore-Protocol (HYPER://)</option>
                 </select>
             </label>
-        </div>
-        <div>
             <button id="uploadButton">Upload to dWeb</button>
-            <ul id="uploadListBox"></ul>
+            
         </div>
+        <ul id="uploadListBox"></ul>
         <div>
             <input id="fetchCidInput" type="text" placeholder="Enter IPFS CID or Hyperdruve URL ">
             <button id="fetchButton">Fetch from dWeb</button>
