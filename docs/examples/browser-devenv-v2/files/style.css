@@ -1,0 +1,4 @@
+@import url("agregore://theme/vars.css");
+html {
+    font-family: var(--ag-theme-font-family);
+}
