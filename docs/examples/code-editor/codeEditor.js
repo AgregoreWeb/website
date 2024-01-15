@@ -8,25 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Attach event listeners
     [htmlCode, javascriptCode, cssCode].forEach(element => {
-        element.addEventListener('keydown', handleKeyDown);
-        element.addEventListener('input', () => update(0));
+        element.addEventListener('input', () => update());
     });
 });
-
-// Handle tab key press
-function handleKeyDown(event) {
-    if (event.keyCode === 9) {  // Tab key
-        var v = this.value;
-        var s = this.selectionStart;
-        var e = this.selectionEnd;
-        this.value = v.substring(0, s) + '\t' + v.substring(e);
-        this.selectionStart = this.selectionEnd = s + 1;
-        return false;
-    }
-    if (event.keyCode === 8) {  // Backspace key
-        update(1);
-    }
-}
 
 // Import CSS from Agregore theme
 export let basicCSS = `
@@ -41,14 +25,8 @@ export let basicCSS = `
             }
 `;
 
-
-
-
-var j=0;
-
 //Function for live Rendering
-export function update(i) {
-    if(i==0){
+export function update() {
     let htmlCode = $('#htmlCode').value;
     console.log('HTML Code:', htmlCode);
     let cssCode = $('#cssCode').value;
@@ -67,17 +45,8 @@ export function update(i) {
     iframeDoc.open();
     iframeDoc.write(iframeContent);
     iframeDoc.close();
-    }
-
-    else if(i==1){
-
-        let htmlCode=document.getElementById("htmlCode").value;
-        let html=htmlCode.slice(0,htmlCode.length);
-        document.getElementById("htmlCode").value=html;
-        j=1;
-
-    }
 }
+
 
 // Show or hide the loading spinner
 export function showSpinner(show) {
