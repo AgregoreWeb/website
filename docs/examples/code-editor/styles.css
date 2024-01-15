@@ -70,6 +70,20 @@ div textarea:focus {
     align-items: center
 }
 
+#dweb-container > * {
+    width: 100%;
+    display:flex;
+    flex-direction:row;
+    margin-bottom: 0.5rem;
+}
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+    #dweb-container,
+    #dweb-container > *  {
+       flex-direction: column;
+    }
+}
+
 #loadingSpinner, #backdrop {
     display: none;  
 }
