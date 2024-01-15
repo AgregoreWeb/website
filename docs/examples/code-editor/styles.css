@@ -33,6 +33,14 @@ main {
     column-gap: var(--gap);
 }
 
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* One column */
+        grid-template-rows: repeat(4, 1fr); /* Four rows */
+    }
+}
+
 .grid-container > * {
     padding: var(--gap);
     width: 100%;
