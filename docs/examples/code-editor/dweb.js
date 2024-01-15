@@ -156,8 +156,6 @@ fetchButton.addEventListener('click', () => {
 });
 
 function parseAndDisplayData(data) {
-    console.log("parseAndDisplayData received data:", data); // Log the raw data
-
     const parser = new DOMParser();
     const doc = parser.parseFromString(data, 'text/html');
 
@@ -179,10 +177,7 @@ function parseAndDisplayData(data) {
 
     // Displaying the content in respective textareas
     $('#htmlCode').value = htmlContent;
-    console.log('HTML Content:', htmlContent);
     $('#cssCode').value = cssContent;
-    console.log('CSS Content:', cssContent);
     $('#javascriptCode').value = jsContent;
-    console.log('JS Content:', jsContent);
     update(0);
 }
