@@ -69,7 +69,7 @@ div textarea:focus {
     display:flex;
     flex-direction:row;
     align-items: flex-end;
-    margin-bottom: 0.5rem;
+    gap: var(--half-gap);
     padding: var(--half-gap);
 }
 
