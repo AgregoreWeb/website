@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Import CSS from Agregore theme
+// Import CSS from Agregore theme to use in the iframe preview
 export let basicCSS = `
 @import url("agregore://theme/vars.css");
             body, * {
