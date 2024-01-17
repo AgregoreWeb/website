@@ -5,6 +5,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 ### Demos and tools:
 
+- [Agregore Docs](/docs/)
 - [PubSub Chat](/docs/examples/ipfs-pub-sub-chat/)
 - [Drag and Drop File Uploads](/docs/examples/drag-and-drop/)
 - [Theme Builder](/docs/examples/themebuilder)
@@ -28,6 +29,11 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 - [Agregore Tutorials in our docs](/docs/#tutorials)
 - [Making a P2P Gemini blog](https://mastodon.mauve.moe/@mauve/110099166164967631)
+
+### Other browsers:
+
+- [Peersky](https://peersky.p2plabs.xyz/)
+- [IPFS in Brave](https://blog.ipfs.io/2021-01-21-how-we-put-ipfs-in-brave/)
 
 ---
 
