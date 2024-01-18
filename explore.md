@@ -5,11 +5,12 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 ### Demos and tools:
 
+- [Agregore Docs](/docs/)
+- [PubSub Chat](/docs/examples/ipfs-pub-sub-chat/)
+- [Drag and Drop File Uploads](/docs/examples/drag-and-drop/)
 - [Theme Builder](/docs/examples/themebuilder)
-- [Chat example](https://github.com/AgregoreWeb/agregore-chat-example)
-- [Drag and drop file upload example](https://github.com/AgregoreWeb/agregore-drag-and-drop)
-- [Block Builder](/docs/examples/blocks-app/)
-- [Pin Manager](https://agregoreweb.github.io/pin-manager/) for talking to IPFS pinning service
+- [Pin Manager](https://agregoreweb.github.io/pin-manager/) for talking to IPFS pinning services
+- [Sutty CMS, static site generator with dweb publishing](https://sutty.nl/en/)
 
 ### Extensions:
 
@@ -26,9 +27,13 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 ### Tutorials
 
+- [Agregore Tutorials in our docs](/docs/#tutorials)
 - [Making a P2P Gemini blog](https://mastodon.mauve.moe/@mauve/110099166164967631)
-- [Setting up a development environment from scratch](/docs/tutorials/ipfs-browser-devenv/part-1)
-- [Making a theme builder](/docs/tutorials/themebuilder-tutorial)
+
+### Other browsers:
+
+- [Peersky](https://peersky.p2plabs.xyz/)
+- [IPFS in Brave](https://blog.ipfs.io/2021-01-21-how-we-put-ipfs-in-brave/)
 
 ---
 
