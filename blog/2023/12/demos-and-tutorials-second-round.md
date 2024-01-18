@@ -9,11 +9,11 @@ For this round we have switched up the team and created 3 more apps and tutorial
 
 ### Dirk's p2p pub sub chat
 
-[@DirkCuys](https://github.com/dirkcuys) put together a basic chat app using the `pubsub://` protocol that is part of IPFS. This orotocol allows you to `subscribe` on a `topic` and connect to anyone else subscribed on the topic and then `publish` messages that get delivered to everyone. You can see a live version of the chat [here](/docs/examples/ipfs-pub-sub-chat/) or build it yourself with [the tutorial](/docs/tutorials/ipfs-pub-sub-chat).
+[@DirkCuys](https://github.com/dirkcuys) put together a basic chat app using the `pubsub://` protocol that is part of IPFS. This protocol allows you to `subscribe` on a `topic` and connect to anyone else subscribed on the topic and then `publish` messages that get delivered to everyone. You can see a live version of the chat [here](/docs/examples/ipfs-pub-sub-chat/) or build it yourself with [the tutorial](/docs/tutorials/ipfs-pub-sub-chat).
 
 ### Dirk's Directory Uploader
 
-[@DirkCuys](https://github.com/dirkcuys) also investigated how one could more easily upload entire folders to Agregore's built in protocol handlers and extended his initial browser development environment with this funcionality. With this [demo](/docs/examples/browser-devenv-2/) you can upload a static website or a bunch of dependencies for a javascript project. You can see how you can add this funcionality in the new [tutorial](/docs/tutorials/ipfs-dir-upload/).
+[@DirkCuys](https://github.com/dirkcuys) also investigated how one could more easily upload entire folders using Agregore's built-in protocol handlers and extended his initial browser development environment with this funcionality. With this [demo](/docs/examples/browser-devenv-2/) you can upload a static website or a bunch of dependencies for a javascript project. You can see how you can add this funcionality in the new [tutorial](/docs/tutorials/ipfs-dir-upload/).
 
 ### New Docs for `hyper://` Protocol Handlers
 
@@ -29,7 +29,7 @@ As with the preview milestone we had retrospectives to see how the process worke
 
 ## Next Steps
 
-Next we have ou final round where we'll be publishing 4 more apps and tutorials and wrapping up work on the grant. If you're curious to have these tutorials used for your communities or to develop new ones, reach out to us by [email](mailto:contact@mauve.moe).
+Next we have our final round where we'll be publishing 4 more apps and tutorials and wrapping up work on the grant. If you're curious to have these tutorials used for your communities or to develop new ones, reach out to us by [email](mailto:contact@mauve.moe).
 
 ---
 
