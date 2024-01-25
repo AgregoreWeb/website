@@ -6,9 +6,8 @@
 The goal was to create an introductory tutorial for building a real-time, browser-based code editor similar to platforms like jsfiddle or codepen, using Agregore. Focusing on simplicity and beginner-friendliness, the tutorial aimed to cover HTML, CSS, and JavaScript essentials, along with an introduction to decentralized web protocols. The end result is a functional code editor that facilitates interaction with IPFS and Hypercore, aligning well with these objectives.
 
 ### Achievements and Evolution 📈
-- Successfully developed a real-time code editor that interacts with IPFS and Hypercore.
-- Maintained a balance between simplicity for beginners and providing a practical introduction to decentralized web technologies.
-- Consistently focused on making the tutorial accessible to those with basic web development knowledge.
+- Successfully developed a user-friendly, real-time code editor capable of interacting with decentralized web technologies.
+- Struck a delicate balance between simplicity for beginners and a meaningful introduction to the practical applications of decentralized web protocols.
 
 ### Challenges and Insights 💡
 - Balancing simplicity with the complexity of a real-time in-browser code editor that interfaces with the decentralized web.
