@@ -3,7 +3,7 @@
 ## Reflecting on the Journey 🎉
 
 ### Original Objective and Outcome 🎯
-The goal was to create an introductory tutorial for building a real-time, jjsfiddle/codepen type, browser-based code editor using Agregore, focusing on simplicity and beginner-friendliness. The tutorial aimed to cover HTML, CSS, and JavaScript essentials, along with an introduction to decentralized web protocols. The code editor allows for uploading to and fetching the code from both IPFS and Hypercore. The end result is a functional code editor that meet these criteria while providing a web app that interacts with the decentralized web.
+The goal was to create an introductory tutorial for building a real-time, browser-based code editor similar to platforms like jsfiddle or codepen, using Agregore. Focusing on simplicity and beginner-friendliness, the tutorial aimed to cover HTML, CSS, and JavaScript essentials, along with an introduction to decentralized web protocols. The end result is a functional code editor that facilitates interaction with IPFS and Hypercore, aligning well with these objectives.
 
 ### Achievements and Evolution 📈
 - Successfully developed a real-time code editor that interacts with IPFS and Hypercore.
