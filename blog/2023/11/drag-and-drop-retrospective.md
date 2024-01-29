@@ -18,7 +18,7 @@ The primary goal was to create a straightforward drag-and-drop interface that al
 ## The Development Process 🛠️
 
 ### Building the App 🏗️
-- The app was constructed using HTML, CSS, and JavaScript. The detailed steps and code snippets are available in the [tutorial I created](../../../docs/examples/drag-and-drop/README.md).
+- The app was constructed using HTML, CSS, and JavaScript. The detailed steps and code snippets are available in the [tutorial I created](/docs/examples/drag-and-drop/README.md).
 - Notable aspects of the development process:
   - **What Went Well:** The overall implementation of the drag-and-drop feature and IPFS integration went smoothly.
   - **Time-Consuming Tasks:** Hypercore integration took a significant amount of time, primarily due to the lack of comprehensive documentation.
