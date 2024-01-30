@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    @import url("agregore://theme/vars.css");
+    @import url("agregore://theme/style.css");
+  </style>
+  <title>Agregore IPFS Development Environment V3</title>
+  <h1>Agregore IPFS Development Environment V3</h1>
+  <p>This page should be opened using the <a href="https://github.com/AgregoreWeb/agregore-browser/releases/latest">Agregore Browser</a> to function correctly.</p>
+  <p>When you click start, a new IPFS site will be created for you containing a basic development environment you can use to update the site.</p>
+  <button onclick="window.bootstrapSite()">Start</button>
+
+  <script>
+    const EMPTY_IPFS_URL = 'ipfs://bafyaabakaieac/'
+    const MANIFEST = [
+      {file: 'files/index.html', name: 'index.html', type: 'text/html'},
+      {file: 'files/lib.js', name: 'lib.js', type: 'text/javascript'},
+      {file: 'files/style.css', name: 'style.css', type: 'text/css'},
+      {file: 'files/upload.js', name: 'upload.js', type: 'text/javascript'},
+    ]
+
+    async function addFiles(files){
+      const formData = new FormData()
+      files.forEach( (file, index) => {
+         formData.append('file', file) 
+      })
+      const resp = await fetch(EMPTY_IPFS_URL, {method: 'put', body: formData})
+      const newLocation = resp.headers.get('location')
+      window.location = new URL(newLocation).origin
+    }
+
+    async function bootstrapSite(){
+      const files = [];
+      for (const entry of MANIFEST){
+        let resp = await fetch(entry.file)
+        files.push(new File([await resp.text()], entry.name, {type: entry.type}))
+      }
+      await addFiles(files)
+    }
+  </script>
+</html>
