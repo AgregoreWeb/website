@@ -2,7 +2,7 @@
 
 In this tutorial we will be adding a 3rd party dependency to an app hosted on IPFS. The specific 3rd party dependency we'll be adding is the [ACE editor](https://ace.c9.io/) and we will use it to improve editing of JavaScript, HTML and CSS code in the development environment we've previously built.
 
-In the Agregore browser, open the [development environment bootstrap app](https://agregore.mauve.moe/docs/examples/browser-devenv-v2/) and click on the "start" button. Once your site has been created, you can click on the "edit" button to open up the editor.
+In the Agregore browser, open the [development environment bootstrap app](/docs/examples/browser-devenv-v2/) and click on the "start" button. Once your site has been created, you can click on the "edit" button to open up the editor.
 
 ![](devenv-annotated-v2.png)
 
