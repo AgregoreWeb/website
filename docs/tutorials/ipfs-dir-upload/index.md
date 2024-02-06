@@ -133,6 +133,8 @@ const resp = await fetch(window.origin, {method: 'put', body: formData})
 
 Unfortunately we can't upload files to different directories at the same time. This means that we need to find all the files that are in the same directory and upload them together. Let's look at an example directory structure:
 
+**Update 2024-01-29**: since Agregore v2.4.0 the issue has been resolved and files in different folders can now be uploaded together. For the sanity of the writer, and the learning value of the thought process of implementing the solution the code below is updated to still work in v2.4.0, but not entirely reworked. A more sensible approach would be to create batches of a fixed size to upload files together.
+
 ```
 - animals
     - dogs
@@ -209,7 +211,8 @@ async function batchUpload(fileList, pathPrefix){
         for (const file of batch){
            formData.append('file', file) 
         }
-        let putUrl = [currentCid, pathPrefix, batchPath].join('/')
+        // let putUrl = [currentCid, pathPrefix, batchPath].join('/') // <-- uncomment this line if you are using Agregore < 2.4.0
+        let putUrl = [currentCid, pathPrefix].join('/') // <-- delete this line if using Agregore < 2.4.0
         const resp = await fetch(putUrl, {method: 'put', body: formData})
         currentCid = new URL(resp.headers.get('location')).origin
         console.log(currentCid + (pathPrefix && '/') + pathPrefix)

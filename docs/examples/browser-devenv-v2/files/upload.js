@@ -18,7 +18,8 @@ async function batchUpload(fileList, pathPrefix){
         for (const file of batch){
            formData.append('file', file) 
         }
-        let putUrl = [currentCid, pathPrefix, batchPath].join('/')
+        // let putUrl = [currentCid, pathPrefix, batchPath].join('/') // <-- uncomment this line if you are using Agregore < 2.4.0
+        let putUrl = [currentCid, pathPrefix].join('/') // <-- delete this line if you are using Agregore < 2.4.0
         const resp = await fetch(putUrl, {method: 'put', body: formData})
         currentCid = new URL(resp.headers.get('location')).origin
         console.log(currentCid + (pathPrefix && '/') + pathPrefix)
