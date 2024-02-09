@@ -21,6 +21,10 @@ async function loadFile(filename){
         editor.session.setMode("ace/mode/javascript")                        //+
     } else if (filename.match(/\.html/)){                                    //+
         editor.session.setMode("ace/mode/html")                              //+
+    } else if (filename.match(/\.css/)){                                     //+
+        editor.session.setMode("ace/mode/css")                               //+
+    } else {                                                                 //+
+        editor.session.setMode("ace/mode/text")                              //+
     }                                                                        //+
 }
 
