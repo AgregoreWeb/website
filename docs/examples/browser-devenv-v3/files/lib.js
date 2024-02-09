@@ -80,10 +80,22 @@ async function loadSidebar(){
         sidebar.appendChild(button)
     }
     let dirUploadForm = document.createElement('directory-upload')
+    dirUploadForm.addEventListener('dirUploadStart', e => {
+        const modalDiv = document.createElement('div')
+        modalDiv.id = 'uploadStatus'
+        modalDiv.classList.add('modal')
+        modalDiv.style = `display: flex; align-items: center; justify-content: center;`
+        modalDiv.innerHTML = `<p>Uploading ${e.detail.fileCount} file(s)</p>`
+        document.body.appendChild(modalDiv)
+    })
+
     dirUploadForm.addEventListener('dirUpload', e => {
         console.log('onDirUpload', e)
-        window.location = e.detail.cid
+        let modalDiv = document.getElementById('uploadStatus')
+        modalDiv.innerHTML = `<p>Upload complete. You will be redirected shortly</p>`
+        setTimeout(te => window.location = e.detail.cid, 5000)
     })
+
     sidebar.appendChild(dirUploadForm)
 }
 

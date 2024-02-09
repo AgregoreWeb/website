@@ -78,6 +78,7 @@ class DirectoryUpload extends HTMLElement {
         }
     
         const fileInput = document.querySelector('#dirForm input[type="file"]')
+        this.dispatchEvent(new CustomEvent('dirUploadStart', { detail: { fileCount: fileInput.files.length } }))
         const newCid = await batchUpload(fileInput.files, pathPrefix)
         this.dispatchEvent(new CustomEvent('dirUpload', { detail: { cid: newCid } }))
     }
