@@ -28,6 +28,7 @@ async function batchUpload(fileList, pathPrefix){
     return currentCid
 }
 
+
 class DirectoryUpload extends HTMLElement {
     constructor () {
         super()
@@ -77,8 +78,9 @@ class DirectoryUpload extends HTMLElement {
         while (pathPrefix.endsWith('/')){
             pathPrefix = pathPrefix.slice(0, -1)
         }
-    
+
         const fileInput = document.querySelector('#dirForm input[type="file"]')
+        this.dispatchEvent(new CustomEvent('dirUploadStart', { detail: { fileCount: fileInput.files.length } }))
         const newCid = await batchUpload(fileInput.files, pathPrefix)
         this.dispatchEvent(new CustomEvent('dirUpload', { detail: { cid: newCid } }))
     }
