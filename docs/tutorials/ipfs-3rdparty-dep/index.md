@@ -40,6 +40,10 @@ async function loadFile(filename){
         editor.session.setMode("ace/mode/javascript")                        //+
     } else if (filename.match(/\.html/)){                                    //+
         editor.session.setMode("ace/mode/html")                              //+
+    } else if (filename.match(/\.css/)){                                     //+
+        editor.session.setMode("ace/mode/css")                               //+
+    } else {                                                                 //+
+        editor.session.setMode("ace/mode/text")                              //+
     }                                                                        //+
 }
 ```
@@ -110,11 +114,15 @@ Then, to load the content of a file and set the correct highlighting mode, we up
 
 ```js
     window.editor.setValue(content)
-    if (filename.match(/\.js/)){
-        editor.session.setMode("ace/mode/javascript");
-    } else if (filename.match(/\.html/)){
-        editor.session.setMode("ace/mode/html");
-    }
+    if (filename.match(/\.js/)){                                             //+
+        editor.session.setMode("ace/mode/javascript")                        //+
+    } else if (filename.match(/\.html/)){                                    //+
+        editor.session.setMode("ace/mode/html")                              //+
+    } else if (filename.match(/\.css/)){                                     //+
+        editor.session.setMode("ace/mode/css")                               //+
+    } else {                                                                 //+
+        editor.session.setMode("ace/mode/text")                              //+
+    }                                                                        //+
 ```
 
 And finally, we had to update the way we get the code from the editor in the `onSubmit` callback:
