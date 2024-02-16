@@ -10,6 +10,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Drag and drop file upload example](https://github.com/AgregoreWeb/agregore-drag-and-drop)
 - [Block Builder](/docs/examples/blocks-app/)
 - [Pin Manager](https://agregoreweb.github.io/pin-manager/) for talking to IPFS pinning service
+- [P2Pad Code Editor](/docs/examples/p2pad/)
 
 ### Extensions:
 
@@ -29,7 +30,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Making a P2P Gemini blog](https://mastodon.mauve.moe/@mauve/110099166164967631)
 - [Setting up a development environment from scratch](/docs/tutorials/ipfs-browser-devenv/part-1)
 - [Making a theme builder](/docs/tutorials/themebuilder-tutorial)
-
+- [P2Pad: How to code your own in-browser code editor](/docs/tutorials/p2pad-code-editor)
 ---
 
 [Home](/)
