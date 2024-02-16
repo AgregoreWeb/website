@@ -123,18 +123,13 @@ function addError(name, text) {
 }
 
 // The fetchFromDWeb function detects which protocol is used and fetches the content
-async function fetchFromDWeb(cidOrName) {
-    if (!cidOrName) {
+async function fetchFromDWeb(url) {
+    if (!url) {
         alert("Please enter a CID or Name.");
         return;
     }
 
-    let url;
-    if (cidOrName.startsWith('ipfs://')) {
-        url = cidOrName;
-    } else if (cidOrName.startsWith('hyper://')) {
-        url = cidOrName;
-    } else {
+    if (!url.startsWith('ipfs://') && !url.startsWith('hyper://')) {
         alert("Invalid protocol. URL must start with ipfs:// or hyper://");
         return;
     }
