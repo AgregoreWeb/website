@@ -131,8 +131,13 @@ li {
     align-items: flex-end;
 }
 
-svg:hover {
-    fill: var(--ag-theme-primary);
+span {
+    pointer-events: cursor;
+    color: var(--ag-theme-secondary);
+}
+
+span:hover {
+    color: var(--ag-theme-primary);
 }
 
 /* Media query for mobile devices */
