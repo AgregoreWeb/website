@@ -1,12 +1,7 @@
 import { $, loadingSpinner, backdrop, iframe } from './common.js'; // Import common functions
 
-// Get the code editor elements using the $ selector function
-const htmlCode = $('#htmlCode');
-const javascriptCode = $('#javascriptCode');
-const cssCode = $('#cssCode');
-
-// Attach event listeners
-[htmlCode, javascriptCode, cssCode].forEach(element => {
+// Attach event listeners directly using the $ selector function
+[$('#htmlCode'), $('#javascriptCode'), $('#cssCode')].forEach(element => {
     element.addEventListener('input', () => update());
 });
 
