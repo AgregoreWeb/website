@@ -64,11 +64,25 @@ async function loadSidebar(){
         }
         sidebar.appendChild(button)
     }
+
     let dirUploadForm = document.createElement('directory-upload')
+
+    dirUploadForm.addEventListener('dirUploadStart', e => {
+        console.log('onDirUploadStart', e.detail)
+        const modal = document.createElement('dialog')
+        modal.id = 'uploadStatus'
+        modal.innerHTML = `<p>Uploading ${e.detail.fileCount} file(s)</p>`
+        document.body.appendChild(modal)
+        modal.showModal()
+    })
+
     dirUploadForm.addEventListener('dirUpload', e => {
         console.log('onDirUpload', e)
-        window.location = e.detail.cid
+        let modal = document.getElementById('uploadStatus')
+        modal.innerHTML = `<p>Upload complete. You will be redirected shortly</p>`
+        setTimeout(te => window.location = e.detail.cid, 5000)
     })
+
     sidebar.appendChild(dirUploadForm)
 }
 
@@ -78,6 +92,7 @@ async function showEditor(){
         editorDiv = document.createElement('div')
         editorDiv.id = 'editor'
     }
+
     editorDiv.style = `display: flex;
         flex-direction: column;
         position: absolute;
@@ -87,8 +102,9 @@ async function showEditor(){
         height: 100vh;
         background-color: rgb(233 233 233 / 95%);
     `
+
     editorDiv.innerHTML = `<div style="display: flex; flex-grow: 1; padding: 1em">
-        <div id="idSidebar" style="padding-right: 1em; width: 20vw; overflow: scroll"><h2>Files</h2>
+        <div id="idSidebar" style="padding-right: 1em; width: 20vw; overflow:scroll;"><h2>Files</h2>
         </div>
         <form id="idForm" style="flex-grow: 1; display: flex; flex-direction: column;" spellcheck="false">
             <label for="idFilenameInput">Filename</label>
@@ -108,6 +124,5 @@ async function showEditor(){
     }
 
     await loadSidebar()
-
 }
 
