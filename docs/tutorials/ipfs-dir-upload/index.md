@@ -435,37 +435,23 @@ Now that everything is working, let's add a modal indicate that the files are be
 
 ```
 
-In `lib.js`, we will handle this new event and display a modal when the upload starts. When the upload completed, we will show a success message and redirect the page after a delay of 5 seconds. Update the code at the end of `loadSidebar` as follows:
+In `lib.js`, we will handle this new event and display a modal using the [`dialog`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) element when the upload starts. When the upload completed, we will show a success message and redirect the page after a delay of 5 seconds. Update the code at the end of `loadSidebar` as follows:
 
 ```js
     dirUploadForm.addEventListener('dirUploadStart', e => {
-        const modalDiv = document.createElement('div')
-        modalDiv.id = 'uploadStatus'
-        modalDiv.classList.add('modal')
-        modalDiv.style = `display: flex; align-items: center; justify-content: center;`
-        modalDiv.innerHTML = `<p>Uploading ${e.detail.fileCount} file(s)</p>`
-        document.body.appendChild(modalDiv)
+        const modalDiv = document.createElement('dialog')
+        modal.id = 'uploadStatus'
+        modal.innerHTML = `<p>Uploading ${e.detail.fileCount} file(s)</p>`
+        document.body.appendChild(modal)
+        modal.showModal()
     })
 
     dirUploadForm.addEventListener('dirUpload', e => {
         console.log('onDirUpload', e)
-        let modalDiv = document.getElementById('uploadStatus')
-        modalDiv.innerHTML = `<p>Upload complete. You will be redirected shortly</p>`
+        let modal = document.getElementById('uploadStatus')
+        modal.innerHTML = `<p>Upload complete. You will be redirected shortly</p>`
         setTimeout(te => window.location = e.detail.cid, 5000)
     })
-```
-
-Finally we should add the CSS for the `modal` class. Add the following to the end of `style.css`:
-
-```css
-.modal {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(233 233 233 / 95%);
-}
 ```
 
 The final code can be found on [GitHub](https://github.com/AgregoreWeb/website/tree/main/docs/examples/browser-devenv-v2/files/). There is also an updated [self-hosted development environment](/docs/examples/browser-devenv-v2/) you can use!
