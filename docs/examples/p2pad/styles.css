@@ -87,6 +87,10 @@ li {
     display: none;  
 }
 
+#loadingSpinner, .emoji-loader {
+    background: transparent;
+}
+
 #loadingSpinner {
     position: absolute; 
     top: 50%; 
@@ -94,6 +98,18 @@ li {
     transform: translate(-50%, -50%); 
     z-index: 1000; 
     border-radius: 50%;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.emoji-loader {
+    color: var(--ag-color-green);
+    font-size: 10rem; 
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
 }
 
 #backdrop {
@@ -115,8 +131,13 @@ li {
     align-items: flex-end;
 }
 
-svg:hover {
-    fill: var(--ag-theme-primary);
+span {
+    pointer-events: cursor;
+    color: var(--ag-theme-secondary);
+}
+
+span:hover {
+    color: var(--ag-theme-primary);
 }
 
 /* Media query for mobile devices */

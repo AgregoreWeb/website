@@ -1,15 +1,8 @@
 import { $, loadingSpinner, backdrop, iframe } from './common.js'; // Import common functions
 
-// Get the code editor elements
-document.addEventListener('DOMContentLoaded', () => {
-    const htmlCode = document.getElementById('htmlCode');
-    const javascriptCode = document.getElementById('javascriptCode');
-    const cssCode = document.getElementById('cssCode');
-
-    // Attach event listeners
-    [htmlCode, javascriptCode, cssCode].forEach(element => {
-        element.addEventListener('input', () => update());
-    });
+// Attach event listeners directly using the $ selector function
+[$('#htmlCode'), $('#javascriptCode'), $('#cssCode')].forEach(element => {
+    element.addEventListener('input', () => update());
 });
 
 // Import CSS from Agregore theme to use in the iframe preview
