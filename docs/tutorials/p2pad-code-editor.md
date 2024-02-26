@@ -19,7 +19,7 @@ This tutorial will guide you through creating a real-time code editor in your br
 - `codeEditor.js`: JavaScript file to handle the editor's functionality.  
 - `dweb.js`: JavaScript file to handle interactions with the DWeb.  
 - `common.js`: JavaScript file for common functions and selectors.  
-- `styles.css`: CSS file for styling the application.  
+- `styles.css`: CSS file for styling the application.
 
 ## Building the Application
 ### Step 1: HTML Structure
@@ -30,19 +30,13 @@ Add the following content to `index.html`:
 <meta lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Real-Time Editor</title>
+<title>P2Pad: Real-Time Editor</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
 
 <main>
     <div id="backdrop"></div>
     <div id="loadingSpinner" style="display: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-            <g>
-              <path d="M50 20A30 30 0 1 0 80 50.00000000000001" fill="none" stroke="#2de56e" stroke-width="14"></path>
-              <path d="M49 8L49 32L61 20L49 8" fill="#2de56e"></path>
-              <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="2.380952380952381s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-            </g>
-        </svg>
+        <div class="emoji-loader"> ↻ </div>
     </div>
     <div class="grid-container">
         
@@ -255,6 +249,10 @@ li {
     display: none;  
 }
 
+#loadingSpinner, .emoji-loader {
+    background: transparent;
+}
+
 #loadingSpinner {
     position: absolute; 
     top: 50%; 
@@ -262,6 +260,18 @@ li {
     transform: translate(-50%, -50%); 
     z-index: 1000; 
     border-radius: 50%;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.emoji-loader {
+    color: var(--ag-color-green);
+    font-size: 10rem; 
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
 }
 
 #backdrop {
@@ -283,8 +293,13 @@ li {
     align-items: flex-end;
 }
 
-svg:hover {
-    fill: var(--ag-theme-primary);
+span {
+    pointer-events: cursor;
+    color: var(--ag-theme-secondary);
+}
+
+span:hover {
+    color: var(--ag-theme-primary);
 }
 
 /* Media query for mobile devices */
@@ -390,16 +405,9 @@ In codeEditor.js, we define the functionality of that allows for writing code an
 ```javascript
 import { $, loadingSpinner, backdrop, iframe } from './common.js'; // Import common functions
 
-// Get the code editor elements
-document.addEventListener('DOMContentLoaded', () => {
-    const htmlCode = document.getElementById('htmlCode');
-    const javascriptCode = document.getElementById('javascriptCode');
-    const cssCode = document.getElementById('cssCode');
-
-    // Attach event listeners
-    [htmlCode, javascriptCode, cssCode].forEach(element => {
-        element.addEventListener('input', () => update(0));
-    });
+// Attach event listeners directly using the $ selector function
+[$('#htmlCode'), $('#javascriptCode'), $('#cssCode')].forEach(element => {
+    element.addEventListener('input', () => update());
 });
 
 // Import CSS from Agregore theme to use in the iFrame
@@ -589,20 +597,14 @@ function addURL(url) {
     link.href = url;
     link.textContent = url;
 
-    const svgHTML = `<svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="var(--ag-theme-secondary)">
-        <path d="M5.5028,4.627 L5.5,6.75 L5.5,17.2542 C5.5,19.0491 6.95507,20.5042 8.75,20.5042 L17.3663,20.5045 C17.0573,21.3782 16.224,22.0042 15.2444,22.0042 L8.75,22.0042 C6.12665,22.0042 4,19.8776 4,17.2542 L4,6.75 C4,5.76929 4.62745,4.93512 5.5028,4.627 Z M17.75,2 C18.9926,2 20,3.00736 20,4.25 L20,17.25 C20,18.4926 18.9926,19.5 17.75,19.5 L8.75,19.5 C7.50736,19.5 6.5,18.4926 6.5,17.25 L6.5,4.25 C6.5,3.00736 7.50736,2 8.75,2 L17.75,2 Z M17.75,3.5 L8.75,3.5 C8.33579,3.5 8,3.83579 8,4.25 L8,17.25 C8,17.6642 8.33579,18 8.75,18 L17.75,18 C18.1642,18 18.5,17.6642 18.5,17.25 L18.5,4.25 C18.5,3.83579 18.1642,3.5 17.75,3.5 Z">
-        </path>
-        </svg>`;
-
     const copyContainer = document.createElement('span');
-    copyContainer.innerHTML = svgHTML;
-    copyContainer.style.cursor = 'pointer';
-    copyContainer.style.color = 'var(--ag-theme-secondary)';
+    const copyIcon = '⊕'
+    copyContainer.innerHTML = copyIcon;
     copyContainer.onclick = function() {
         navigator.clipboard.writeText(url).then(() => {
             copyContainer.textContent = ' Copied!';
             setTimeout(() => {
-                copyContainer.innerHTML = svgHTML;
+                copyContainer.innerHTML = copyIcon;
             }, 3000);
         }).catch(err => {
             console.error('Error in copying text: ', err);
@@ -619,18 +621,13 @@ function addError(name, text) {
 }
 
 // The fetchFromDWeb function
-async function fetchFromDWeb(cidOrName) {
-    if (!cidOrName) {
+async function fetchFromDWeb(url) {
+    if (!url) {
         alert("Please enter a CID or Name.");
         return;
     }
 
-    let url;
-    if (cidOrName.startsWith('ipfs://')) {
-        url = cidOrName;
-    } else if (cidOrName.startsWith('hyper://')) {
-        url = cidOrName;
-    } else {
+    if (!url.startsWith('ipfs://') && !url.startsWith('hyper://')) {
         alert("Invalid protocol. URL must start with ipfs:// or hyper://");
         return;
     }
