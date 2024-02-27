@@ -182,4 +182,122 @@ Instead of traversing the directory and adding all the containing files, we are 
 
 ![](ace-edit.png)
 
+# Let's clean things up a little
+
+In the [chat tutorial](../ipfs-pub-sub-chat) we added the ability to open the editor using Ctrl+I. Let's add that again. At the end of `lib.js`, add:
+
+```js
+window.addEventListener('load', e => {
+    window.showEditor = showEditor
+    document.addEventListener('keydown', e => {
+        if( e.ctrlKey && e.key == 'i' ){
+            showEditor().catch(console.error)
+        }
+    })
+})
+```
+
+Next it would be nice if we could include all the required code by simply adding `<script src="lib.js">` to index.html. To do this, we'll be using [JavaScript Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). We will load any required JavaScript dynamically and stylesheets by creating new HTML nodes to add. Update the `showEditor` function with the following code at the start:
+
+```js
+async function showEditor(){
+    
+    // Add style
+    let styleLink = document.createElement('link')
+    styleLink.href = 'style.css'
+    styleLink.rel = 'stylesheet'
+    document.head.appendChild(styleLink)
+    
+    let aceCss = document.createElement('link')
+    aceCss.href="/vendor/ace-builds/css/ace.css"
+    aceCss.rel="stylesheet"
+    document.head.appendChild(aceCss)
+    
+    // Add JavaScript
+    await import('./upload.js')
+    await import('/vendor/ace-builds/src-min-noconflict/ace.js')
+    ace.config.set('basePath', '/vendor/ace-builds/src-min-noconflict/')
+```
+
+Now we can remove all the redundant `<link>` and `<scirpt>` tags from `index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <title>Agregore self-hosted devenv V2</title>
+  <h1>Agregore self-hosted devenv V2</h1>
+  <button onclick="window.showEditor()">Show Editor</button>
+  <script src="lib.js"></script>
+</html>
+```
+
+Throughout we've used dynamically generated `style` tags in in-line styles interchangeably. Now is a good time to consolidate styles. Update `style.css` to contain the following styles:
+
+```css
+@import url("agregore://theme/vars.css");
+html {
+    font-family: var(--ag-theme-font-family);
+}
+
+.siteEditor {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(233 233 233 / 95%);
+}
+
+.siteEditor > div {
+    display: flex;
+    flex-grow: 1;
+    padding: 1em;
+}
+
+.siteEditor form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.siteEditor .sideBar {
+    padding-right: 1em;
+    width: 20vw;
+    overflow:scroll;
+}
+
+#idForm pre {
+    flex-grow: 1;
+    margin: 0;
+    font-size: 14px;
+}
+```
+
+And now we can update the `innerHtml` in the `showEditor` function to
+
+```js
+    editorDiv.innerHTML = `<div>
+        <div class="sideBar">
+            <h2>Files</h2>
+        </div>
+        <form id="idForm" spellcheck="false">
+            <label for="idFilenameInput">Filename</label>
+            <input type="text" name="filename" id="idFilenameInput" />
+            <label for="idContentInput">Content</label>
+            <textarea id="idContentInput" style="flex-grow: 1;" rows="20"></textarea>
+            <input type="submit" value="Save" />
+        </form>
+    </div>`
+    document.body.appendChild(editorDiv)
+```
+
+And be sure to also update the first line of `loadSidebar` to:
+
+```js
+    //- const sidebar = document.getElementById('sidebar')
+    const sidebar = document.querySelector('.sideBar')
+```
+
 And that's it! You can find the final code [on GitHub](https://github.com/AgregoreWeb/website/tree/main/docs/examples/browser-devenv-v3/files/). There is also an updated [self-hosted development environment](/docs/examples/browser-devenv-v3/) you can use!

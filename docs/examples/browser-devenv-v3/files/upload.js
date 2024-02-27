@@ -3,7 +3,7 @@ async function batchUpload(fileList, pathPrefix){
     let files = Array.from(fileList)
     while (files.length > 0){
         let batch = [files.pop()]
-        batchPath = batch[0].webkitRelativePath.split('/').slice(0,-1).join('/')
+        let batchPath = batch[0].webkitRelativePath.split('/').slice(0,-1).join('/')
         console.log('Looking for files with matching path', batchPath)
         for (var i=files.length-1; i>=0; i--){
             if(batchPath == files[i].webkitRelativePath.split('/').slice(0,-1).join('/')){
