@@ -26,6 +26,7 @@ async function loadFile(filename){
     } else {                                                                 //+
         editor.session.setMode("ace/mode/text")                              //+
     }                                                                        //+
+
 }
 
 async function listDir(path){
@@ -45,7 +46,7 @@ async function loadSidebar(){
             let li = document.createElement('li')                            //+
             li.innerHTML = `<a href="/vendor/">/vendor/</a>`                 //+
             return [li]                                                      //+
-        } 
+        }                                                                    //+
         if (file.endsWith('/')){
             let subfiles = await listDir(window.origin + path + file)
             let elements = await Promise.all(
@@ -79,7 +80,9 @@ async function loadSidebar(){
         }
         sidebar.appendChild(button)
     }
+
     let dirUploadForm = document.createElement('directory-upload')
+
     dirUploadForm.addEventListener('dirUploadStart', e => {
         console.log('onDirUploadStart', e.detail)
         const modal = document.createElement('dialog')
@@ -105,7 +108,9 @@ async function showEditor(){
         editorDiv = document.createElement('div')
         editorDiv.id = 'editor'
     }
+
     editorDiv.style = `display: flex;
+        flex-direction: column;
         position: absolute;
         top: 0;
         left: 0;
@@ -117,14 +122,15 @@ async function showEditor(){
     editorStyle.innerHTML = "#idForm pre { flex-grow: 1; margin: 0; }"       //+
     document.body.appendChild(editorStyle)                                   //+
 
+
     editorDiv.innerHTML = `<div style="display: flex; flex-grow: 1; padding: 1em">
-        <div id="idSidebar" style="padding-right: 1em; min-width: 20vw;"><h2>Files</h2>
+        <div id="idSidebar" style="padding-right: 1em; width: 20vw; overflow:scroll;"><h2>Files</h2>
         </div>
         <form id="idForm" style="flex-grow: 1; display: flex; flex-direction: column;" spellcheck="false">
             <label for="idFilenameInput">Filename</label>
             <input type="text" name="filename" id="idFilenameInput"></input>
             <label for="idContentInput">Content</label>
-            <textarea id="idContentInput"></textarea>
+            <textarea id="idContentInput" style="flex-grow: 1;" rows="20"></textarea>
             <input type="submit" value="Save"></input>
         </form>
     </div>`
@@ -136,6 +142,7 @@ async function showEditor(){
     form.onsubmit = e => {
         e.preventDefault()
         const filename = document.getElementById('idFilenameInput').value
+//-     const content = document.getElementById('idContentInput').value
         const content = window.editor.getValue()                             //+
         updateSite(filename, content)
     }

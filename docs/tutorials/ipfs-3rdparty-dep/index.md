@@ -86,6 +86,7 @@ async function showEditor(){
     form.onsubmit = e => {
         e.preventDefault()
         const filename = document.getElementById('idFilenameInput').value
+//-     const content = document.getElementById('idContentInput').value
         const content = window.editor.getValue()                             //+
         updateSite(filename, content)
     }
