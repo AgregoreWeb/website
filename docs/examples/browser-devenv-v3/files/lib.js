@@ -15,7 +15,17 @@ async function loadFile(filename){
     const resp = await fetch(filename)
     const content = await resp.text()
     document.getElementById('idFilenameInput').value = filename
-    document.getElementById('idContentInput').value = content
+    window.editor.setValue(content)                                          
+    if (filename.match(/\.js/)){                                             
+        editor.session.setMode("ace/mode/javascript")                        
+    } else if (filename.match(/\.html/)){                                    
+        editor.session.setMode("ace/mode/html")                              
+    } else if (filename.match(/\.css/)){                                     
+        editor.session.setMode("ace/mode/css")                               
+    } else {                                                                
+        editor.session.setMode("ace/mode/text")                              
+    }                                                                        
+
 }
 
 async function listDir(path){
@@ -25,12 +35,17 @@ async function listDir(path){
 }
 
 async function loadSidebar(){
-    const sidebar = document.getElementById('idSidebar')
+    const sidebar = document.querySelector('.sideBar')
     const files = await listDir(window.origin)
     const list = document.createElement('ul')
     list.style =  "list-style: none; padding-inline-start: 0;"
 
     async function makeFileListElements(path, file) {
+        if (path == '/' && file == 'vendor/') {                              
+            let li = document.createElement('li')                            
+            li.innerHTML = `<a href="/vendor/">/vendor/</a>`                 
+            return [li]                                                      
+        }                                                                    
         if (file.endsWith('/')){
             let subfiles = await listDir(window.origin + path + file)
             let elements = await Promise.all(
@@ -87,42 +102,63 @@ async function loadSidebar(){
 }
 
 async function showEditor(){
+    
+    // Add style
+    let styleLink = document.createElement('link')
+    styleLink.href = 'style.css'
+    styleLink.rel = 'stylesheet'
+    document.head.appendChild(styleLink)
+    
+    let aceCss = document.createElement('link')
+    aceCss.href="/vendor/ace-builds/css/ace.css"
+    aceCss.rel="stylesheet"
+    document.head.appendChild(aceCss)
+    
+    // Add JavaScript
+    await import('./upload.js')
+    await import('/vendor/ace-builds/src-min-noconflict/ace.js')
+    ace.config.set('basePath', '/vendor/ace-builds/src-min-noconflict/')
+    
     let editorDiv = document.getElementById("editor")
     if (!editorDiv){
         editorDiv = document.createElement('div')
         editorDiv.id = 'editor'
+        editorDiv.classList.add('siteEditor')
     }
 
-    editorDiv.style = `display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgb(233 233 233 / 95%);
-    `
-
-    editorDiv.innerHTML = `<div style="display: flex; flex-grow: 1; padding: 1em">
-        <div id="idSidebar" style="padding-right: 1em; width: 20vw; overflow:scroll;"><h2>Files</h2>
+    editorDiv.innerHTML = `<div>
+        <div class="sideBar">
+            <h2>Files</h2>
         </div>
-        <form id="idForm" style="flex-grow: 1; display: flex; flex-direction: column;" spellcheck="false">
+        <form id="idForm" spellcheck="false">
             <label for="idFilenameInput">Filename</label>
-            <input type="text" name="filename" id="idFilenameInput"></input>
+            <input type="text" name="filename" id="idFilenameInput" />
             <label for="idContentInput">Content</label>
             <textarea id="idContentInput" style="flex-grow: 1;" rows="20"></textarea>
-            <input type="submit" value="Save"></input>
+            <input type="submit" value="Save" />
         </form>
     </div>`
     document.body.appendChild(editorDiv)
+
+    window.editor = ace.edit("idContentInput")                               
+
     const form = document.getElementById('idForm')
     form.onsubmit = e => {
         e.preventDefault()
         const filename = document.getElementById('idFilenameInput').value
-        const content = document.getElementById('idContentInput').value
+        const content = window.editor.getValue()
         updateSite(filename, content)
     }
 
     await loadSidebar()
 }
+
+window.addEventListener('load', e => {
+    window.showEditor = showEditor
+    document.addEventListener('keydown', e => {
+        if( e.ctrlKey && e.key == 'i' ){
+            showEditor().catch(console.error)
+        }
+    })
+})
 

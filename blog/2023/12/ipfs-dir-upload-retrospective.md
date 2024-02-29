@@ -41,4 +41,4 @@ Being able to merge two UnixFS directories using js-ipfs-fetch without needed to
 
 ## Conclusion
 
-While this project ended up being a big pivot, 
+While this tutorial ended up being about something that should have been a small part of the initial idea, the final tutorial covers useful info and will be useful for more than simply adding a 3rd party JavaScript dependency to a site hosted on IPFS.
