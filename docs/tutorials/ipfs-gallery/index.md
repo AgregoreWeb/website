@@ -534,7 +534,7 @@ Add the following CSS to the style element in 'index.html':
 
 Then we add the event listener for the form to 'gallery.js':
 
-```
+```js
     document.getElementById("idSaveGalleryForm").addEventListener("submit", saveGallery)
 ```
 
