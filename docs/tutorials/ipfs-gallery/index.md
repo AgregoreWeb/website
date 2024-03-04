@@ -359,7 +359,7 @@ Now we can add our own images to the gallery, but they are added after all the s
 
 And then in `addFileToGallery` we want to remove any stock images when we add a new file. Notice that we move the declaration for `const gallery`.
 
-```
+```js
     // Remove stock images
     const gallery = document.querySelector('.gallery')                                                
     if (gallery.querySelectorAll('.row.stock').length > 0){
