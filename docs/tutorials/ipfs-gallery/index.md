@@ -566,7 +566,7 @@ And finally we should display the link for the gallery. Add the following to the
 
 If you've completed this tutorial, you will have this code hosted on IPFS, but if you host the code on HTML, it won't work entirely as intended. We can at least make the gallery up function by posting to an empty IPFS directory when hosted over HTTP. In the `saveGallery` function in 'gallery.js', change the following code:
 
-```
+```js
     if (!window.origin.startsWith('ipfs://')){
         newDoc.querySelector('.gallery .helpOverlay').remove()
     }
