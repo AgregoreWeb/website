@@ -106,7 +106,7 @@ Once a page loads, you should see the rows being adjusted to fill the width of t
 
 To make this a little nicer, change the CSS for `.gallery > .row` in the style element in 'index.html' to:
 
-```
+```css
       .gallery > .row {
         display: flex;
         width: 100%;
