@@ -510,7 +510,7 @@ The data is saved to a new IPFS folder using the IPFS gateway implemented by Agr
 
 Next we should connect the save functionality to the user interface. When a user changed the gallery, we want them to be able to save it. And once it's been saved, we want to show the link to the updated gallery. Add the following markup to the help overlay in 'index.html':
 
-```
+```html
     <div class="gallery">
         <div class="helpOverlay">
           <p>Drag and drop images to begin or <button>select files</button>.<span> Click anywhere to view the gallery.</span></p>
