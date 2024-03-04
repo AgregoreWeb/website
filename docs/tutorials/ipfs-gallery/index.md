@@ -175,7 +175,7 @@ Notice how things still jump around while loading? We can fix this by specifying
 
 To make the layout work on mobile, we will use a [CSS media query](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries) that will change the layout so that images are each the full with of the screen rather than forming a complex grid. By adding
 
-```
+```css
       @media (width < 678px) {
           .gallery > .row {
               aspect-ratio: unset !important;
