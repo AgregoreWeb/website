@@ -385,7 +385,7 @@ We should indicate to a user that they can drag-and-drop images to add them to t
 
 And add the CSS for the overlay to the `<style>` tag:
 
-```
+```css
       .gallery > div.helpOverlay {
         display: flex;
         flex-direction: column;
