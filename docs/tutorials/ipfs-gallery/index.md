@@ -14,6 +14,12 @@ The final application should be usable by anyone using Agregore Web and not requ
 
 To get started, go to [this page](https://agregore.mauve.moe/docs/examples/browser-devenv-v3/) and click on **Start**. This will create a copy of the IDE for you to use during this tutorial.
 
+![Webpage on Agregore to create an IPFS browser development environment](devenv-bs.png)
+
+When you click on 'start', you should be redirected to your started site. To open the code editor, click the button or press **Ctrl+I**. Here is a quick guide to the editor:
+
+![Annotated screenshot of the code editor](devenv-3-annotated.png)
+
 # Image layout
 
 We should decide how we want to layout our images. For inspiration we can look at how other popular photo sharing websites layout their images. I personally like the way that Flickr handles the layout. This image show the layout we are aiming for:
