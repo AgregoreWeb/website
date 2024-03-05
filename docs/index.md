@@ -30,6 +30,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [Directory Uploader](./tutorials/ipfs-dir-upload/)
 - [P2Pad Code editor](./tutorials/p2pad-code-editor/)
 - [Adding a 3rd-party dependency](./tutorials/ipfs-3rd-party-dep/)
+- [DLinktree Builder](./tutorials/dlinktree-builder)
 ---
 
 [Home](/)
