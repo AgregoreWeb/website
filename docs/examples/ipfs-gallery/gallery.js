@@ -153,6 +153,25 @@ async function handleHelpClick(e){
     document.querySelector('.helpOverlay').classList.add('small')
 }
 
+async function downloadStock(){
+    // Initialize the newImages array
+    window.newImages = window.newImages || []
+
+    // Get all the stock images
+    const imageNodes = document.querySelectorAll('.gallery .row.stock img')
+    for (let i = 0; i < imageNodes.length; ++i){
+        let img = imageNodes.item(i)
+        // Download the image and update the src
+        let response = await fetch(img.src)
+        window.newImages.push(new File([await response.blob()], `/stock/image-${i}.jpg`))
+        img.src = `/stock/image-${i}.jpg`
+    }
+
+    // Utilize saveGallery to upload the files and updated markup for us
+    await saveGallery({preventDefault: () => true})
+    console.log('Navigate to ', document.querySelector("#idGalleryUrl a").href)
+}
+
 window.addEventListener('load', e => {
     layout()
     

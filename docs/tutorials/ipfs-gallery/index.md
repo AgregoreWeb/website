@@ -562,9 +562,38 @@ And finally we should display the link for the gallery. Add the following to the
     document.querySelector("#idGalleryUrl a").href = newCid
 ```
 
+# Downloading stock images
+
+Up until now, we've relied on stock images that are being downloaded from the [Lorum Picsum](https://picsum.photos/) servers using HTTP. Since we want to distribute our application over IPFS, we should also host the stock images on IPFS. Luckily for us they use imagery from Unsplash, and the [license](https://unsplash.com/license) allows us to download and host the images. To do so add the following function to 'gallery.js':
+
+```js
+async function downloadStock(){
+    // Initialize the newImages array
+    window.newImages = window.newImages || []
+
+    // Get all the stock images
+    const imageNodes = document.querySelectorAll('.gallery .row.stock img')
+    for (let i = 0; i < imageNodes.length; ++i){
+        let img = imageNodes.item(i)
+        // Download the image and update the src
+        let response = await fetch(img.src)
+        window.newImages.push(new File([await response.blob()], `/stock/image-${i}.jpg`))
+        img.src = `/stock/image-${i}.jpg`
+    }
+
+    // Utilize saveGallery to upload the files and updated markup for us
+    await saveGallery({preventDefault: () => true})
+    console.log('Navigate to ', document.querySelector("#idGalleryUrl a").href)
+}
+```
+
+To upload the stock images, we should manually trigger this function once. Open the developer console and execute `await downloadStock()`. Once the command finished, you'll see the new IPFS URL. Manually navigate to this URL and all your stock imagery will now be hosted with the gallery.
+
+Your gallery app is now ready to be distributed over IPFS. You should be able to open up the current version of your gallery without being connected to the internet, add images and share it with someone else over IPFS!
+
 # Hosting it on HTML
 
-If you've completed this tutorial, you will have this code hosted on IPFS, but if you host the code on HTML, it won't work entirely as intended. We can at least make the gallery up function by posting to an empty IPFS directory when hosted over HTTP. In the `saveGallery` function in 'gallery.js', change the following code:
+If you've followed this tutorial, you will have this code hosted on IPFS, but if you host the code on HTML, it won't work entirely as intended. We can at least make the gallery function by posting updates to an new IPFS directory when hosted over HTTP. In the `saveGallery` function in 'gallery.js', change the following code:
 
 ```js
     if (!window.origin.startsWith('ipfs://')){
