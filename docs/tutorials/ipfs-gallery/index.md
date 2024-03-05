@@ -18,7 +18,7 @@ To get started, go to [this page](https://agregore.mauve.moe/docs/examples/brows
 
 We should decide how we want to layout our images. For inspiration we can look at how other popular photo sharing websites layout their images. I personally like the way that Flickr handles the layout. This image show the layout we are aiming for:
 
-![](ipfs-gallery-layout.png)
+![Image of nine differently sized rectangles laid out in 3 rows](ipfs-gallery-layout.png)
 
 For a start, we will use some placeholder images from [picsum.photos](picsum.photos). By specifying the dimensions in the URL, we get a stock image of the desired size.
 
