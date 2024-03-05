@@ -18,34 +18,34 @@ function layout(){
 }
 
 async function addFileToGallery(file){
-    window.newImages = window.newImages || []
-    window.newImages.push(file)
+    window.newImages = window.newImages || []                               //+
+    window.newImages.push(file)                                             //+
     const columns = 3
-    
+
     // Show save form
     document.getElementById("idSaveGalleryForm").classList.remove('hidden')
-    
-    // Create markup                                                                                  
-    const img = document.createElement("img")                                                         
+
+    // Create markup
+    const img = document.createElement("img")
     img.classList.add('new')
-    img.dataset.fileName = file.name                                                                  
-    img.src = URL.createObjectURL(file);                                                              
-    let imgDiv = document.createElement('div')                                                        
+    img.dataset.fileName = file.name
+    img.src = URL.createObjectURL(file);
+    let imgDiv = document.createElement('div')
     imgDiv.appendChild(img)
-    
-    // Get dimensions                                                                                 
-    const image = await createImageBitmap(file)                                                       
+
+    // Get dimensions
+    const image = await createImageBitmap(file)
     img.width = image.width
-    img.height = image.height                                                                         
-    
-    // Add event listener for lightbox                                                                
-    img.addEventListener('click', e => {                                                              
-        document.querySelector('.lightBox img').src = img.src                                         
-        document.querySelector('.lightBox').classList.remove('hidden')                                
+    img.height = image.height
+
+    // Add event listener for lightbox
+    img.addEventListener('click', e => {
+        document.querySelector('.lightBox img').src = img.src
+        document.querySelector('.lightBox').classList.remove('hidden')
     })
-    
+
     // Remove stock images
-    const gallery = document.querySelector('.gallery')                                                
+    const gallery = document.querySelector('.gallery')
     if (gallery.querySelectorAll('.row.stock').length > 0){
         for (const stockRow of gallery.querySelectorAll('.row.stock')){
             gallery.removeChild(stockRow)
@@ -54,18 +54,18 @@ async function addFileToGallery(file){
         div.classList.add('row')
         gallery.appendChild(div)
     }
-    
+
     // Find the right place to add the image
-    if (gallery.querySelectorAll('.row:last-child img').length < columns){                            
+    if (gallery.querySelectorAll('.row:last-child img').length < columns){
         gallery.querySelector('.row:last-child').appendChild(imgDiv)
     } else {
-        const div = document.createElement('div')                                                     
+        const div = document.createElement('div')
         div.classList.add('row')
         div.appendChild(imgDiv)
-        gallery.appendChild(div)                                                                      
-    }   
-    
-    // Call layout to recalculate the aspect ratios                                                   
+        gallery.appendChild(div)
+    }
+
+    // Call layout to recalculate the aspect ratios
     setTimeout(layout, 500)
 }
 
@@ -74,20 +74,20 @@ async function saveGallery(e){
     // Hide save form and link before saving updated markup
     document.getElementById("idSaveGalleryForm").classList.add('hidden')
     document.getElementById("idGalleryUrl").classList.add('hidden')
-    
+
     let formData = new FormData()
 
     // Add new images to formData
     for (const image of window.newImages){
         formData.append('file', image)
     }
-    
+
     // Get the original HTML
     const index = await fetch('index.html')
     const txt = await index.text()
     const parser = new DOMParser()
     let newDoc = parser.parseFromString(txt, 'text/html')
-    
+
     // Replace the gallery with the updated markup
     newDoc.querySelector('.gallery').replaceWith(document.querySelector('.gallery').cloneNode(true))
     for (const imgEl of newDoc.querySelectorAll('.gallery img.new')){
@@ -95,7 +95,6 @@ async function saveGallery(e){
         delete imgEl.dataset.fileName
         imgEl.classList.remove('new')
     }
-
     if (!window.origin.startsWith('ipfs://')){
         newDoc.querySelector('.gallery .helpOverlay').remove()
     }
@@ -105,17 +104,15 @@ async function saveGallery(e){
     if (!window.origin.startsWith('ipfs://')){
         postUrl = 'ipfs://bafyaabakaieac/'
     }
-    
-    // Post the new data to save the images and the gallery 
+
+    // Post the new data to save the images and the gallery
     const resp = await fetch(postUrl, {method: 'put', body: formData})
     newCid = new URL(resp.headers.get('location')).origin
     console.log(`Uploaded ${newImages.length} files to ${newCid}`)
-    
-    // Set URL for saved gallery and show link element
-    document.querySelector("#idGalleryUrl a").href = newCid
     document.querySelector("#idGalleryUrl").classList.remove('hidden')
-}
+    document.querySelector("#idGalleryUrl a").href = newCid
 
+}
 
 function dropListener(e){
     e.preventDefault()
@@ -146,11 +143,11 @@ async function handleHelpClick(e){
         startIn: "pictures",
     }
     let result = await showOpenFilePicker(opts)
+    document.querySelector('.helpOverlay').classList.add('small')
     for (const fileHandle of result){
         let file = await fileHandle.getFile()
         await addFileToGallery(file)
     }
-    document.querySelector('.helpOverlay').classList.add('small')
 }
 
 async function downloadStock(){
@@ -172,26 +169,29 @@ async function downloadStock(){
     console.log('Navigate to ', document.querySelector("#idGalleryUrl a").href)
 }
 
-window.addEventListener('load', e => {
+
+function galleryInit(){
     layout()
-    
+
     for (const img of document.querySelectorAll('.gallery .row img')){
         img.addEventListener('click', e => {
             document.querySelector('.lightBox img').src = img.src
             document.querySelector('.lightBox').classList.remove('hidden')
         })
     }
-    
-    document.querySelector('.lightBox img').addEventListener('click', e => 
+
+    document.querySelector('.lightBox img').addEventListener('click', e =>
         document.querySelector('.lightBox').classList.add('hidden')
     )
-    
     document.querySelector(".gallery").addEventListener("dragover", e => e.preventDefault())
     document.querySelector(".gallery").addEventListener("drop", dropListener)
-    
     document.querySelector(".helpOverlay").addEventListener('click', e => {
         document.querySelector('.helpOverlay').classList.add('small')
     })
     document.querySelector(".helpOverlay button").addEventListener("click", handleHelpClick)
     document.getElementById("idSaveGalleryForm").addEventListener("submit", saveGallery)
+}
+
+window.addEventListener('load', e => {
+    galleryInit()
 })

@@ -91,8 +91,12 @@ function layout(){
     }
 }
 
-window.addEventListener('load', e => {
+function galleryInit(){
     layout()
+}
+
+window.addEventListener('load', e => {
+    galleryInit()
 })
 ```
 
@@ -223,10 +227,10 @@ And then let's update the styling for this to display as an overlay. We will use
       }
 ```
 
-And then to show/hide the lightbox, we add a click event handler in 'gallery.js' to each image. We display the lightbox by removing the `hidden` class from the element and we update the image in the lightbox to be the one the user clicked on. **Note** if you are using the developer tools and caching is disabled, you will see a different image that the one you've clicked on.
+To show/hide the lightbox, we add a click event handler to each image. We display the lightbox by removing the `hidden` class from the element and we update the image in the lightbox to be the one the user clicked on. **Note** if you are using the developer tools and caching is disabled, you will see a different image that the one you've clicked on. Add the following to `galleryInit` in 'gallery.js':
 
 ```js
-window.addEventListener('load', e => {
+function galleryInit(){
     layout()
     
     for (const img of document.querySelectorAll('.gallery .row img')){
@@ -239,7 +243,7 @@ window.addEventListener('load', e => {
     document.querySelector('.lightBox img').addEventListener('click', e => 
         document.querySelector('.lightBox').classList.add('hidden')
     )
-})
+}
 ```
 
 **A note about CSS classes** In most of this tutorial we specify the element `class` property rather than the `id` property, unless there REALLY should only be one element on the page (like a form input). We also prefer more specific CSS selectors rather than shorter ones that will probably also work in this app. This allows us to not worry too much about having style collisions while we're developing the app or if we develop it further at a later stage.
@@ -265,7 +269,7 @@ function dropListener(e){
 }
 ```
 
-And register the event handlers
+And register the event handlers by adding the following to `galleryInit` in 'gallery.js':
 
 ```js
     document.querySelector(".gallery").addEventListener("dragover", e => e.preventDefault())
@@ -332,7 +336,7 @@ Update the for loop in the `dropListener` function to add the images one by one:
 
 We could do things more efficiently, but by handling images one by one we can use our existing layout code!
 
-Now we can add our own images to the gallery, but they are added after all the stock images. Let's remove all the stock images when we upload our own images. To do so, we're going to add a CSS class called stock to the markup for all the rows of stock images:
+Now we can add our own images to the gallery, but they are added after all the stock images. Let's remove all the stock images when we upload our own images. To do so, we're going to add a CSS class called stock to the markup for all the rows of stock images. Replace the markup for the images in 'index.html' with the following:
 
 ```html
       <div class="row stock">
@@ -375,7 +379,7 @@ And then in `addFileToGallery` we want to remove any stock images when we add a 
     if (gallery.querySelectorAll('.row:last-child img').length < columns){ 
 ```
 
-We should indicate to a user that they can drag-and-drop images to add them to the gallery. Let's do this by adding an overlay over the gallery with stock images with some help text. We also want to allow the user to interact with the gallery with the stock images, so we will add the ability to minimize the overlay. Add the following to `index.html`:
+We should indicate to a user that they can drag-and-drop images to add them to the gallery. Let's do this by adding an overlay over the gallery with stock images with some help text. We also want to allow the user to interact with the gallery with the stock images, so we will add the ability to minimize the overlay. Add the following to `index.html` as a child of the `.gallery` div:
 
 ```html
       <div class="helpOverlay">
@@ -383,7 +387,7 @@ We should indicate to a user that they can drag-and-drop images to add them to t
       </div>
 ```
 
-And add the CSS for the overlay to the `<style>` tag:
+And add the CSS for the overlay to the `<style>` tag in 'index.html':
 
 ```css
       .gallery > div.helpOverlay {
@@ -408,12 +412,12 @@ And add the CSS for the overlay to the `<style>` tag:
       }
 ```
 
-And to allow the user to minimize the help overlay, add a click handler in the `window.onload` event listener in 'gallery.js':
+And to allow the user to minimize the help overlay, add a click handler in the `galleryInit` function in 'gallery.js':
 
 ```js
-  document.querySelector(".helpOverlay").addEventListener('click', e => {
-      document.querySelector('.helpOverlay').classList.add('small')
-  })
+    document.querySelector(".helpOverlay").addEventListener('click', e => {
+        document.querySelector('.helpOverlay').classList.add('small')
+    })
 ```
 
 Drag-and-drop will only work on a desktop, to support a mobile device, we should add a file selector. We will use the [`showOpenFilePicker`](https://developer.mozilla.org/en-US/docs/Web/API/window/showOpenFilePicker) API for this. Let's update the help overlay to include a button that will open the file picker:
@@ -451,7 +455,7 @@ async function handleHelpClick(e){
 }
 ```
 
-And bind it to the button on the help overlay by adding an event listener in 
+And bind it to the button on the help overlay by adding an event listener in `galleryInit` in 'gallery.js':
 
 ```js
   document.querySelector(".helpOverlay button").addEventListener("click", handleHelpClick)
@@ -472,7 +476,7 @@ async function addFileToGallery(file){
     // Create markup 
 ```
 
-We can use this array to get the files we need to upload. To update the markup, we will use the [DOMParser](https://developer.mozilla.org/en-US/docs/Web/API/DOMParser) API to load the original HTML document and add our updates. Add the following function to `gallery.js`:
+We can use this array to get the files we need to upload. To update the markup, we will use the [DOMParser](https://developer.mozilla.org/en-US/docs/Web/API/DOMParser) API to load the original HTML document and add our updates. Add the following function to 'gallery.js':
 
 ```js
 async function saveGallery(e){
@@ -511,28 +515,28 @@ The data is saved to a new IPFS folder using the IPFS gateway implemented by Agr
 Next we should connect the save functionality to the user interface. When a user changed the gallery, we want them to be able to save it. And once it's been saved, we want to show the link to the updated gallery. Add the following markup to the help overlay in 'index.html':
 
 ```html
-    <div class="gallery">
-        <div class="helpOverlay">
-          <p>Drag and drop images to begin or <button>select files</button>.<span> Click anywhere to view the gallery.</span></p>
-          <form id="idSaveGalleryForm" class="hidden">
-              <p><button type="submit" value="submit">Save</button></p>
-          </form>
-          <p id="idGalleryUrl" class="hidden">
-              <a href="/">View your gallery</a>
-          </p>
-        </div>
+  <div class="gallery">
+      <div class="helpOverlay">
+        <p>Drag and drop images to begin or <button>select files</button>.<span> Click anywhere to view the gallery.</span></p>
+        <form id="idSaveGalleryForm" class="hidden">
+            <p><button type="submit" value="submit">Save</button></p>
+        </form>
+        <p id="idGalleryUrl" class="hidden">
+            <a href="/">View your gallery</a>
+        </p>
+      </div>
 ```
 
 Add the following CSS to the style element in 'index.html':
 
-```
+```css
       #idGalleryUrl a {
         color: white;
         font-weight: bold;
       }
 ```
 
-Then we add the event listener for the form to 'gallery.js':
+Then we add the event listener for the form to `galleryInit` in 'gallery.js':
 
 ```js
     document.getElementById("idSaveGalleryForm").addEventListener("submit", saveGallery)
@@ -561,6 +565,12 @@ And finally we should display the link for the gallery. Add the following to the
     document.querySelector("#idGalleryUrl").classList.remove('hidden')
     document.querySelector("#idGalleryUrl a").href = newCid
 ```
+
+![Image of gallery at this point](ipfs-gallery.png)
+
+All the basic functionality is implemented. You can drag and drop or select images, save your gallery and share it with someone else. Once you've saved your gallery, you can add more images or customize the HTML if you want to.
+
+This is a minimal app, so there is still a lot of functionality that would be nice to add like removing images, re-ordering images, improving the lightbox amongst other things. Please share any further development or improvements you make!
 
 # Downloading stock images
 
