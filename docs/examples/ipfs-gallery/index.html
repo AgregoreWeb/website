@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>Image gallery</title>
+  
+  <style>
+      body { 
+          margin: 0; 
+      }
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .gallery > .row {
+        display: flex;
+        width: 100%;
+        aspect-ratio: 3;
+        transition-property: aspect-ratio;
+        transition-duration: 1.5s;
+        overflow: hidden;
+      }
+      .gallery > .row img {
+        height: 100%;
+        width: auto;
+        display: block;
+      }
+      @media (width < 678px) {
+        .gallery > .row {
+            aspect-ratio: unset !important;
+            flex-direction: column;
+        }
+      .gallery .row img {
+            height: auto;
+            width: 100%;
+        }
+      }
+      .hidden {
+          display: none !important;
+      }
+      .lightBox {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        backdrop-filter: blur(10px);
+      }
+      .lightBox > img {
+        object-fit: contain;
+        max-width: 100%;
+        max-height: 100%;
+      }
+      .gallery > div.helpOverlay {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0, 0.6);
+        color: white;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px;
+      }
+      .gallery > div.helpOverlay.small {
+        height: unset;
+        bottom: 0;
+      }
+      .gallery > div.helpOverlay.small span {
+        display: none;
+      }
+      #idGalleryUrl a {
+        color: white;
+        font-weight: bold;
+      }
+  </style>
+  
+  <div class="gallery">
+      <div class="helpOverlay">
+        <p>Drag and drop images to begin or <button>select files</button>.<span> Click anywhere to view the gallery.</span></p>
+        <form id="idSaveGalleryForm" class="hidden">
+            <p><button type="submit" value="submit">Save</button></p>
+        </form>
+        <p id="idGalleryUrl" class="hidden">
+            <a href="/">View your gallery</a>
+        </p>
+      </div>
+      <div class="lightBox hidden"><img src="https://picsum.photos/1920/1080" /></div>
+      <div class="row stock">
+        <div><img src="https://picsum.photos/1920/1080?rand11" width="1920" height="1080"/></div>
+        <div><img src="https://picsum.photos/1040/1080?rand12" width="1040" height="1080"/></div>
+        <div><img src="https://picsum.photos/1080/1920?rand13" width="1080" height="1920"/></div>
+        <div><img src="https://picsum.photos/225/400?rand14" width="225" height="400"/></div>
+      </div>
+      <div class="row stock">  
+        <div><img src="https://picsum.photos/1080/1920?rand21" width="1080" height="1920"/></div>
+        <div><img src="https://picsum.photos/1080/1920?rand22" width="1080" height="1920"/></div>
+        <div><img src="https://picsum.photos/1920/1080?rand23" width="1920" height="1080"/></div>
+        <div><img src="https://picsum.photos/1920/1080?rand24" width="1920" height="1080"/></div>
+      </div>
+      <div class="row stock">
+        <div><img src="https://picsum.photos/1920/1080?rand31" width="1920" height="1080"/></div>
+        <div><img src="https://picsum.photos/1920/1200?rand32" width="1920" height="1200"/></div>
+        <div><img src="https://picsum.photos/1920/1080?rand33" width="1920" height="1080"/></div>
+      </div>
+      <div class="row stock">
+        <div><img src="https://picsum.photos/1920/1080?rand41" width="1920" height="1080"/></div>
+      </div>
+  </div>
+  
+  <script src="lib.js"></script>
+  <script src="gallery.js"></script>
+  
+</html>
+
