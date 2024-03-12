@@ -80,17 +80,15 @@ async function assembleCode() {
 
     let pageTitle = document.getElementById("title").textContent;
 
-    let basicCSS = `
-    @import url("agregore://theme/vars.css");
-                body, * {
-                    font-size: 1.2rem;
-                    margin: 0;
-                    padding: 0;
-                    font-family: var(--ag-theme-font-family);
-                    background: var(--ag-theme-background);
-                    color: var(--ag-theme-text);
-                }
-    `;
+    // Fetch styles.css content to import as our basic CSS
+    let basicCSS = '';
+    try {
+        const response = await fetch('./styles.css'); 
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        basicCSS = await response.text();
+    } catch (error) {
+        console.error("Failed to fetch styles.css:", error);
+    }
 
     // Combine your code into a single HTML file
     let combinedCode = `
