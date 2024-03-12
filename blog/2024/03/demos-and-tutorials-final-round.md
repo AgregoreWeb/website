@@ -10,9 +10,9 @@ This time around we had a mix of working more on some foundational tutorials and
 
 First up is Dirk's final tweak to his code editor series. This time he's figured out how to add third party dependencies to the editor, specifically ACE for syntax highlighting. You can follow along with the latest tutorial [here](/docs/tutorials/ipfs-3rdparty-dep/) or start at the beginning [here](/docs/tutorials/ipfs-browser-devenv/part-1). You can also see the live deployed version [here](/docs/examples/browser-devenv-v3/index.html).
 
-### Dirk's Image Gallary
+### Dirk's Image Gallery
 
-Dirk's final app was an image gallary where you can upload images and then create a web app to display them in a pleasant tiled format. You can find the tutorial [here](/docs/tutorials/ipfs-gallery/) and a version of the app hosted on html [here](/docs/examples/ipfs-gallery/). This also builds on top of his development environment so you can use the new syntax highliting and multi file uploading features as you develop.
+Dirk's final app was an image gallery where you can upload images and then create a web app to display them in a pleasant tiled format. You can find the tutorial [here](/docs/tutorials/ipfs-gallery/) and a version of the app hosted on html [here](/docs/examples/ipfs-gallery/). This also builds on top of his development environment so you can use the new syntax highlighting and multi-file uploading features as you develop.
 
 ### Vincent's P2Pad code editor
 
@@ -25,7 +25,7 @@ For his last app Vincent made use of his P2Pad app too bootstrap making a small 
 
 ## Retrospectives
 
-As with the other milestones keeping stuff small and reducing feature sets has helped keep the apps more focused and made it easier to build them. This time around we also saw the benefits of working on top of existing code which could be copied from past projects or in the case of the editors, used to make new projects with less fuss than devtools. It aslo looks like working on the app code before writing the tutorial has been best for avoiding rewriting the tutorial as you go. Overall we've been getting better at scoping tutorials and apps and finding ways to work with the tools we have available.
+As with the other milestones, keeping stuff small and reducing feature sets has helped keep the apps more focused and made it easier to build them. This time around we also saw the benefits of working on top of existing code which could be copied from past projects or in the case of the editors, used to make new projects with less fuss than devtools. It aslo looks like working on the app code before writing the tutorial has been best for avoiding rewriting the tutorial as you go. Overall we've been getting better at scoping tutorials and apps and finding ways to work with the tools we have available.
 
 ## Next steps
 
