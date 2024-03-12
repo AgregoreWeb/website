@@ -93,8 +93,6 @@ async function assembleCode() {
     // Combine your code into a single HTML file
     let combinedCode = `
     <!DOCTYPE html>
-    <html>
-    <head>
         <title>${pageTitle}</title>
         <style>${basicCSS}</style>
         <style>
@@ -136,17 +134,13 @@ async function assembleCode() {
         }
         </style>
         
-    </head>
-    <body>
     <div class='header-image' style="background-image: ${backgroundImageComputed}"></div>
     <div class='container'>
         <div class='content'>
             <h1>${pageTitle}</h1>
             <div>${links.outerHTML}</div>
         </div>
-    </div>
-    </body>
-    </html>`;
+    </div>`;
 
     // Convert the combined code into a Blob
     const blob = new Blob([combinedCode], { type: 'text/html' });
