@@ -204,7 +204,7 @@ function setImageAsBackground(fullUrl) {
     bgImg.textContent = '';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function addEventListeners() {
     const uploadToDWebButton = document.getElementById("uploadToDWebButton");
     const addLinkButton = document.getElementById("addLinkButton");
     const linkForm = document.getElementById("linkForm");
@@ -259,4 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-});
+};
+
+addEventListeners();
