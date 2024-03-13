@@ -1,0 +1,50 @@
+<meta lang="en" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DLINKTREE BUILDER</title>
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<main>
+    <div class="grid-container" id="grid">
+        <h1 id="title" contenteditable="true">
+            Click here to edit your title
+        </h1>
+        <div id="header-image-uploader" class="linktree-editable">
+        Click to upload image
+        </div>
+        <div class="links dnone" id="linksContainer">
+        <!-- Links will be dynamically added here -->
+        </div>
+        <button id="addLinkButton">Add New Link</button>
+        <!-- Hidden form for adding/editing links -->
+        <div id="linkForm" style="display: none">
+        <input type="text" id="linkText" placeholder="Link Text" />
+        <input
+            type="url"
+            id="linkUrl"
+            placeholder="ipfs://, hyper:// or https://"
+        />
+        <button type="button" onclick="addLink()">Save Link</button>
+        </div>
+
+        <div id="linkForm" style="display: none">
+        <input type="text" id="linkText" placeholder="Link Text" />
+        <input type="url" id="linkUrl" placeholder="Link URL" />
+        </div>
+    </div>
+    <div id="dweb-container">
+        <div>
+        <label for="protocol">
+            Protocol:
+            <select id="protocol">
+            <option value="ipfs" selected>
+                Inter-Planetary File System (IPFS://)
+            </option>
+            <option value="hyper">Hypercore-Protocol (HYPER://)</option>
+            </select>
+        </label>
+        <button id="uploadToDWebButton">Upload to DWeb</button>
+        </div>
+    </div>
+    <ul id="uploadLinks"></ul>
+</main>
+<script src="script.js"></script>

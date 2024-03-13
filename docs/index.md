@@ -32,6 +32,8 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [P2Pad Code editor](./tutorials/p2pad-code-editor/)
 - [Adding a 3rd-party dependency](./tutorials/ipfs-3rd-party-dep/)
 - [Building an IPFS gallery](./tutorial/ipfs-gallery/)
+- [DLinktree Builder](./tutorials/dlinktree-builder)
+
 ---
 
 [Home](/)
