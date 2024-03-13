@@ -90,7 +90,7 @@ main {
 .grid-container {
     display: grid;
     grid-template-columns: 1fr; /* One column */
-    grid-template-rows: repeat(3, 1fr); /* 3 rows on load */
+    grid-template-rows: 1fr 4fr 1fr; 
     height: 95vh;
     gap: var(--gap);
 }
