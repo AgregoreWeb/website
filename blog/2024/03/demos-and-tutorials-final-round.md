@@ -16,7 +16,7 @@ Dirk's final app was an image gallery where you can upload images and then creat
 
 ### Vincent's P2Pad code editor
 
-After getting comfortable with making apps and tutorials, Vincent worked on a simple [JSFidde](https://jsfiddle.net/) or [Code Pen](https://codepen.io/) insipired editor where you enter HTML, CSS, and JavaScript into separate text inputs and render a live preview for quickly sketching up web pages and apps. This is a more barebones alternative to Dirk's editor which handles editing files in a directory whereas this generates single HTML pages. You can play around and make your own page [here](/docs/examples/p2pad/) or follow [the tutorial](/docs/tutorials/p2pad-code-editor.md) to make your own.
+After getting comfortable with making apps and tutorials, Vincent worked on a simple [JSFidde](https://jsfiddle.net/) or [Code Pen](https://codepen.io/) inspired editor where you enter HTML, CSS, and JavaScript into separate text inputs and render a live preview for quickly sketching up web pages and apps. This is a more barebones alternative to Dirk's editor which handles editing files in a directory whereas this generates single HTML pages. You can play around and make your own page [here](/docs/examples/p2pad/) or follow [the tutorial](/docs/tutorials/p2pad-code-editor.md) to make your own.
 
 ### Vincent's DLinkTree link aggregator
 
