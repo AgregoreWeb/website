@@ -21,43 +21,37 @@ In this step, we'll lay the foundation of the Dlinktree builder. The HTML struct
 First, navigate to the [P2Pad](https://agregore.mauve.moe/docs/examples/p2pad/) code editor in your Agregore browser. In the HTML container, add the following content to the HTML quadrant seen in the top left (or top row if on mobile):
 
 ```html
-<html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DLINKTREE BUILDER</title>
-<main>
-    <div class="grid-container" id="grid">
-        <h1 id='title' contenteditable="true">
-            Click here to edit your title
-        </h1>
-        <div id="header-image-uploader">
-            Click to upload header image
-        </div>
-        <div class="links dnone" id="linksContainer">
-            <!-- Links will be dynamically added here -->
-        </div>
-        <button id="addLinkButton">Add New Link</button>
-        <!-- Hidden form for adding/editing links -->
-        <div id="linkForm" style="display:none;">
-            <input type="text" id="linkText" placeholder="Link Text">
-            <input type="url" id="linkUrl" placeholder="ipfs://, hyper:// or https://">
-            <button type="button" onclick="addLink()">Save Link</button>
-        </div>
+<div class="grid-container" id="grid">
+    <h1 id='title' contenteditable="true">
+        Click here to edit your title
+    </h1>
+    <div id="header-image-uploader">
+        Click to upload header image
     </div>
-    <div id="upload-container">
-        <div>
-            <label for="protocol">
-                Protocol:
-                <select id="protocol">
-                    <option value="ipfs" selected>Inter-Planetary File System (IPFS://)</option>
-                    <option value="hyper">Hypercore-Protocol (HYPER://)</option>
-                </select>
-            </label>
-            <button id="uploadToDWebButton">Upload to DWeb</button>
-        </div>
+    <div class="links dnone" id="linksContainer">
+        <!-- Links will be dynamically added here -->
     </div>
-    <ul id="uploadLinks"></ul>
-</main>
+    <button id="addLinkButton">Add New Link</button>
+    <!-- Hidden form for adding/editing links -->
+    <div id="linkForm" style="display:none;">
+        <input type="text" id="linkText" placeholder="Link Text">
+        <input type="url" id="linkUrl" placeholder="ipfs://, hyper:// or https://">
+        <button type="button" onclick="addLink()">Save Link</button>
+    </div>
+</div>
+<div id="upload-container">
+    <div>
+        <label for="protocol">
+            Protocol:
+            <select id="protocol">
+                <option value="ipfs" selected>Inter-Planetary File System (IPFS://)</option>
+                <option value="hyper">Hypercore-Protocol (HYPER://)</option>
+            </select>
+        </label>
+        <button id="uploadToDWebButton">Upload to DWeb</button>
+    </div>
+</div>
+<ul id="uploadLinks"></ul>
 ```
 
 This structure provides a simple yet flexible layout for your Dlinktree. It includes a section for a header image, an editable title, a container for your links, and a form for adding new links. The dweb-container holds the controls for uploading your Dlinktree to the decentralized web.
