@@ -65,7 +65,7 @@ In this step, we'll apply CSS styles to make the Dlinktree visually appealing an
 Navigate to the CSS container in the P2Pad code editor and replace the existing content with the following CSS code:
 
 ```css
-@import url("agregore://theme/vars.css");
+@import url("agregore://theme/style.css");
 
 :root {
     --gap: 5px;
