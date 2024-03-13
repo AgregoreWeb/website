@@ -139,6 +139,9 @@ span {
 span:hover {
     color: var(--ag-theme-primary);
 }
+select {
+    width: auto;
+}
 
 .dnone {
     display: none;
