@@ -257,22 +257,13 @@ async function assembleCode() {
 
     let pageTitle = document.getElementById("title").textContent;
 
-    // Fetch styles.css content to import as our basic CSS
-    let basicCSS = '';
-    try {
-        const response = await fetch('./styles.css'); 
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        basicCSS = await response.text();
-    } catch (error) {
-        console.error("Failed to fetch styles.css:", error);
-    }
-
     // Combine your code into a single HTML file
     let combinedCode = `
     <!DOCTYPE html>
         <title>${pageTitle}</title>
-        <style>${basicCSS}</style>
         <style>
+        @import url("agregore://theme/style.css");
+
         body {
             overflow: hidden;
         }
