@@ -80,65 +80,64 @@ async function assembleCode() {
 
     let pageTitle = document.getElementById("title").textContent;
 
-    // Fetch styles.css content to import as our basic CSS
-    let basicCSS = '';
-    try {
-        const response = await fetch('./styles.css'); 
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        basicCSS = await response.text();
-    } catch (error) {
-        console.error("Failed to fetch styles.css:", error);
-    }
-
     // Combine your code into a single HTML file
     let combinedCode = `
     <!DOCTYPE html>
         <title>${pageTitle}</title>
-        <style>${basicCSS}</style>
         <style>
-        body {
-            overflow: hidden;
-        }
-        .header-image {
-            position: relative;
-            width: 100%;
-            height: 100vh; 
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container {
-            position: absolute;
-            width: 100%;
-            height: 100vh;
-            text-align: center;
-            background-color: transparent;
-            color: var(--ag-theme-text);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            top: 0;
-        }
-        .content {
-            width: fit-content;
-            background-color: var(--ag-theme-background);
-            border-radius: 1rem;
-            padding: 1rem;
-        }
-        li {
-            list-style: none;
-        }
+            @import url("agregore://theme/style.css");
+            body {
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+            }
+            .header-image {
+                position: relative;
+                width: 100vw;
+                height: 100vh; 
+                background-size: cover;
+                background-position: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .container {
+                position: absolute;
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                background-color: transparent;
+                color: var(--ag-theme-text);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                top: 0;
+                left: 0;
+            }
+            .content {
+                width: fit-content;
+                background-color: var(--ag-theme-background);
+                border-radius: 1rem;
+                padding: 1rem;
+            }
+            ul {
+                padding-left: 0;
+            }
+            li {
+                list-style: none;
+            }
         </style>
         
     <div class='header-image' style="background-image: ${backgroundImageComputed}"></div>
     <div class='container'>
         <div class='content'>
-            <h1>${pageTitle}</h1>
-            <div>${links.outerHTML}</div>
+            <h1>
+                ${pageTitle}
+            </h1>
+            <div>
+                ${links.outerHTML}
+            </div>
         </div>
     </div>`;
 

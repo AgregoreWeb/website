@@ -1,4 +1,4 @@
-@import url("agregore://theme/vars.css");
+@import url("agregore://theme/style.css");
 
 :root {
   --gap: 5px;
@@ -16,6 +16,7 @@ body,
 }
 
 main {
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,9 +24,9 @@ main {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr; /* One column */
-  grid-template-rows: repeat(3, 1fr); /* 3 rows on load */
-  height: 95vh;
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr 4fr 1fr; 
+  height: 94vh;
   gap: var(--gap);
 }
 
@@ -48,7 +49,7 @@ div textarea:focus,
 #dweb-container,
 #uploadListBox {
   display: flex;
-  padding: 0 var(--half-gap);
+  padding: var(--half-gap);
   align-items: center;
   justify-content: space-between;
 }
@@ -74,6 +75,10 @@ span {
 
 span:hover {
   color: var(--ag-theme-primary);
+}
+
+select {
+  width: auto;
 }
 
 .dnone {

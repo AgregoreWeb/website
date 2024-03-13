@@ -82,6 +82,7 @@ body, * {
 }
 
 main {
+    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -269,7 +270,7 @@ async function assembleCode() {
         }
         .header-image {
             position: relative;
-            width: 100%;
+            width: 100vw;
             height: 100vh; 
             background-size: cover;
             background-position: center;
@@ -290,12 +291,16 @@ async function assembleCode() {
             align-items: center;
             padding: 1rem;
             top: 0;
+            left: 0;
         }
         .content {
             width: fit-content;
             background-color: var(--ag-theme-background);
             border-radius: 1rem;
             padding: 1rem;
+        }
+        ul {
+            padding-left: 0;
         }
         li {
             list-style: none;
