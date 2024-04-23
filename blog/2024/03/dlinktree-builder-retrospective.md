@@ -18,7 +18,7 @@ The ambition behind the Dlinktree Builder was to devise a tool that embodies bot
 ## The Development Tapestry 🧵
 
 ### Constructing the Builder 🏗️
-- Utilizing HTML, CSS, and JavaScript, this web app is both functional and aesthetically pleasing. All the detailed steps can be found in the accompanying [tutorial](/docs/tutorials/dlinktree-builder.md).
+- Utilizing HTML, CSS, and JavaScript, this web app is both functional and aesthetically pleasing. All the detailed steps can be found in the accompanying [tutorial](/docs/tutorials/dlinktree-builder).
 - **What Worked Well:** Integrating decentralized web protocols gets smoother every time, thanks to the foundation laid in previous projects.
 - **Challenges Faced:** Ensuring the app remained approachable without diluting its functionality required careful consideration at each step. Having multiple ideas for improvement while needing to keep it short is a constant challenge.
 - **Unexpected Insights:** The modular approach to tutorial creation fosters a deeper understanding of DWeb technologies.

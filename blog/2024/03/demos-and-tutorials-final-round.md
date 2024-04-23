@@ -16,12 +16,12 @@ Dirk's final app was an image gallery where you can upload images and then creat
 
 ### Vincent's P2Pad code editor
 
-After getting comfortable with making apps and tutorials, Vincent worked on a simple [JSFidde](https://jsfiddle.net/) or [Code Pen](https://codepen.io/) inspired editor where you enter HTML, CSS, and JavaScript into separate text inputs and render a live preview for quickly sketching up web pages and apps. This is a more barebones alternative to Dirk's editor which handles editing files in a directory whereas this generates single HTML pages. You can play around and make your own page [here](/docs/examples/p2pad/) or follow [the tutorial](/docs/tutorials/p2pad-code-editor.md) to make your own.
+After getting comfortable with making apps and tutorials, Vincent worked on a simple [JSFiddle](https://jsfiddle.net/) or [Code Pen](https://codepen.io/) inspired editor where you enter HTML, CSS, and JavaScript into separate text inputs and render a live preview for quickly sketching up web pages and apps. This is a more barebones alternative to Dirk's editor which handles editing files in a directory whereas this generates single HTML pages. You can play around and make your own page [here](/docs/examples/p2pad/) or follow [the tutorial](/docs/tutorials/p2pad-code-editor) to make your own.
 
 ### Vincent's DLinkTree link aggregator
 
 For his last app Vincent made use of his P2Pad app too bootstrap making a small app for aggregating links and publishing them as a page on IPFS. You can view the
-[tutorial](/docs/tutorials/dlinktree-builder.md) to build it yourself or check out the final version [here](/docs/examples/dlinktree-builder/). Since this doesn't require Devtools to build you can even try to build it on an Android phone with [Agregore Mobile](https://github.com/AgregoreWeb/agregore-mobile/releases/tag/101.0.4951.53).
+[tutorial](/docs/tutorials/dlinktree-builder) to build it yourself or check out the final version [here](/docs/examples/dlinktree-builder/). Since this doesn't require Devtools to build you can even try to build it on an Android phone with [Agregore Mobile](https://github.com/AgregoreWeb/agregore-mobile/releases/tag/101.0.4951.53).
 
 ## Retrospectives
 
@@ -41,7 +41,7 @@ If you want to work on this or fund work like this, get in touch by either joinn
 
 Full Retrospectives:
 
-- [Ace Editor](/blog/2024/01/ipfs-3rd-party-dep-retrospective.md)
-- [IPFS Gallary](/blog/2024/03/ipfs-gallery-retrospective.md)
-- [P2Pad](/blog/2024/01/p2pad-code-editor-retrospective.md)
-- [DLinkTree](/blog/2024/03/dlinktree-builder-retrospective.md)
+- [Ace Editor](/blog/2024/01/ipfs-3rd-party-dep-retrospective)
+- [IPFS Gallary](/blog/2024/03/ipfs-gallery-retrospective)
+- [P2Pad](/blog/2024/01/p2pad-code-editor-retrospective)
+- [DLinkTree](/blog/2024/03/dlinktree-builder-retrospective)
