@@ -503,7 +503,7 @@ This script is the core of the code editor's functionality, handling user inputs
 
 ### Step 4: DWeb Integration with `dweb.js`
 
-In `dweb.js`, we extend the functionality of our code editor to integrate with the decentralized web (DWeb), specifically IPFS and Hypercore. This script shares some functionalities with the previous tutorial on Drag and Drop to IPFS and Hypercore, which can be revisited for a more in-depth understanding. [Drag and Drop Tutorial](https://agregore.mauve.moe/docs/tutorials/drag-and-drop/)
+In `dweb.js`, we extend the functionality of our code editor to integrate with the decentralized web (DWeb), specifically IPFS and Hypercore. This script shares some functionalities with the previous tutorial on Drag and Drop to IPFS and Hypercore, which can be revisited for a more in-depth understanding. [Drag and Drop Tutorial](https://agregore.mauve.moe/docs/tutorials/drag-and-drop)
 
 Here is the content of `dweb.js`:
 ```javascript
