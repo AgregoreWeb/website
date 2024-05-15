@@ -115,11 +115,11 @@ window.addEventListener('load', e => {
 })
 ```
 
-We can now go ahead and test the code. To see what is happening, we first need to open the developer tools - you can do so by pressing Ctrl+Shift+I or using the 'File' menu. Now select a folder using the file input or drag and drop a folder onto it and press "Upload files". After each file that has been uploaded, you should see a URL logged to the console. You can open some of these URLs to see what they contain.
+We can now go ahead and test the code. To see what is happening, we first need to open the developer tools - you can do so by pressing Ctrl+Shift+I or using the 'File' menu - and select the "consoler" tab. Now choose a folder using the file input or drag and drop a folder onto it and press "Upload files". After each file that has been uploaded, you should see a URL logged to the console. You can open some of these URLs to see what they contain.
 
 ## Make it go faster!
 
-Notice that we are sequentially uploading the files. Each time we upload a file, we get back a new CID. This CID references a IPFS directory that contains all the files uploaded up to that point. We then upload the next file to that IPFS directory, create a new IPFS that contains the new file. We do this until we've uploaded all the files.
+Notice that we are sequentially uploading the files. Each time we upload a file, we get back a new CID. This CID references an IPFS directory that contains all the files uploaded up to that point. We then upload the next file to that IPFS directory, create a new IPFS that contains the new file. We do this until we've uploaded all the files.
 
 This isn't the most efficient way to upload multiple files. In agregore we can upload multiple files at the same time using FormData.
 
@@ -132,6 +132,8 @@ const resp = await fetch(window.origin, {method: 'put', body: formData})
 ```
 
 Unfortunately we can't upload files to different directories at the same time. This means that we need to find all the files that are in the same directory and upload them together. Let's look at an example directory structure:
+
+**Update 2024-01-29**: since Agregore v2.4.0 the issue has been resolved and files in different folders can now be uploaded together. For the sanity of the writer, and the learning value of the thought process of implementing the solution, the code below is updated to still work in v2.4.0, but not entirely reworked. A more sensible approach would be to create batches of a fixed size to upload files together.
 
 ```
 - animals
@@ -209,7 +211,8 @@ async function batchUpload(fileList, pathPrefix){
         for (const file of batch){
            formData.append('file', file) 
         }
-        let putUrl = [currentCid, pathPrefix, batchPath].join('/')
+        // let putUrl = [currentCid, pathPrefix, batchPath].join('/') // <-- uncomment this line if you are using Agregore < 2.4.0
+        let putUrl = [currentCid, pathPrefix].join('/') // <-- delete this line if using Agregore < 2.4.0
         const resp = await fetch(putUrl, {method: 'put', body: formData})
         currentCid = new URL(resp.headers.get('location')).origin
         console.log(currentCid + (pathPrefix && '/') + pathPrefix)
@@ -244,7 +247,7 @@ Unfortunately we can't further optimize this by doing the uploads in parallel si
 
 We want to integrate this directory upload functionality with our development environment we've been using thus far. But before we do so, we want to make it easier to use it. We will do this by creating a [Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) that will contain the interface and logic for this element.
 
-Let's move the HTML, the code for the submit handler (`onSubmit`{:.js}) and the document load event handler code into the web component. We also in-lining the CSS to make it a bit easier:
+Let's move the HTML, the code for the submit handler (`onSubmit`) and the document load event handler code into the web component. We also in-lining the CSS to make it a bit easier:
 
 ```js
 class DirectoryUpload extends HTMLElement {
@@ -419,6 +422,36 @@ When you upload a bunch of files, you might notice that this creates some issues
             <input type="submit" value="Save"></input>
         </form>
     </div>`
+```
+
+## Show the user what is happening
+
+Now that everything is working, let's add a modal indicate that the files are being uploaded. We will use another custom event to indicate when an upload starts. Add the following to the `onSubmit` handler in `upload.js` after assigning the `fileInput` variable and before calling `batchUpload`:
+
+```js
+         const fileInput = document.querySelector('#dirForm input[type="file"]')
+         this.dispatchEvent(new CustomEvent('dirUploadStart', { detail: { fileCount: fileInput.files.length } }))        // <--- Add this line
+         const newCid = await batchUpload(fileInput.files, pathPrefix)
+
+```
+
+In `lib.js`, we will handle this new event and display a modal using the [`dialog`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) element when the upload starts. When the upload completed, we will show a success message and redirect the page after a delay of 5 seconds. Update the code at the end of `loadSidebar` as follows:
+
+```js
+    dirUploadForm.addEventListener('dirUploadStart', e => {
+        const modalDiv = document.createElement('dialog')
+        modal.id = 'uploadStatus'
+        modal.innerHTML = `<p>Uploading ${e.detail.fileCount} file(s)</p>`
+        document.body.appendChild(modal)
+        modal.showModal()
+    })
+
+    dirUploadForm.addEventListener('dirUpload', e => {
+        console.log('onDirUpload', e)
+        let modal = document.getElementById('uploadStatus')
+        modal.innerHTML = `<p>Upload complete. You will be redirected shortly</p>`
+        setTimeout(te => window.location = e.detail.cid, 5000)
+    })
 ```
 
 The final code can be found on [GitHub](https://github.com/AgregoreWeb/website/tree/main/docs/examples/browser-devenv-v2/files/). There is also an updated [self-hosted development environment](/docs/examples/browser-devenv-v2/) you can use!

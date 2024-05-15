@@ -3,7 +3,7 @@ async function batchUpload(fileList, pathPrefix){
     let files = Array.from(fileList)
     while (files.length > 0){
         let batch = [files.pop()]
-        batchPath = batch[0].webkitRelativePath.split('/').slice(0,-1).join('/')
+        let batchPath = batch[0].webkitRelativePath.split('/').slice(0,-1).join('/')
         console.log('Looking for files with matching path', batchPath)
         for (var i=files.length-1; i>=0; i--){
             if(batchPath == files[i].webkitRelativePath.split('/').slice(0,-1).join('/')){
@@ -18,8 +18,7 @@ async function batchUpload(fileList, pathPrefix){
         for (const file of batch){
            formData.append('file', file) 
         }
-        // let putUrl = [currentCid, pathPrefix, batchPath].join('/') // <-- uncomment this line if you are using Agregore < 2.4.0
-        let putUrl = [currentCid, pathPrefix].join('/') // <-- delete this line if you are using Agregore < 2.4.0
+        let putUrl = [currentCid, pathPrefix].join('/')
         const resp = await fetch(putUrl, {method: 'put', body: formData})
         currentCid = new URL(resp.headers.get('location')).origin
         console.log(currentCid + (pathPrefix && '/') + pathPrefix)
@@ -27,7 +26,6 @@ async function batchUpload(fileList, pathPrefix){
     }
     return currentCid
 }
-
 
 class DirectoryUpload extends HTMLElement {
     constructor () {
@@ -78,7 +76,7 @@ class DirectoryUpload extends HTMLElement {
         while (pathPrefix.endsWith('/')){
             pathPrefix = pathPrefix.slice(0, -1)
         }
-
+    
         const fileInput = document.querySelector('#dirForm input[type="file"]')
         this.dispatchEvent(new CustomEvent('dirUploadStart', { detail: { fileCount: fileInput.files.length } }))
         const newCid = await batchUpload(fileInput.files, pathPrefix)

@@ -18,6 +18,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [Drag and Drop File Uploader](./examples/drag-and-drop/)
 - [PubSub Chat](./examples/ipfs-pub-sub-chat/)
 - [Theme Builder](./examples/themebuilder)
+- [Browser Development Environment V3](./examples/browser-devenv-v3/)
 
 ## Tutorials:
 
@@ -27,7 +28,8 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [Drag and Drop File Uploader](./tutorials/drag-and-drop)
 - [PubSub Chat](./tutorials/ipfs-pub-sub-chat)
 - [Directory Uploader](./tutorials/ipfs-dir-upload/)
-
+- [P2Pad Code editor](./tutorials/p2pad-code-editor/)
+- [Adding a 3rd-party dependency](./tutorials/ipfs-3rd-party-dep/)
 ---
 
 [Home](/)
