@@ -771,3 +771,5 @@ Including `common.js` in your application is a best practice in web development.
 Congratulations! You've built a versatile code editor in your browser that interacts with the decentralized web. This project not only enhances your web development skills but also introduces you to the realm of DWeb technologies.
 
 Feel free to expand upon this application by adding more features or refining the UI. Explore the possibilities with Agregore and the decentralized web!
+
+You can find the finished result of this tutorial [here](https://agregore.mauve.moe/docs/examples/p2pad/)
