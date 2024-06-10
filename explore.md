@@ -12,6 +12,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Pin Manager](https://agregoreweb.github.io/pin-manager/) for talking to IPFS pinning services
 - [Sutty CMS, static site generator with dweb publishing](https://sutty.nl/en/)
 - [P2Pad Code Editor](/docs/examples/p2pad/)
+- [Distributed Press Social Reader](//reader.distributed.press/)
 
 ### Extensions:
 
