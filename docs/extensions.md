@@ -12,19 +12,15 @@ You can drop folders in here to have them load when Agregore starts up.
 
 For a list of APIs that are supported, please look at the [Electron Extensions](https://github.com/sentialx/electron-extensions/issues/14) module.
 
-Agregore comes with two built-in extensions. A basic ad blocker, and the history tracking extension.
+### Built in extensions
 
-You can change the location of your extensions folder by editing your `.agregorerc` config file.
+Agregore comes with a few built-in extensions.
 
-This can be done by clicking `Help > Edit Configuration File`, then adding in the following contents:
-
-```javascript
-{
-  "extensions": {
-    "dir": "/your/extensions/folder/here"
-  }
-}
-```
+- [UBlock Origin](https://ublockorigin.com/) is a secure ad blocker which makes your default experience on the web a bit safer.
+- [ArchiveWeb.page](https://archiveweb.page/) lets you create local copies of websites and either save them to IPFS or as files.
+- [Agregore Renderer](https://github.com/AgregoreWeb/extension-agregore-renderer) renders Markdown/Gemini/JSON as well as a "Reader Mode" which extracts the main contents from a web page and renders it with your browser-wide color scheme.
+- [QR Share](https://github.com/AgregoreWeb/extension-agregore-qr-share) is a minimal QR code generator and scanner so you can share P2P website links without dictating long strings of letters and numbers.
+- [Agregore History](https://github.com/AgregoreWeb/extension-agregore-history) is used by Agregore to track and search through your web browsing history. You can fork and update it to do whatever yopu want without needing to upgrade Agregore as a whole.
 
 ---
 
