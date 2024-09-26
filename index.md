@@ -43,7 +43,7 @@ Explore the distributed web
 - Archive and save web pages for offline use via [ArchiveWeb.page](https://archiveweb.page/)
 - Customizable [color scheme](/docs/theming) which gets applied to all pages
 - New web [APIs for creating p2p sites and apps](https://agregore.mauve.moe/docs/#protocols)
-
+- Built in [large language model APIs](/docs/ai) using free to use local models
 
 ### Watch the 5 Minute Intro
 
