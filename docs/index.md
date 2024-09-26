@@ -1,10 +1,13 @@
-# Docs
+## 📔 Docs 📔
+
+Here are some docs to get you started with using Agregore.
 
 **🛠🚧 The following pages are WIPs and are currently being worked on! Check back every now and again for updates 🚧🛠**
 
-[Protocols](./protocols)
-[Extensions](./extensions)
-[Theming](./theming)
+- [Extensions](./extensions)
+- [Theming](./theming)
+
+### Protocols
 
 Documentation for P2P protocol handlers that are supported by Agregore. A great place to start if you want to create apps using Agregore ✨
 
@@ -12,7 +15,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [🌀 Hypercore Protocol Handlers](./hypercore-protocol-handlers)
 - [🌊 Bittorrent Protocol Handlers](./bittorent-protocol-handlers)
 
-# Examples
+### Examples
 
 - [Browser Development Environment](./examples/browser-devenv/)
 - [Drag and Drop File Uploader](./examples/drag-and-drop/)
@@ -21,7 +24,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [Browser Development Environment V3](./examples/browser-devenv-v3/)
 - [IPFS Gallery](./examples/ipfs-gallery/)
 
-## Tutorials:
+### Tutorials:
 
 - [🧱 App and tutorial making process](./tutorials/process)
 - [Theme Builder](./tutorials/themebuilder-tutorial)
