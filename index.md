@@ -31,8 +31,6 @@ Explore the distributed web
 [Download](https://github.com/AgregoreWeb/agregore-browser/releases/latest)
 [Mobile](https://github.com/AgregoreWeb/agregore-mobile/)
 
-![Screenshot showing Agregore Browser loading a hyper:// URL](hyper-url.png)
-
 ### Features
 
 - Browse the existing (HTTP) web like usual.
@@ -44,6 +42,8 @@ Explore the distributed web
 - Customizable [color scheme](/docs/theming) which gets applied to all pages
 - New web [APIs for creating p2p sites and apps](https://agregore.mauve.moe/docs/#protocols)
 - Built in [large language model APIs](/docs/ai) using free to use local models
+
+![Screenshot showing Agregore Browser loading a hyper:// URL](hyper-url.png)
 
 ### Watch the 5 Minute Intro
 
