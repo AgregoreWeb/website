@@ -13,6 +13,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Sutty CMS, static site generator with dweb publishing](https://sutty.nl/en/)
 - [P2Pad Code Editor](/docs/examples/p2pad/)
 - [Distributed Press Social Reader](//reader.distributed.press/)
+- [LLM App Generator](/docs//examples/llm-appgen/)
 
 ### Extensions:
 
@@ -25,7 +26,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 ### Magazines
 
-- [COMPOST Issue One](ipns://one.compost.digital) and [Issue Two](ipns://two.compost.digital)
+- [COMPOST Issue One](//one.compost.digital) and [Issue Two](//two.compost.digital)
 
 ### Tutorials
 

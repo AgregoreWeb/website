@@ -23,6 +23,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [Theme Builder](./examples/themebuilder)
 - [Browser Development Environment V3](./examples/browser-devenv-v3/)
 - [IPFS Gallery](./examples/ipfs-gallery/)
+- [LLM App Generator](./examples/llm-appgen/)
 
 ### Tutorials:
 

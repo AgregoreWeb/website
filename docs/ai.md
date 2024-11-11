@@ -73,7 +73,7 @@ You can configure your settings in your `.agregorerc` file which you can open wi
     "enabled": true,
     "baseURL": "http://127.0.0.1:11434/v1/",
     "apiKey": "ollama",
-    "model": "phi3:3.8b-mini-4k-instruct-q4_0"
+    "model": "qwen2.5-coder"
   }
 }
 ```
