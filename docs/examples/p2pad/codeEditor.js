@@ -8,7 +8,7 @@ import { $, loadingSpinner, backdrop, iframe } from './common.js'; // Import com
 // Import CSS from Agregore theme to use in the iframe preview
 export let basicCSS = `
 @import url("agregore://theme/vars.css");
-            body, * {
+            body {
                 font-size: 1.2rem;
                 margin: 0;
                 padding: 0;
