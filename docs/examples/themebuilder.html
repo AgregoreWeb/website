@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<title>Theme Builder</title>
+<style>
+    @import "agregore://theme/style.css";
+</style>
+
+<h1>Theme Builder</h1>
+
+<label for="backgroundCol">Background: </label><input type="color" id="backgroundCol" value="#111">
+<label for="textCol">Text: </label><input type="color" id="textCol" value="#F2F2F2">
+<label for="primaryCol">Primary: </label><input type="color" id="primaryCol" value="#6e2de5">
+<label for="secondaryCol">Secondary: </label><input type="color" id="secondaryCol" value="#2de56e">
+<button onclick="downloadTheme()">Download</button>
+
+<h2>The Idea ✨</h2>
+<p>
+Play around with Agregore's built in styles and download a copy of an <code>.agregorerc</code> file to save to your home folder to apply your styles globally.
+</p>
+<p>
+For more information, check out the <a href="https://agregore.mauve.moe/docs/theming#customization">theming documentation</a>.
+</p>
+<script>
+let root = document.documentElement
+let rootStyle = getComputedStyle(document.body);
+
+backgroundCol.addEventListener("input", function(event) {
+	colorChange(event, "--ag-theme-background");
+},false);
+textCol.addEventListener("input",function(event) {
+	colorChange(event, "--ag-theme-text");
+},false);
+primaryCol.addEventListener("input",function(event) {
+	colorChange(event, "--ag-theme-primary");
+},false);
+secondaryCol.addEventListener("input",function(event) {
+	colorChange(event, "--ag-theme-secondary");
+},false);
+
+function colorChange(event, colorVar) {
+	root.style.setProperty(colorVar, event.target.value);
+}
+
+function downloadTheme(){
+  const link = document.createElement("a");
+  const content = `
+{
+  "theme": {
+    "font-family": "system-ui",
+    "background": "${rootStyle.getPropertyValue("--ag-theme-background")}",
+    "text": "${rootStyle.getPropertyValue("--ag-theme-text")}",
+    "primary": "${rootStyle.getPropertyValue("--ag-theme-primary")}",
+    "secondary": "${rootStyle.getPropertyValue("--ag-theme-secondary")}"
+  }
+}
+  `;
+  const file = new Blob([content],{type: "text/plain"});
+  console.log(content);
+  link.href = URL.createObjectURL(file);
+  link.download = "agregorerc";
+  link.filename = ".agregorerc";
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+</script>

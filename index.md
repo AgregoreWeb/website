@@ -22,37 +22,36 @@
 
 # Agregore
 
-## Explore the distributed web
+Explore the distributed web
 
 [Explore](./explore)
-[Protocols](./protocols)
-[Extensions](./extensions)
-[Theming](./theming)
+[Blog](./blog/)
+[Docs](./docs/)
 [Videos](./videos)
 [Download](https://github.com/AgregoreWeb/agregore-browser/releases/latest)
+[Mobile](https://github.com/AgregoreWeb/agregore-mobile/)
 
-### Watch the 5 Minute Intro</h3>
+### Features
+
+- Browse the existing (HTTP) web like usual.
+- Browse the [Distributed Web](https://getdweb.net/) on [Hypercore](https://github.com/hypercore-protocol), [BitTorrent](http://bittorrent.org/introduction.html), and [IPFS](https://ipfs.tech/).
+- Browse alternate web protocols like [Gemini](https://geminiprotocol.net/)
+- Tracking free with a built in [Ad blocker](https://ublockorigin.com/)
+- Render [Markdown](https://www.markdownguide.org/basic-syntax/) documents natively
+- Archive and save web pages for offline use via [ArchiveWeb.page](https://archiveweb.page/)
+- Customizable [color scheme](/docs/theming) which gets applied to all pages
+- New web [APIs for creating p2p sites and apps](https://agregore.mauve.moe/docs/#protocols)
+- Built in [large language model APIs](/docs/ai) using free to use local models
+
+![Screenshot showing Agregore Browser loading a hyper:// URL](hyper-url.png)
+
+### Watch the 5 Minute Intro
 
 <iframe width="560" height="315" src="https://archive.org/embed/dweb-meetup-dec-2020-dweb-lightning-talks?start=4212" title="Agregore 4 minute intro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### What is the distributed web?</h3>
-
-The current web works by having companies set up servers which host people's websites and data.
-This means that if a company goes down, or if a person doesn't have access to their server (say they're offline, behind a firewall, or can't afford a decent connection) they can't access it.
-This also means that not everybody can publish things since it takes a lot of technical know-how to host things that they can have full control over.
-
-The distributed web works by removing central web servers and instead using [Peer to Peer connections](https://en.wikipedia.org/wiki/Peer-to-peer) directly between people to load data.
-If you want to create something, you serve it directly from your computer, and when somebody downloads their content they will also re-share it.
-The more people load some data, the more resilient it is and the faster it can be downloaded.
-
-As well, once you've loaded some data over the distributed web, you no longer need to be connected to the internet to access it.
-In fact, if you have a bunch of people connected to a wifi router in the middle of nowhere, your peer to peer apps will all keep working.
 
 ### How does it work?
 
 Agregore works by letting you load web pages and content from peer to peer protocols the same way you would load them from a website.
-
-![Screenshot showing Agregore Browser loading a hyper:// URL](hyper-url.png)
 
 In the same way as you can navigate to `http://example.com`, you can navigate to `hyper://blog.mauve.moe` and have it load from anybody on the network that has a copy.
 This can be done via the different protocols that Agregore supports like [BitTorrent](https://github.com/AgregoreWeb/agregore-markdown-site-generator), [IPFS](https://ipfs.io), and [Hypercore Protocol](https://github.com/AgregoreWeb/agregore-markdown-site-generator).
@@ -68,14 +67,12 @@ You can create your own peer to peer website using this simple code snippet:
 
 ```javascript
 // Upload your website page
-await fetch("hyper://example/index.md", {
-  method: "post",
-  body: `
-# Hello World!
-`
-})
-// Navigate to the website
-window.location.href = "hyper://example/"
+url = 'ipfs://bafyaabakaieac/example.txt'
+response = await fetch(url, {
+  method: 'PUT',
+  body: 'Hello World! 👋 🌎🌍🌏'
+})// Navigate to the website
+window.location.href = response.headers.get('Location')
 ```
 
 For more details and demos, check out the the [Videos](videos.html) page, or read the [Fetch API Docs](https://github.com/AgregoreWeb/agregore-browser/tree/master/docs).
@@ -84,4 +81,5 @@ For more details and demos, check out the the [Videos](videos.html) page, or rea
 [Contact](mailto:agregore@mauve.moe)
 [Discord](https://discord.gg/QMthd4Y)
 [Matrix](https://matrix.to/#/#agregore:mauve.moe)
+[Mastodon](https://mastodon.mauve.moe/@agregore)
 [Twitter](https://twitter.com/AgregoreBrowser)

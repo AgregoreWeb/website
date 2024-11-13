@@ -1,0 +1,96 @@
+@import url("agregore://theme/style.css");
+
+:root {
+  --gap: 5px;
+  --half-gap: calc(var(--gap) / 2);
+}
+
+body,
+* {
+  padding: 0;
+  margin: 0;
+  font-family: var(--ag-theme-font-family);
+  background: var(--ag-theme-background);
+  color: var(--ag-theme-text);
+  box-sizing: border-box;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr 4fr 1fr; 
+  height: 94vh;
+  gap: var(--gap);
+}
+
+.grid-container > *,
+.grid-container > textarea {
+  padding: var(--gap);
+  overflow: auto;
+  border: 1px solid var(--ag-theme-primary);
+  resize: none;
+  height: 100%;
+  min-height: 1rem;
+}
+
+div textarea:focus,
+#uploadtoDWebButton:hover {
+  outline: 2px solid var(--ag-theme-secondary);
+  color: var(--ag-theme-text);
+}
+
+#dweb-container,
+#uploadListBox {
+  display: flex;
+  padding: var(--half-gap);
+  align-items: center;
+  justify-content: space-between;
+}
+
+#dweb-container > *,
+#uploadListBox li {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--half-gap);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding: var(--gap);
+}
+
+span {
+  pointer-events: cursor;
+  color: var(--ag-theme-secondary);
+}
+
+span:hover {
+  color: var(--ag-theme-primary);
+}
+
+select {
+  width: auto;
+}
+
+.dnone {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  #dweb-container,
+  #dweb-container > *,
+  .grid-container {
+    flex-direction: column;
+    align-items: flex-start;
+    grid-template-columns: 1fr; /* Adjusts to a single column for mobile */
+  }
+}

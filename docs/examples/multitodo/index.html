@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <title>My Multiple-Stage Todo List</title>
+
+    <style>
+      .to-play {
+        background-color: #ffffff;
+        color: darkslategray;
+      }
+      .playing {
+        background-color: rgb(122, 233, 243);
+      }
+      .played {
+        background-color: rgb(255, 166, 166);
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Hello World, this is my multi-stage todo list!</h1>
+
+    <h2>All games</h2>
+    <ul id="gameList">
+      <li id="inputLi">
+        <form onsubmit="document.addNewGame(event)">
+          <input id="newGameField" />
+        </form>
+      </li>
+    </ul>
+
+    <button id="saveButton" onclick="document.doSave();">Save</button>
+
+    <div>
+      <h3>Legend</h3>
+      <ul>
+        <li class="to-play">Want to play: I haven't started yet</li>
+        <li class="playing">Playing: progressing or ongoing</li>
+        <li class="played">Done playing: finished or set aside</li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <a href="https://github.com/judytuna/ipfs-multido">on github</a>
+    </div>
+
+    <div id="stageSelect" hidden="true" style="background-color: orchid; z-index: 1000; color: #ffffff; width: 100px; position: absolute; padding-left: 16px;">
+      <p onclick="document.moveToStage(event, 'to-play')">Want to play</p>
+      <p onclick="document.moveToStage(event, 'playing')">Playing</p>
+      <p onclick="document.moveToStage(event, 'played')">Played</p>
+    </div>
+
+  </body>
+
+  <script>
+    function init() {
+      const peek = JSON.parse(localStorage.getItem("multido"));
+      if(peek) {
+        document.gameData = peek;
+      } else {
+        document.gameData = [];
+        localStorage.setItem("multido", JSON.stringify(document.gameData));
+      }
+
+      document.listEl = document.getElementById("gameList");
+
+      document.gameData.forEach(game => {
+        let newGameLi = document.createElement("li");
+        newGameLi.className = game.stageName;
+        newGameLi.setAttribute("onclick", "document.stagePopup(event)");
+        newGameLi.append(game.name);
+
+        document.listEl.append(newGameLi);
+      });
+
+      document.inputLi = document.getElementById("inputLi");
+      document.listEl.append(document.inputLi);
+
+      document.currentGameLi = "";
+
+      document.stagePopup = function(e) {
+        let el = e.currentTarget;
+        console.log(el.className);
+        document.currentGameLi = el;
+
+        let stageSelect = document.getElementById("stageSelect");
+        stageSelect.style.left = e.clientX;
+        stageSelect.style.top = e.clientY;
+        stageSelect.removeAttribute("hidden");
+
+        let saveButton = document.getElementById("saveButton");
+        saveButton.setAttribute("disabled", "true");
+      }
+
+      document.moveToStage = function(e, desiredStageName) {
+        let stageSelect = document.getElementById("stageSelect");
+        stageSelect.hidden = true;
+
+        let el = document.currentGameLi;
+        el.className = "";
+        el.classList.add(desiredStageName);
+        let gameName = el.textContent;
+
+        document.gameData.find(i => i["name"] == gameName).stageName = desiredStageName;
+
+        let saveButton = document.getElementById("saveButton");
+        saveButton.removeAttribute("disabled");
+
+        document.doSave();
+      };
+
+      document.doSave = function() {
+        console.log("Saving...");
+        localStorage.setItem('multido', JSON.stringify(document.gameData));
+        console.log(localStorage.getItem("multido"));
+      };
+
+      document.addNewGame = function(e) {
+        e.preventDefault();
+
+        let inputLi = document.getElementById("inputLi");
+        let newGameField = document.getElementById("newGameField");
+        let gameText = newGameField.value;
+        newGameField.value = "";
+
+        let newGameLi = document.createElement("li");
+        newGameLi.className = "to-play";
+        newGameLi.setAttribute("onclick", "document.stagePopup(event)");
+        newGameLi.append(gameText);
+
+        document.listEl.append(newGameLi);
+        document.listEl.append(inputLi);
+
+        document.gameData.push({
+          "name": gameText,
+          "stageName": "to-play"
+        });
+
+        document.doSave();
+      };
+    }
+
+    init();
+  </script>
+
+</html>

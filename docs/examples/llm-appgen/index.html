@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<title>Local LLM Appgen</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name=" apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+    @import url(agregore://theme/style.css);
+
+    fieldset {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    dialog button {
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+    }
+
+    iframe {
+        height: 80vh;
+    }
+
+    textarea {
+        min-height: 30vh;
+    }
+
+    a[href=""] {
+        display: none;
+    }
+
+    br {
+        display: unset;
+    }
+
+    dd {
+        white-space: pre-wrap;
+    }
+</style>
+<textarea id="promptbox" title="Write your app description here.">
+Have an eye emoji in a marquee tag, make the font size get bigger when you click it on the eye. Increase it by 1em.
+</textarea>
+<fieldset>
+    <button id="submitter">Generate!</button>
+    <a id="pagelink" href="">🔗Link</a>
+    <a id="alllinks" href="">All Apps</a>
+    <button id="showLog">Open Logs</button>
+</fieldset>
+<iframe title="App preview" id="preview"></iframe>
+<dialog id="logview">
+    <dl title="Logs" id="logs"></dl>
+    <button title="Close log dialog" id="closeLog">Close</button>
+</dialog>
+<script type="module">
+    const SYSTEM = 'system'
+    const USER = 'user'
+    const SYSTEM_PROMPT = `You are a programmer's assistant that helps users create simple web pages.`
+    const PREFIX_MESSAGE = { role: SYSTEM, content: SYSTEM_PROMPT }
+    const STORAGE_ITEM = "llm-appgen"
+
+    const CSS_VARS = await(await fetch('agregore://theme/vars.css')).text()
+
+    getOwnDrive().then((url) => {
+        window.alllinks.href = url
+    })
+
+    closeLog.onclick = () => logview.close()
+    showLog.onclick = showlogs
+
+    if (localStorage.getItem(STORAGE_ITEM)?.trim()) {
+        promptbox.value = localStorage.getItem(STORAGE_ITEM)
+    }
+
+    promptbox.oninput = () => localStorage.setItem(STORAGE_ITEM, promptbox.value.trim())
+
+    submitter.onclick = async () => {
+        showlogs()
+        let prompt = promptbox.value.trim()
+        try {
+            log("Creating app from prompt", prompt)
+
+            log("Generating metadata (name, file name)")
+            let metadata = await makeMetadata(prompt)
+            log("Metadata", metadata)
+
+            log("Making step by step plan")
+            const plan = await makePlan(prompt, metadata)
+
+            log("Generated plan", plan)
+
+            log("Making HTML")
+
+            let html = await makeHTML(prompt, metadata, plan);
+
+            log("Generated HTML", html)
+
+            log("Making JavaScript")
+
+            let js = await makeJS(prompt, metadata, plan, html);
+
+            log("Generated JS", js)
+
+            log("Making CSS")
+
+            let css = await makeCSS(prompt, metadata, plan, html);
+
+            log("Generated CSS", css)
+
+            log("Rendering page")
+
+            const description = JSON.stringify(prompt.replaceAll('\n', ' '))
+
+            let final = `<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>${metadata.name}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name=" apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content=${description}>
+<style>
+    @import url(agregore://theme/style.css);
+    ${css}
+</style>
+<!--
+Created using Agregore LLM-Appgen
+Prompt: ${prompt}
+-->
+${html}
+<script>
+    ${js}
+    document.dispatchEvent(new Event('DOMContentLoaded'))
+</${"script"}>`
+
+            console.log("final", final)
+            let frame = document.createElement("iframe")
+            frame.setAttribute("id", "preview")
+            preview.replaceWith(frame)
+            preview.contentWindow.document.write(final)
+
+            log("Publishing")
+            let publishedURL = await publish(metadata.file, final)
+            log("Published to URL", publishedURL)
+            window.pagelink.href = publishedURL
+            logview.close()
+        } catch (e) {
+            console.error(e.stack)
+            log("Error", e.stack)
+        }
+    }
+
+    log("Ready!")
+
+    async function makeHTML(prompt, { name }, plan) {
+        let content = `I'm planning to make a web page called ${name} with the following description:
+${prompt}
+Here are the more detailed plans for making the page:
+${plan}
+Now make the HTML for the page.
+Assume the DOCTYPE and head already exist, just place the contents of the body.
+Put it in a code block like this:
+<body>
+</body>
+You can call JS functions from event handlers like onclick.
+Use HTML5 semantic elements where appropriate.
+Use the id attribute for elements that will be dynamically modified by JavaScript.
+Don't use images unless the user told you their URLs.
+Instead of images make SVG or use an emoji. 
+Make sure to define all elements from the plan.
+Don't include any script tags or styles.
+No inline CSS either.`
+
+        let messages = [PREFIX_MESSAGE, {
+            role: USER,
+            content
+        }]
+
+        let result = await chat(messages, { stop: ["<script"] })
+
+        let html = extractSection(result.content, "<body>", "</body>")
+
+        return html
+    }
+
+    async function makeJS(prompt, { name }, plan, html) {
+        let content = `I'm planning to make a web page called ${name} with the following description:
+${prompt}
+Here are the more detailed plans for making the page:
+${plan}
+
+Only follow the JavaScript related plans.
+
+Here's the HTML for the page:
+\`\`\`html
+${html}
+\`\`\`
+
+Now make the JavaScript for the page.
+Use let and const for variable names.
+Use element.onclick for event handlers.
+Use console.log to log steps as they happen.
+Make sure to define all the functions from the plan.
+Do not use DOMContentLoaded or window.onload.
+Only output the JavaScript and nothing else.
+Output the JavaScript code inside a code block like this:
+\`\`\`javascript\nCode Here\`\`\``
+        let messages = [PREFIX_MESSAGE, {
+            role: USER,
+            content
+        }]
+
+        let { content: result } = await chat(messages, { stop: ['```\n'] })
+
+        if (result.includes('<script>')) {
+            return extractSection(result, '<script>', `</${'script'}>`)
+        }
+
+        let js = extractSection(result, '```javascript', '```')
+
+        return js
+    }
+
+    async function makeCSS(prompt, { name }, plan, html) {
+        let content = `I'm planning to make a web page called ${name} with the following description:
+${prompt}
+
+Here are the existing CSS styles on the page:
+\`\`\`css
+${CSS_VARS}
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ag-theme-background);
+  color: var(--ag-theme-text);
+  font-family: var(--ag-theme-font-family);
+  font-size: inherit;
+}
+
+body {
+  padding: 1em;
+}
+\`\`\`
+
+Here's the HTML for the page:
+\`\`\`html
+${html}
+\`\`\`
+
+Here are the more detailed plans for making the page:
+${plan}
+Follow just the CSS related plans.
+
+Now make the CSS for the page.
+Buttons, backgrounds, inputs, dialogs, and forms already have styles.
+Don't worry about the colors of the style, another agent will handle that.
+Use flexbox for layout if needed.
+Keep it minimal and basic.
+Only provide the CSS and nothing else.
+Output the CSS code inside a code block. like \`\`\`css\nCode Here\`\`\``
+        let messages = [PREFIX_MESSAGE, {
+            role: USER,
+            content
+        }]
+
+        let result = await chat(messages, { stop: ['```\n'] })
+
+        let css = extractSection(result.content, '```css', '```')
+
+        if (css.includes("<style>")) {
+            css = extractSection(css, "<style>", "</style>")
+        }
+
+        return css
+    }
+
+    async function makeMetadata(description) {
+        let content = `I have an app I'm trying to make with the following description:
+${description}
+
+I want you to come up with a name and a file name for this app.
+Try to be whimsicle and include the main function of the app.
+Make sure the file name ends in ".html"
+
+Output in the form of a JSON object that looks like this:
+
+{"name":"Name here","file":"example.html"}`
+
+        let messages = [{
+            role: USER,
+            content
+        }]
+
+        let { content: result } = await chat(messages)
+        let data = extractSection(result, "{", "}")
+
+        console.log("metadata parse", { result, data })
+
+        return JSON.parse(`{${data}}`)
+    }
+
+    async function makePlan(description, { name }) {
+        let content = `I would like to make a web page that does the following:
+${description}
+
+I'm going to call the app "${name}".
+Plan how this app should work step by step.
+You cannot rely on external files, if you need an image use a unicode symbol or make an inline SVG.
+Assume the general structure is taken care of, focus on the contents.
+What elements do we need in the HTML and what are their IDs?
+What function names do we need in the JavaScript?
+How should we style layout?
+Do we need user input via forms or keyboard and mouse?
+Do not worry about the colors of the style, another agent will handle that.
+Do not write any code, just the high level description.
+Do not provide an example.
+`
+        let messages = [PREFIX_MESSAGE, {
+            role: USER,
+            content
+        }]
+
+        // Don't let it generate the app yet.
+        let result = await chat(messages, { stop: ['```'] })
+
+        return result.content
+    }
+
+    async function chat(messages, opts = {}) {
+        console.log('chat', messages)
+        let response = await window.llm.chat({ messages, ...opts })
+        console.log('chat response', response)
+        return response
+    }
+
+    function showlogs() {
+        logview.showModal()
+    }
+
+    function log(label, ...messages) {
+        console.log(label, ...messages)
+        let titleElement = document.createElement("dt")
+        titleElement.innerText = label
+        logs.appendChild(titleElement)
+        for (let message of messages) {
+            let detailElement = document.createElement("dd")
+            let messageText = typeof message === 'string' ? message : JSON.stringify(message, null, ' ')
+            detailElement.innerText = messageText
+            logs.appendChild(detailElement)
+        }
+        logview.scrollTop = logview.scrollHeight;
+    }
+
+    function extractSection(content, startText, endText) {
+        let start = content.indexOf(startText) + startText.length
+        // First occurance after the start
+        let end = content.indexOf(endText, start + 1)
+
+        let data = content.slice(start, end)
+
+        return data
+    }
+
+    async function publish(fileName, fileData) {
+        let root = await getOwnDrive()
+        let filePath = new URL(`${fileName}`, root).href
+        let response = await fetch(filePath, {
+            method: 'PUT',
+            body: fileData
+        })
+        if (!response.ok) {
+            throw new Error(`Unable to publish ${fileName}: ${await response.text()}`)
+        }
+        // Avoid memory leak
+        await response.text()
+        console.log(`Published ${fileName} to ${filePath}`)
+        return filePath
+    }
+
+    async function getOwnDrive() {
+        return generateHyperdriveKey('llm-appgen')
+    }
+
+    async function generateHyperdriveKey(name) {
+        try {
+            const response = await fetch(`hyper://localhost/?key=${name}`, { method: 'POST' });
+            if (!response.ok) {
+                throw new Error(`Failed to generate Hyperdrive key: ${response.statusText}`);
+            }
+            return await response.text();  // This returns the hyper:// URL
+        } catch (error) {
+            console.error('Error generating Hyperdrive key:', error);
+            throw error;
+        }
+    }
+
+    function withRetries(fn, ...args) {
+        let retries = 3
+        while (retries) {
+            try {
+                return fn.call(window, ...args)
+            } catch (e) {
+                retries -= 1
+                if (!retries) throw e
+            }
+        }
+    }
+</script>
