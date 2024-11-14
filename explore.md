@@ -17,10 +17,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 ### Extensions:
 
-- [DScan: Decentralized QR code generator](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
-
-### Extensions:
-- [DScan: Decentralized QR code generator](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
+- [DScan: Own Your Identity, Own Your Data](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
 
 ### Blogs / Homepages
 
