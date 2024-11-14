@@ -14,6 +14,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [P2Pad Code Editor](/docs/examples/p2pad/)
 - [Distributed Press Social Reader](//reader.distributed.press/)
 - [LLM App Generator](/docs//examples/llm-appgen/)
+- [Distributed Press CLI](https://github.com/hyphacoop/distributed-press-cli/)
 
 ### Extensions:
 
