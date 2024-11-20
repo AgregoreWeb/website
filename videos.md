@@ -6,6 +6,10 @@ Here's a collection of videos related to Agregore. If you'd like to schedule a p
 
 <iframe width="560" height="315" src="https://archive.org/embed/dweb-meetup-dec-2020-dweb-lightning-talks?start=4212" title="Agregore 4 minute intro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+### LLMs in the user agent
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HrQAYgMA-mc?si=6mFgpoPEJIgXWMGI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ### How Decentralized Web Apps work - Bloom
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gHrul4jEHvs" title="How Decentralized Web Apps Work" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
