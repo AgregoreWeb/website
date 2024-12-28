@@ -15,6 +15,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Distributed Press Social Reader](//reader.distributed.press/)
 - [LLM App Generator](/docs//examples/llm-appgen/)
 - [Distributed Press CLI](https://github.com/hyphacoop/distributed-press-cli/)
+- [LLM Chat Example](/docs/examples/llm-chat.html)
 
 ### Extensions:
 
