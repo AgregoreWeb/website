@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<title>LLM Chat</title>
+<style>
+@import url("agregore://theme/style.css");
+
+#newChat {
+  display: flex;
+  align-items: stretch;
+}
+#promptBox {
+  margin: 0px;
+  margin-right: 1em;
+}
+</style>
+<template id="messageTemplate">
+
+</template>
+<section id="messages">
+</section>
+<form id="newChat">
+  <textarea autofocus id="promptBox">Hey there!</textarea>
+  <button>💬</button>
+</form>
+</form>
+<script type="module">
+  newChat.onsubmit = onNewChat
+
+  console.log("ready!")
+
+  function onNewChat(e) {
+    e.preventDefault()
+    let prompt = promptBox.value
+    promptBox.value = ""
+    addMessage('user', prompt)
+    runInference()
+  }
+
+  function addMessage(role, content) {
+    const message = document.createElement('p')
+    message.classList.add('message')
+    message.dataset.role = role
+    message.innerText = content
+    messages.append(message)
+  }
+
+  function serializeMessages() {
+    return [...messages.children].map((message) => {
+      return {role: message.dataset.role, content: message.innerText}
+    })
+  }
+
+  async function runInference() {
+    const messages = serializeMessages()
+    console.log(messages)
+    const {role, content}  = await llm.chat({messages})
+    console.log(role, content)
+    addMessage(role, content)
+  }
+</script>
