@@ -17,6 +17,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Distributed Press CLI](https://github.com/hyphacoop/distributed-press-cli/)
 - [LLM Chat Example](/docs/examples/llm-chat.html)
 - [LLM Tonal Lenses](/docs/examples/llm-lenses-chat/)
+- [Quick Code Snippet Generator](/docs/examples/quickcode.html)
 
 ### Extensions:
 
