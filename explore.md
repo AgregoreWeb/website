@@ -27,6 +27,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 - [Mauve's Blog](//blog.mauve.moe)
 - [Hypha Worker Coop](//hypha.coop)
+- [CW Flashing, web animation series](hyper://31fcaz66jb57o9pm1gdook8ftni5q13mwhn9jrbx4pgs8kqod6zy/)
 
 ### Magazines
 
