@@ -133,12 +133,16 @@ li {
 }
 
 span {
-    pointer-events: cursor;
+    margin-left: var(--gap);
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 0 var(--half-gap);
     color: var(--ag-theme-secondary);
 }
 
 span:hover {
-    color: var(--ag-theme-primary);
+    background-color: var(--ag-theme-secondary);
+    color: var(--ag-theme-background);
 }
 
 /* Media query for mobile devices */

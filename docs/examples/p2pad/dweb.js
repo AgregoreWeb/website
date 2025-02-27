@@ -96,7 +96,7 @@ function addURL(url) {
     copyContainer.innerHTML = copyIcon;
     copyContainer.onclick = function() {
         navigator.clipboard.writeText(url).then(() => {
-            copyContainer.textContent = ' Copied!';
+            copyContainer.textContent = '☑';
             setTimeout(() => {
                 copyContainer.innerHTML = copyIcon;
             }, 3000);
