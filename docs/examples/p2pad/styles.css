@@ -45,10 +45,12 @@ main {
 .grid-container > textarea {
     resize: none;
     font-size: 1.2rem;
+    margin-top: 0;
 }
 
 #viewer {
     color: var(--ag-theme-text);
+    margin-top: 0;
 }
 
 div textarea:focus {
@@ -61,7 +63,7 @@ div textarea:focus {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     padding: 0 var(--half-gap);
 }
 
@@ -146,7 +148,7 @@ span:hover {
 }
 
 /* Media query for mobile devices */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 769px) {
     #dweb-container,
     #dweb-container > *  {
        flex-direction: column;
