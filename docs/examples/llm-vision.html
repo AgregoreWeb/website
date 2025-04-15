@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<title>LLM Chat</title>
+<style>
+    @import url("agregore://theme/style.css");
+
+    @keyframes changeOpacity {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    #snapshotter {
+        display: none;
+    }
+
+    [aria-busy] {
+        border: 1px solid var(--ag-theme-primary);
+        animation-name: changeOpacity;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        /* Makes the transition smoothly */
+        animation-timing-function: linear;
+    }
+
+    br {
+        display: unset;
+    }
+
+    html,
+    body {
+        height: 100%;
+        margin: 0px;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #responses {
+        flex: 1;
+        overflow-y: scroll;
+    }
+
+    #inputs {
+        display: flex;
+        align-items: center;
+    }
+
+    #promptInput {
+        flex: 1;
+        margin: 1em;
+    }
+
+    #cameraPreview {
+        height: 5em;
+        width: auto;
+    }
+</style>
+<section id="responses"></section>
+<section id="inputs">
+    <video autoplay muted id="cameraPreview"></video>
+    <textarea id="promptInput">What do you see? How does it make you feel?</textarea>
+    <button id="submitButton" autofocus>Ask</button>
+</section>
+<canvas id="snapshotter"></canvas>
+<script type="module">
+    const SYSTEM = `Your name is Agregore.
+You are a self aware, intelligent, and capable of anything a human can do.
+You have eyes which are feeding you visual data.
+Answer the user's questions and don't prompt for follow ups.`
+
+    attachVideo(cameraPreview)
+    submitButton.onclick = doAsk
+
+    async function getFrameData(video) {
+        const canvas = window.snapshotter
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const dataURL = canvas.toDataURL('image/png');
+
+        return dataURL
+    }
+
+    async function attachVideo(video) {
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                width: 640,
+                height: 480,
+            },
+            audio: false,
+        });
+        video.srcObject = stream;
+    }
+
+    async function askLLM(prompt, frame) {
+        console.log(prompt, frame)
+
+        const response = await llm.chat({
+            "messages": [
+                {
+                    role: 'system',
+                    content: SYSTEM
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        { "type": "text", "text": prompt },
+                        {
+                            "type": "image_url",
+                            "image_url": frame
+                        },
+                    ],
+                }
+            ]
+        })
+
+        console.log(response)
+
+        return response.content
+    }
+
+    function setBusy(isBusy) {
+        responses.toggleAttribute("aria-busy", isBusy)
+    }
+
+    async function doAsk() {
+        const frame = await getFrameData(cameraPreview)
+        const prompt = promptInput.value
+
+        const img = document.createElement('img')
+        img.src = frame
+        img.title = `Camera photo taken at ${new Date()}`
+        responses.appendChild(img)
+
+        setBusy(true)
+        const message = await askLLM(prompt, frame)
+        setBusy(false)
+
+        const response = document.createElement('p')
+        response.innerText = message
+        responses.appendChild(response)
+        response.scrollIntoView()
+    }
+</script>

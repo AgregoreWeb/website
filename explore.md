@@ -19,6 +19,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [LLM Tonal Lenses](/docs/examples/llm-lenses-chat/)
 - [Quick Code Snippet Generator](/docs/examples/quickcode.html)
 - [LLM Echo Chamber](/docs/examples/llm-echo-chamber.html)
+- [LLM Vision Demo](/docs/examples/llm-vision.html)
 
 ### Extensions:
 

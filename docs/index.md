@@ -26,6 +26,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 - [LLM App Generator](./examples/llm-appgen/)
 - [LLM Chat](./examples/llm-chat.html)
 - [LLM Tonal Lenses](./examples/llm-lenses-chat/)
+- [LLM Vision](./examples/llm-vision)
 
 ### Tutorials:
 
