@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<title>Quick Code</title>
+<style>
+    @import url("agregore://theme/style.css");
+
+    @keyframes changeOpacity {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    [aria-busy] {
+        border: 1px solid var(--ag-theme-primary);
+        animation-name: changeOpacity;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        /* Makes the transition smoothly */
+        animation-timing-function: linear;
+    }
+
+    #codeBox {
+        min-height: 50vh;
+    }
+</style>
+<textarea id="promptBox">python fib function</textarea>
+<button id="generateButton">Generate</button>
+<hr>
+<textarea id="codeBox"></textarea>
+<script type="module">
+    const SYSTEM = `Generate code blocks based on the prompt.
+    Stop after outputting the code block.
+    Be short and quick.`
+    generateButton.onclick = async () => {
+        promptBox.toggleAttribute("aria-busy", true)
+        try {
+            codeBox.value = await generate(promptBox.value)
+        } catch (e) {
+            alert(e.message)
+        }
+        promptBox.toggleAttribute("aria-busy", false)
+    }
+
+    async function generate(prompt) {
+        console.log("generating", prompt)
+        const { content } = await llm.chat({
+            messages: [
+                { role: "system", content: SYSTEM },
+                { role: "user", content: prompt }
+            ]
+        })
+
+        console.log("Raw response", content)
+
+        const startBlock = content.indexOf('```')
+        const blockContentStart = content.indexOf("\n", startBlock) + 1
+        const blockContentEnd = content.indexOf("```", blockContentStart)
+
+        const block = content.slice(blockContentStart, blockContentEnd)
+
+        return block
+    }
+</script>

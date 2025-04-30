@@ -44,7 +44,7 @@ async function uploadFile(file) {
     // Construct the URL based on the protocol
     let url;
     if (protocol === 'hyper') {
-        const hyperdriveUrl = await generateHyperdriveKey('drag-and-drop');
+        const hyperdriveUrl = await generateHyperdriveKey('p2pad');
         url = `${hyperdriveUrl}`;
     } else {
         url = `ipfs://bafyaabakaieac/`;
@@ -96,7 +96,7 @@ function addURL(url) {
     copyContainer.innerHTML = copyIcon;
     copyContainer.onclick = function() {
         navigator.clipboard.writeText(url).then(() => {
-            copyContainer.textContent = ' Copied!';
+            copyContainer.textContent = '☑';
             setTimeout(() => {
                 copyContainer.innerHTML = copyIcon;
             }, 3000);

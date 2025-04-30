@@ -14,10 +14,16 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [P2Pad Code Editor](/docs/examples/p2pad/)
 - [Distributed Press Social Reader](//reader.distributed.press/)
 - [LLM App Generator](/docs//examples/llm-appgen/)
+- [Distributed Press CLI](https://github.com/hyphacoop/distributed-press-cli/)
+- [LLM Chat Example](/docs/examples/llm-chat.html)
+- [LLM Tonal Lenses](/docs/examples/llm-lenses-chat/)
+- [Quick Code Snippet Generator](/docs/examples/quickcode.html)
+- [LLM Echo Chamber](/docs/examples/llm-echo-chamber.html)
+- [LLM Vision Demo](/docs/examples/llm-vision.html)
 
 ### Extensions:
 
-- [DScan: Decentralized QR code generator](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
+- [DScan: Own Your Identity, Own Your Data](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
 
 ### Extensions:
 - [DScan: Decentralized QR code generator](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
@@ -26,6 +32,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 
 - [Mauve's Blog](//blog.mauve.moe)
 - [Hypha Worker Coop](//hypha.coop)
+- [CW Flashing, web animation series](hyper://31fcaz66jb57o9pm1gdook8ftni5q13mwhn9jrbx4pgs8kqod6zy/)
 
 ### Magazines
 

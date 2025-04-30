@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<title>LLM Echo Chamber</title>
+<style>
+  @import url("agregore://theme/style.css");
+
+  @keyframes changeOpacity {
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.9;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  #newChat {
+    display: flex;
+    align-items: center;
+  }
+
+  #promptBox {
+    margin: 0px;
+    margin-right: var(--ag-theme-indent);
+  }
+
+  .message-content {
+    white-space: pre-wrap;
+  }
+
+  #messages {
+    padding: var(--ag-theme-indent);
+    margin-bottom: var(--ag-theme-indent);
+  }
+
+  #messages[aria-busy] {
+    border: 1px solid var(--ag-theme-primary);
+    animation-name: changeOpacity;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    /* Makes the transition smoothly */
+    animation-timing-function: linear;
+  }
+
+  #mirrorPrompt {
+    min-height: 8em;
+  }
+
+  br {
+    display: block;
+  }
+</style>
+
+<template id="messageTemplate">
+  <p class="message">
+    👁️‍🗨️ <span class="message-content"></span>
+  </p>
+</template>
+
+<section id="messages" aria-live="polite"></section>
+<form id="newChat">
+  <textarea autofocus title="Topic of discussion" id="promptBox">What Doth Life?</textarea>
+  <button title="Start discussing">💬</button>
+  <button id="stopButton" title="Stop discussing">🛑</button>
+</form>
+<form>
+  <textarea id="mirrorPrompt" title="Mirror transformation">
+Respond with as few words as possible.
+Respond with different a perspective.
+Use dialectics.
+Don't repeat yourself
+  </textarea>
+</form>
+<details>
+  <summary>How does this work?</summary>
+  <p>
+    The echo chamber works by having a language model talk to itself.
+    You supply the initial topic and it will keep discussing until you stop it.
+    A <code>reflection</code> is applied between each discussion which can help guide the discussions.
+  </p>
+</details>
+
+<script type="module">
+  const SYSTEM_CONTENT = `You discuss philosphy and the depper aspects of life.`
+  const USER = 'user'
+  const ASSISTANT = 'assistant'
+
+  const PROMPT_KEY = 'llmEchoChamberPrompt'
+  const MIRROR_KEY = 'llmEchoChamberMirrorPrompt'
+
+  if (localStorage.getItem(PROMPT_KEY)) {
+    promptBox.value = localStorage.getItem(PROMPT_KEY)
+  }
+
+  if (localStorage.getItem(MIRROR_KEY)) {
+    mirrorPrompt.value = localStorage.getItem(MIRROR_KEY)
+  }
+
+  newChat.onsubmit = onNewChat
+  stopButton.onclick = onStop
+
+  let running = 0
+
+  console.log("ready!")
+
+  function onNewChat(e) {
+    e.preventDefault()
+    messages.innerText = ""
+    running = Date.now();
+    let prompt = promptBox.value
+    localStorage.setItem(PROMPT_KEY, prompt)
+    addMessage(USER, prompt)
+    loop()
+  }
+
+  async function loop() {
+    const seenRunning = running
+    await runInference()
+    if (running != seenRunning) return
+    flipRoles()
+    setTimeout(loop, 0)
+  }
+
+  function onStop(e) {
+    e.preventDefault()
+    running = 0
+    setBusy(false)
+  }
+
+  function flipRoles() {
+    for (const message of messages.children) {
+      const role = message.dataset.role
+      if (role === USER) {
+        message.dataset.role = ASSISTANT
+      } else if (role === ASSISTANT) {
+        message.dataset.role = USER
+      }
+    }
+  }
+
+  function addMessage(role, content) {
+    const message = messageTemplate
+      .content
+      .cloneNode(true)
+      .children[0]
+    console.log(message)
+    message.dataset.role = role
+    message.querySelector('.message-content').innerText = content
+    messages.append(message)
+  }
+
+  function serializeMessages() {
+    return [...messages.children].map((message) => {
+      return {
+        role: message.dataset.role,
+        content: message.querySelector('.message-content').innerText
+      }
+    })
+  }
+
+  function setBusy(isBusy) {
+    messages.toggleAttribute("aria-busy", isBusy)
+  }
+
+  async function runInference() {
+    const seenRunning = running
+    setBusy(true)
+    const messages = serializeMessages()
+    messages.unshift({
+      role: "system",
+      content: SYSTEM_CONTENT
+    })
+    messages.push({
+      role: USER,
+      content: mirrorPrompt.value
+    })
+    localStorage.setItem(MIRROR_KEY, mirrorPrompt.value)
+    //messages.push({
+    //  role: 'assistant',
+    //  content: 'To put it in as few words as possible:'
+    //})
+    console.log(messages)
+    const { role, content } = await llm.chat({ messages })
+    if (running != seenRunning) return
+    console.log(role, content)
+    addMessage(role, content)
+    setBusy(false)
+  }
+</script>

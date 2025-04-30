@@ -1,2 +1,4 @@
 *.html
 !docs/examples/**
+.aider*
+.env
