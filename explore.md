@@ -44,7 +44,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 ### Other browsers:
 
 - [Peersky](https://peersky.p2plabs.xyz/)
-- ~~[IPFS in Brave][(https://blog.ipfs.io/2021-01-21-how-we-put-ipfs-in-brave/)](https://github.com/brave/brave-browser/issues/37735)~~
+~~[IPFS in Brave](https://github.com/brave/brave-browser/issues/37735)~~
 - [Galacteek](https://galacteek.gitlab.io/)
 - [Hybrid](https://github.com/HybridWare/hybrid-browser)
 
