@@ -10,11 +10,12 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Drag and Drop File Uploads](/docs/examples/drag-and-drop/)
 - [Theme Builder](/docs/examples/themebuilder)
 - [Pin Manager](https://agregoreweb.github.io/pin-manager/) for talking to IPFS pinning services
-- [Sutty CMS, static site generator with dweb publishing](https://sutty.nl/en/)
 - [P2Pad Code Editor](/docs/examples/p2pad/)
+- [Sutty CMS, static site generator with dweb publishing](https://sutty.nl/en/)
 - [Distributed Press Social Reader](//reader.distributed.press/)
-- [LLM App Generator](/docs//examples/llm-appgen/)
 - [Distributed Press CLI](https://github.com/hyphacoop/distributed-press-cli/)
+- [DWeb Explorer](https://explore.distributed.press/)
+- [LLM App Generator](/docs//examples/llm-appgen/)
 - [LLM Chat Example](/docs/examples/llm-chat.html)
 - [LLM Tonal Lenses](/docs/examples/llm-lenses-chat/)
 - [Quick Code Snippet Generator](/docs/examples/quickcode.html)
@@ -43,7 +44,8 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 ### Other browsers:
 
 - [Peersky](https://peersky.p2plabs.xyz/)
-- [IPFS in Brave](https://blog.ipfs.io/2021-01-21-how-we-put-ipfs-in-brave/)
+- ~~[IPFS in Brave](https://github.com/brave/brave-browser/issues/37735)~~
+- [Galacteek](https://galacteek.gitlab.io/)
 - [Hybrid](https://github.com/HybridWare/hybrid-browser)
 
 ---
