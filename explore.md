@@ -40,6 +40,17 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Agregore Tutorials in our docs](/docs/#tutorials)
 - [Making a P2P Gemini blog](https://mastodon.mauve.moe/@mauve/110099166164967631)
 
+### Built In Pages
+
+- [agregore://welcome](agregore://welcome)
+- [agregore://settings](agregore://settings)
+- [agregore://history](agregore://history)
+- [agregore://about](agregore://about)
+- [agregore://about](agregore://404)
+- [agregore://theme/example](agregore://theme/example)
+- [agregore://theme/style.css](agregore://theme/style.css)
+- [agregore://theme/vars.css](agregore://theme/vars.css)
+
 ### Other browsers:
 
 - [Peersky](https://peersky.p2plabs.xyz/)
