@@ -9,12 +9,9 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [PubSub Chat](/docs/examples/ipfs-pub-sub-chat/)
 - [Drag and Drop File Uploads](/docs/examples/drag-and-drop/)
 - [Theme Builder](/docs/examples/themebuilder)
-- [Pin Manager](https://agregoreweb.github.io/pin-manager/) for talking to IPFS pinning services
 - [P2Pad Code Editor](/docs/examples/p2pad/)
 - [Sutty CMS, static site generator with dweb publishing](https://sutty.nl/en/)
 - [Distributed Press Social Reader](//reader.distributed.press/)
-- [Distributed Press CLI](https://github.com/hyphacoop/distributed-press-cli/)
-- [DWeb Explorer](https://explore.distributed.press/)
 - [LLM App Generator](/docs//examples/llm-appgen/)
 - [LLM Chat Example](/docs/examples/llm-chat.html)
 - [LLM Tonal Lenses](/docs/examples/llm-lenses-chat/)
@@ -22,19 +19,21 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [LLM Echo Chamber](/docs/examples/llm-echo-chamber.html)
 - [LLM Vision Demo](/docs/examples/llm-vision.html)
 
+## Aggregators and Search
+
+- [DWeb Explorer](https://explore.distributed.press/)
+- ["Totally Legit" Gemini Search](gemini://tlgs.one/search?agregore)
+
 ### Extensions:
 
 - [DScan: Own Your Identity, Own Your Data](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
 
-### Blogs / Homepages
+### Blogs / Homepages / Magazines
 
 - [Mauve's Blog](//blog.mauve.moe)
 - [Hypha Worker Coop](//hypha.coop)
 - [CW Flashing, web animation series](hyper://31fcaz66jb57o9pm1gdook8ftni5q13mwhn9jrbx4pgs8kqod6zy/)
-
-### Magazines
-
-- [COMPOST Issue One](//one.compost.digital) and [Issue Two](//two.compost.digital)
+- [COMPOST Issue One](//one.compost.digital), [Issue Two](//two.compost.digital), [Issue Three](//three.compost.digital/)
 
 ### Tutorials
 
@@ -44,7 +43,6 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 ### Other browsers:
 
 - [Peersky](https://peersky.p2plabs.xyz/)
-- ~~[IPFS in Brave](https://github.com/brave/brave-browser/issues/37735)~~
 - [Galacteek](https://galacteek.gitlab.io/)
 - [Hybrid](https://github.com/HybridWare/hybrid-browser)
 
