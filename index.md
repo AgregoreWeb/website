@@ -28,6 +28,7 @@ Explore the distributed web
 [Blog](./blog/)
 [Docs](./docs/)
 [Videos](./videos)
+[FAQ](./faq)
 [Download](https://github.com/AgregoreWeb/agregore-browser/releases/latest)
 [Mobile](https://github.com/AgregoreWeb/agregore-mobile/)
 
