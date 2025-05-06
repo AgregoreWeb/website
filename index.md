@@ -83,4 +83,4 @@ For more details and demos, check out the the [Videos](videos.html) page, or rea
 [Discord](https://discord.gg/QMthd4Y)
 [Matrix](https://matrix.to/#/#agregore:mauve.moe)
 [Mastodon](https://mastodon.mauve.moe/@agregore)
-[Twitter](https://twitter.com/AgregoreBrowser)
+[BlueSky](https://bsky.app/profile/agregore.mauve.moe)
