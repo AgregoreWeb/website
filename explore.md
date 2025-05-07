@@ -19,7 +19,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [LLM Echo Chamber](/docs/examples/llm-echo-chamber.html)
 - [LLM Vision Demo](/docs/examples/llm-vision.html)
 
-## Aggregators and Search
+### Aggregators and Search
 
 - [DWeb Explorer](https://explore.distributed.press/)
 - ["Totally Legit" Gemini Search](gemini://tlgs.one/search?agregore)
