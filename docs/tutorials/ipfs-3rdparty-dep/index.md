@@ -234,7 +234,7 @@ Now we can remove all the redundant `<link>` and `<scirpt>` tags from `index.htm
 Throughout we've used dynamically generated `style` tags in in-line styles interchangeably. Now is a good time to consolidate styles. Update `style.css` to contain the following styles:
 
 ```css
-@import url("agregore://theme/vars.css");
+@import url("browser://theme/vars.css");
 html {
     font-family: var(--ag-theme-font-family);
 }

@@ -65,7 +65,7 @@ In this step, we'll apply CSS styles to make the Dlinktree visually appealing an
 Navigate to the CSS container in the P2Pad code editor and replace the existing content with the following CSS code:
 
 ```css
-@import url("agregore://theme/style.css");
+@import url("browser://theme/style.css");
 
 :root {
     --gap: 5px;
@@ -159,7 +159,7 @@ select {
 
 ### Key Aspects of the CSS Code
 
-1. **Agregore Theming Integration**: The @import url("agregore://theme/vars.css"); line integrates the Dlinktree with the Agregore browser's theme, ensuring that the app's look and feel match the user's theme settings.
+1. **Agregore Theming Integration**: The @import url("browser://theme/vars.css"); line integrates the Dlinktree with the Agregore browser's theme, ensuring that the app's look and feel match the user's theme settings.
 
 2. **Layout and Responsiveness**: The .grid-container uses CSS Grid to organize content into a single column, adaptable to the content's length. The media query ensures the layout remains user-friendly on mobile devices.
 
@@ -263,7 +263,7 @@ async function assembleCode() {
     <!DOCTYPE html>
         <title>${pageTitle}</title>
         <style>
-        @import url("agregore://theme/style.css");
+        @import url("browser://theme/style.css");
 
         body {
             overflow: hidden;

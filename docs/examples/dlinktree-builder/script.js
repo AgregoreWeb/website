@@ -85,7 +85,7 @@ async function assembleCode() {
     <!DOCTYPE html>
         <title>${pageTitle}</title>
         <style>
-            @import url("agregore://theme/style.css");
+            @import url("browser://theme/style.css");
             body {
                 overflow: hidden;
                 margin: 0;

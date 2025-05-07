@@ -47,7 +47,7 @@ Let's start by updating `index.html`. We will add a form with two inputs. The fi
 Next we will create the stylesheet we've referenced above. Open the editor, but instead of selecting a file, type `style.css` in the filename field and add the following CSS to the 'Content' field:
 
 ```css
-@import url("agregore://theme/vars.css");
+@import url("browser://theme/vars.css");
 html {
     font-family: var(--ag-theme-font-family);
 }
@@ -336,7 +336,7 @@ Next we can update `index.html` and replace the form with the custom element:
 And let's remove the CSS we moved from `style.css`:
 
 ```diff
-@import url("agregore://theme/vars.css");
+@import url("browser://theme/vars.css");
 html {
     font-family: var(--ag-theme-font-family);
 }
