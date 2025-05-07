@@ -160,7 +160,7 @@ Let's do a quick overview of what each of these sections do:
 In `styles.css`, include the necessary styles:
 
 ```css
-@import url("agregore://theme/vars.css");
+@import url("browser://theme/vars.css");
 
 :root {
     --gap: 5px;
@@ -320,7 +320,7 @@ Now, let's look at the purpose of each of these styles.
 Here's a breakdown of key elements in the stylesheet:
 #### Importing Agregore Theme Variables
 ```css
-@import url("agregore://theme/vars.css");
+@import url("browser://theme/vars.css");
 ```
 - This line imports CSS variables from the Agregore browser theme. These variables provide consistent theming and include settings for colors, fonts, and more.
 
@@ -412,7 +412,7 @@ import { $, loadingSpinner, backdrop, iframe } from './common.js'; // Import com
 
 // Import CSS from Agregore theme to use in the iFrame
 export let basicCSS = `
-@import url("agregore://theme/vars.css");
+@import url("browser://theme/vars.css");
             body, * {
                 font-size: 1.2rem;
                 margin: 0;
@@ -474,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
 #### Agregore Theme CSS Import
 ```javascript
 export let basicCSS = `
-@import url("agregore://theme/vars.css");
+@import url("browser://theme/vars.css");
             body, * {
                 // Basic CSS styles
             }
