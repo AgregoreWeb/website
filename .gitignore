@@ -1,4 +1,6 @@
 *.html
+*.gmi
+style.css
 !docs/examples/**
 .aider*
 .env
