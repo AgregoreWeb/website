@@ -27,20 +27,20 @@
     <div id="dweb-container">
         <div>
             <label for="protocolSelect">
-                Protocol:
                 <select id="protocolSelect">
-                    <option value="ipfs" selected>Inter-Planetary File System (IPFS://)</option>
-                    <option value="hyper">Hypercore-Protocol (HYPER://)</option>
+                    <option value="ipfs" selected>IPFS://</option>
+                    <option value="hyper">HYPER://</option>
                 </select>
             </label>
+            <input type="text" id="titleInput" placeholder="Project title" required>
             <button id="uploadButton">Upload to DWeb</button>
-            
+        
         </div>
         <div id="fetchContainer">
-            <input id="fetchCidInput" type="text" placeholder="Enter IPFS CID or Hyperdrive URL ">
+            <input id="fetchCidInput" type="text" placeholder="Enter IPFS CID or Hyper URL ">
             <button id="fetchButton">Fetch from DWeb</button>
         </div>
-        
+
     </div>
     <ul id="uploadListBox"></ul>
 </main>
