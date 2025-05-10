@@ -147,7 +147,7 @@ saveForm.onsubmit = (e) => {
 
 if(shouldLoad) {
   console.log("Loading", shouldLoad)
-  loadPage(shouldLoad)
+  loadPage(new URL(shouldLoad, location.href).href)
 } else {
   setPreview(genPage())
 }

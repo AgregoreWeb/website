@@ -64,6 +64,12 @@
         height: 5em;
         width: auto;
     }
+
+    #helpButton {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+    }
 </style>
 <section id="responses"></section>
 <section id="inputs">
@@ -71,6 +77,22 @@
     <textarea id="promptInput">What do you see? How does it make you feel?</textarea>
     <button id="submitButton" autofocus>Ask</button>
 </section>
+<button id="helpButton" title="help" onclick="helpDialog.showModal()">❔</button>
+<dialog id="helpDialog">
+  <h3>What is this?</h3>
+  <p>
+    This is an example application for using Agregore's built in Local AI capabilities.
+    This simulates chatting with an occult entity of some sort.
+    You will be guided through an initial setup the first time you use AI features.
+    You can read more about the AI support <a href="../../ai">here</a>.
+  </p>
+  <p>
+    You can make a custom version of this example app by opening it in the
+    <a href="/apps/scratchpad.html?url=/docs/examples/llm-vision.html">DWeb Scratchpad</a>.
+  </p>
+  <button onclick="helpDialog.close()">Close</button>
+</details>
+</dialog>
 <canvas id="snapshotter"></canvas>
 <script type="module">
     const SYSTEM = `Your name is Agregore.
