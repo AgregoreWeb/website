@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<meta lang="en">
+<meta charset="UTF-8">
+<title>DWeb Scratchpad</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Quickly put together a p2p app with live preview">
+<link rel="stylesheet" href="agregore://theme/style.css">
+<style>
+textarea {
+  min-height: 25vh;
+}
+.closeButton {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+form > *, label > * {
+  display: block;
+  margin: 0.5em;
+}
+h1 {
+  font-size: 1rem;
+  display: inline;
+}
+textarea, iframe {
+  margin: 0px;
+}
+</style>
+<header>
+<h1>DWeb Scratchpad</h1>
+  <button
+    title="Save your scratchpad to the dweb"
+    onclick="saveDialog.showModal()"
+  >💾</button>
+  <button
+    title="Load and edit a site from a link"
+    onclick="loadDialog.showModal()"
+  >📂</button>
+  <button
+    title="Look at your saved sites"
+    onclick="window.showAllSaved()"
+  >📃</button>
+  <button
+    title="Help"
+    onclick="helpDialog.showModal()"
+  >❔</button>
+</header>
+<main id="mainContents">
+
+<iframe id="previewFrame"></iframe>
+<textarea autofocus id="htmlContent">
+<marquee>🧑‍💻HTML content here📃</marquee>
+</textarea>
+<textarea id="cssContent">
+/*CSS here*/
+marquee {
+  color: var(--ag-theme-primary);
+  font-weight: bold;
+  font-size: 3em;
+}
+</textarea>
+<textarea id="jsContent">
+// JavaScript here
+console.log("Hello World!")
+</textarea>
+
+</main>
+<dialog id="saveDialog">
+<h2>Save to the dweb</h2>
+	<form id="saveForm">
+  <label>
+    Title
+    <input id="appTitle" name="title" value="Scratchpad App">
+  </label>
+  <label>
+    Filename (.html)
+    <input id="appFilename" name="filename" value="example.html">
+  </label>
+  <label>
+    Description
+    <textarea id="appDescription" name="description">My quick scratch</textarea>
+  </label>
+	<button>Save and View</button>
+	</form>
+  <button class="closeButton" title="Close dialog" onclick="this.parentElement.close()">❌</button>
+</dialog>
+<dialog id="loadDialog">
+  <form id="loadForm">
+  <label>
+    Page URL
+    <input name="url" type="url">
+    <button>Load 📂</button>
+  </label>
+  </form>
+  <button class="closeButton" title="Close dialog" onclick="this.parentElement.close()">❌</button>
+</dialog>
+<dialog id="helpDialog">
+  <h2>How does this work?</h2>
+  <p>
+		This is a scratchpad for making p2p apps. Enter some HTML/CSS/JavaScript and see a preview in real time. You can save the result to your collection or try to load a site somebody else published from their link.
+  </p>
+  <p>
+    If you're new to Agregore, check out our <a href="hyper://agregore.mauve.moe/docs/">docs</a> and if you're new to web programming check out the <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core">Mozilla Developer Network</a> for tutorials and documentation on web development.
+  </p>
+  <p>
+    Once you've set up Ollama you can use the <a href="hyper://agregore.mauve.moe/docs/examples/quickcode.html">Quickcode</a> AI example to help generate code snippets for you. This can help you learn new syntax like "Css for a red box that is half the screen" or "open the camera and render the video to a video tag".
+  </p>
+  <p>
+    If you feel like this page should have more features try opening it within itself and tinkering with the code!
+  </p>
+  <button class="closeButton" title="Close dialog" onclick="this.parentElement.close()">❌</button>
+</dialog>
+<script type="module">
+window.showAllSaved = async () => {
+  const url = await getDriveURL()
+  window.open(url)
+}
+
+const shouldLoad = new URL(location.href).searchParams.get('url')
+
+// Triggered when we generate blobs for the page content
+// FileReader converts them to data URLs
+const previewReader = new FileReader()
+previewReader.onload = (e) => previewFrame.src = e.target.result
+
+mainContents.addEventListener('input', updatePreview)
+
+loadForm.onsubmit = (e) => {
+  e.preventDefault(e)
+  console.log(loadForm)
+  const url = new FormData(loadForm).get('url')
+  loadPage(url)
+  loadDialog.close()
+}
+
+saveForm.onsubmit = (e) => {
+  e.preventDefault()
+  const formData = new FormData(saveForm)
+  saveDialog.close()
+  let filename = formData.get('filename')
+  if(!filename.endsWith('.html')) {
+    filename+= '.html'
+  }
+  saveAndPublish(filename)
+    .then((url) => window.open(url))
+}
+
+if(shouldLoad) {
+  console.log("Loading", shouldLoad)
+  loadPage(shouldLoad)
+} else {
+  setPreview(genPage())
+}
+
+async function getDriveURL() {
+  const name = "dweb_scratchpad"
+  const response = await fetch(`hyper://localhost/?key=${name}`, { method: 'POST' });
+  if (!response.ok) {
+    throw new Error(`Failed to generate Hyperdrive key: ${response.statusText}`);
+  }
+  return await response.text()
+}
+
+async function saveAndPublish(filename) {
+  const driveURL = await getDriveURL()
+  const url = new URL(filename, driveURL).href
+  const content = genPage()
+  const response = await fetch(url, {
+    method: 'PUT',
+    body: content
+  })
+  if(!response.ok) {
+    throw new Error(`Failed to upload ${await response.text()}`)
+  }
+  await response.text()
+  return url
+}
+
+function updatePreview() {
+  setPreview(genPage())
+}
+
+async function setPreview(content) {
+  const blob = new Blob([content], {type:"text/html"})
+  previewReader.readAsDataURL(blob)
+}
+
+async function loadPage(url) {
+  console.log('loading page', url)
+  const response = await fetch(url)
+  if(!response.ok) throw new Error(`Unable to load page:\n${await response.text()}`)
+  const text = await response.text()
+  const {title, description, html, js, css} = extractPage(text)
+  console.log({title, description, html, js, css})
+
+  const {pathname} = new URL(url)
+  const filename = pathname.split('/').at(-1)
+
+  appTitle.value = title
+  appDescription.value = description
+  appFilename.value = filename
+  htmlContent.value = html
+  cssContent.value = css
+  jsContent.value = js
+
+  setPreview(genPage())
+}
+
+function extractPage(content) {
+  console.log('Extracting', {content})
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(content, 'text/html');
+  const title = doc.title
+  const description = doc.head.querySelector('meta[name=description]')
+  const css = doc.head.querySelector('style').innerText.trim()
+  const script = doc.head.querySelector('script') || doc.body.querySelector('script')
+  const js = script.innerText.trim()
+
+  for(const script of doc.querySelectorAll('script')) {
+    script.parentElement.removeChild(script)
+  }
+
+  const html = doc.body.innerHTML.trim()
+
+  return {title, description, css, html, js}
+}
+
+function genPage({
+  title=appTitle.value,
+  description=appDescription.value,
+  html=htmlContent.value,
+  css=cssContent.value,
+  js=jsContent.value
+}={}) {
+return `
+<!DOCTYPE html>
+<meta lang="en">
+<meta charset="UTF-8">
+<title>${title}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="${description}">
+<link rel="stylesheet" href="agregore://theme/style.css">
+<style>
+${css}
+</style>
+${html}
+<script type="module">
+${js}
+</${"script"}>
+`
+}
+</script>

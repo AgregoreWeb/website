@@ -6,6 +6,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 ### Demos and tools:
 
 - [Agregore Docs](/docs/)
+- [DWeb Scratchpad](/apps/scratchpad.html)
 - [Drag and Drop File Uploads](/docs/examples/drag-and-drop/)
 - [Theme Builder](/docs/examples/themebuilder)
 - [Sutty CMS, static site generator with dweb publishing](https://sutty.nl/en/)
