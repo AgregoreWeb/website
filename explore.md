@@ -21,6 +21,13 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [DWeb Explorer](https://explore.distributed.press/)
 - ["Totally Legit" Gemini Search](gemini://tlgs.one/search?agregore)
 
+### Protocols
+
+- [Hypercore Protocol](https://hypercore-protocol.org)
+- [IPFS](ipns:://ipfs.tech)
+- [Gemini Protocol](gemini://geminiprotocol.net/)
+- [BitTorrent](https://bittorrent.org/)
+
 ### Extensions:
 
 - [DScan: Own Your Identity, Own Your Data](https://chrome.google.com/webstore/detail/dscan-decentralized-qr-co/idpfgkgogjjgklefnkjdpghkifbjenap)
