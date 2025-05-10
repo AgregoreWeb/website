@@ -6,18 +6,14 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 ### Demos and tools:
 
 - [Agregore Docs](/docs/)
-- [PubSub Chat](/docs/examples/ipfs-pub-sub-chat/)
 - [Drag and Drop File Uploads](/docs/examples/drag-and-drop/)
 - [Theme Builder](/docs/examples/themebuilder)
-- [P2Pad Code Editor](/docs/examples/p2pad/)
 - [Sutty CMS, static site generator with dweb publishing](https://sutty.nl/en/)
 - [Distributed Press Social Reader](//reader.distributed.press/)
-- [LLM App Generator](/docs//examples/llm-appgen/)
-- [LLM Chat Example](/docs/examples/llm-chat.html)
-- [LLM Tonal Lenses](/docs/examples/llm-lenses-chat/)
+- [Local AI App Generator](/docs//examples/llm-appgen/)
+- [Local AI Chat Example](/docs/examples/llm-chat.html)
 - [Quick Code Snippet Generator](/docs/examples/quickcode.html)
-- [LLM Echo Chamber](/docs/examples/llm-echo-chamber.html)
-- [LLM Vision Demo](/docs/examples/llm-vision.html)
+- [Local AI Vision Demo](/docs/examples/llm-vision.html)
 
 ### Aggregators and Search
 
