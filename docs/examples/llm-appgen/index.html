@@ -5,7 +5,7 @@
 <meta name=" apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <style>
-    @import url(agregore://theme/style.css);
+    @import url(browser://theme/style.css);
 
     fieldset {
         display: flex;
@@ -59,7 +59,7 @@ Have an eye emoji in a marquee tag, make the font size get bigger when you click
     const PREFIX_MESSAGE = { role: SYSTEM, content: SYSTEM_PROMPT }
     const STORAGE_ITEM = "llm-appgen"
 
-    const CSS_VARS = await(await fetch('agregore://theme/vars.css')).text()
+    const CSS_VARS = await(await fetch('browser://theme/vars.css')).text()
 
     getOwnDrive().then((url) => {
         window.alllinks.href = url
@@ -120,7 +120,7 @@ Have an eye emoji in a marquee tag, make the font size get bigger when you click
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="description" content=${description}>
 <style>
-    @import url(agregore://theme/style.css);
+    @import url(browser://theme/style.css);
     ${css}
 </style>
 <!--

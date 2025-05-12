@@ -1,4 +1,4 @@
-@import url("agregore://theme/vars.css");
+@import url("browser://theme/vars.css");
 html {
     background: var(--ag-theme-background);
     color: var(--ag-theme-text);

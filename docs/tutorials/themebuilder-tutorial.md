@@ -3,7 +3,7 @@
 
 ## The Idea ✨
 
-Jesse is using the Agregore theme (found [here](agregore://theme/style.css) or [here](https://agregore.mauve.moe/docs/theming)) to keep their apps looking cohesive.
+Jesse is using the Agregore theme (found [here](browser://theme/style.css) or [here](https://agregore.mauve.moe/docs/theming)) to keep their apps looking cohesive.
 They want to change up the theme, so they navigate to ipns://themebuild.er to play around with the colors until they find something they like, then export it to reuse it in Agregore.
 
 ### Preamble
@@ -25,12 +25,12 @@ So, let's start making our app, our basic endgoal here is to have some color pic
 
 ### Set Up
 
-First let's set up our file, if you navigate to agregore://theme/vars.css you can see Agregore's default styles.
-You can add these styles to your jsfiddle by pasting `@import "agregore://theme/style.css"` into the CSS section.
+First let's set up our file, if you navigate to browser://theme/vars.css you can see Agregore's default styles.
+You can add these styles to your jsfiddle by pasting `@import "browser://theme/style.css"` into the CSS section.
 
 The reason we're doing things this was is because we're gonna want to be able to apply the default styles and mess with them with custom values.
 
-The variables for the colors can be found in another file called agregore://theme/vars.css which should look like this:
+The variables for the colors can be found in another file called browser://theme/vars.css which should look like this:
 
 ```css
 :root {
@@ -49,7 +49,7 @@ After we've done that we're going to want to have some content for the CSS to st
 And with that, we're done set up. You should have a CSS file that looks like this:
 
 ```css
-@import "agregore://theme/style.css"
+@import "browser://theme/style.css"
 ```
 
 And an HTML file that looks like this:
@@ -57,7 +57,7 @@ And an HTML file that looks like this:
 ```html
 <h1>Theme Builder</h1>
 <h2>The Idea ✨</h2>
-<p>Jesse is using the Agregore theme (found <a href="agregore://theme/style.css">here</a> or <a href="https://agregore.mauve.moe/docs/theming">here</a>) to keep their apps looking cohesive. They want to change up the theme, so they navigate to ipns://themebuild.er to play around with the colors until they find something they like.
+<p>Jesse is using the Agregore theme (found <a href="browser://theme/style.css">here</a> or <a href="https://agregore.mauve.moe/docs/theming">here</a>) to keep their apps looking cohesive. They want to change up the theme, so they navigate to ipns://themebuild.er to play around with the colors until they find something they like.
 </p>
 <h3>Preamble</h3>
 <p>This tutorial assumes a very basic level of web development experience as well as a small familiarity with p2p web protocols or IPFS. Maybe you've made a handful of single page web apps and have heard about the distributed web before but haven't really played around with it.</p>
@@ -67,10 +67,10 @@ And an HTML file that looks like this:
 <h2>Developing Our App</h2>
 <p>So, let's start making our app, our basic endgoal here is to have some color pickers to choose the theme colors, an "example page" to reflect the color changes, and a way for the user to "save" those changes.</p>
 <p>
-First let's set up our file, if you navigate to <code>agregore://theme/style.css</code> we're just going to copy paste this whole thing into the css. 
+First let's set up our file, if you navigate to <code>browser://theme/style.css</code> we're just going to copy paste this whole thing into the css. 
 </p>
 <p>
-Once you've done that, delete the second line (the <code>@import url("agregore://theme/vars.css")</code>) and replace it with the following:
+Once you've done that, delete the second line (the <code>@import url("browser://theme/vars.css")</code>) and replace it with the following:
 </p>
 <pre>
 <code>:root {
@@ -84,7 +84,7 @@ Once you've done that, delete the second line (the <code>@import url("agregore:/
 }</code>
 </pre>
 <p>
-If you took a peek at <code>agregore://theme/vars.css</code> you might notice that this looks very similar because it's essentially that file. The reason we're doing things this was is because we're gonna want to be able to mess with the CSS file and edit it freely. 
+If you took a peek at <code>browser://theme/vars.css</code> you might notice that this looks very similar because it's essentially that file. The reason we're doing things this was is because we're gonna want to be able to mess with the CSS file and edit it freely. 
 </p>
 <p>
 After we've done that we're going to want to have some content for the CSS to style. For that I decided to use this tutorial up to this point!</p>
@@ -225,7 +225,7 @@ In the end you should have a file that looks like this:
 <!DOCTYPE html>
 <title>Theme Builder</title>
 <style>
-    @import "agregore://theme/style.css";
+    @import "browser://theme/style.css";
 </style>
 
 <h1>Theme Builder</h1>
