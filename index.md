@@ -18,11 +18,11 @@
 }
 </style>
 
-<img class="agregore-logo" title="Agregore Logo" src="./icon.svg">
+<img class="agregore-logo" title="Agregore Logo. Eight arrows pointing out with an eye in the center." src="./icon.svg">
 
 # Agregore
 
-Explore the distributed web
+Build the distributed web.
 
 [Explore](./explore)
 [Blog](./blog/)
@@ -32,16 +32,21 @@ Explore the distributed web
 [Download](https://github.com/AgregoreWeb/agregore-browser/releases/latest)
 [Mobile](https://github.com/AgregoreWeb/agregore-mobile/)
 
+Agregore is not just a Web-Browser, it's a Web-Weaver.
+It gives you the tools to load and author content locally without needing the cloud.
+It works offline, on local networks, and over the internet with ease.
+Made to support a resilient and person-first foundation for software.
+
 ### Features
 
 - Browse the existing (HTTP) web like usual.
 - Browse the [Distributed Web](https://getdweb.net/) on [Hypercore](https://github.com/hypercore-protocol), [BitTorrent](http://bittorrent.org/introduction.html), and [IPFS](https://ipfs.tech/).
 - Browse alternate web protocols like [Gemini](https://geminiprotocol.net/)
 - Tracking free with a built in [Ad blocker](https://ublockorigin.com/)
-- Render [Markdown](https://www.markdownguide.org/basic-syntax/) documents natively
+- Render [Markdown](https://www.markdownguide.org/basic-syntax/) and JSON natively.
 - Archive and save web pages for offline use via [ArchiveWeb.page](https://archiveweb.page/)
 - Customizable [color scheme](/docs/theming) which gets applied to all pages
-- New web [APIs for creating p2p sites and apps](https://agregore.mauve.moe/docs/#protocols)
+- New web [APIs for creating p2p sites and apps](/docs/#protocols)
 - Built in [large language model APIs](/docs/ai) using free to use local models
 
 ![Screenshot showing Agregore Browser loading a hyper:// URL](hyper-url.png)
