@@ -25,6 +25,9 @@ h1 {
 textarea, iframe {
   margin: 0px;
 }
+iframe {
+  resize: vertical;
+}
 </style>
 <header>
 <h1>DWeb Scratchpad</h1>
@@ -79,6 +82,14 @@ console.log("Hello World!")
   <label>
     Description
     <textarea id="appDescription" name="description">My quick scratch</textarea>
+  </label>
+  <label>
+    Save Type
+    <select name="saveType">
+      <option value="hyper">hyper://</option>
+      <option value="ipfs">ipfs://</option>
+      <option value="download">Download</option>
+    </select>
   </label>
 	<button>Save and View</button>
 	</form>
@@ -141,7 +152,8 @@ saveForm.onsubmit = (e) => {
   if(!filename.endsWith('.html')) {
     filename+= '.html'
   }
-  saveAndPublish(filename)
+  const saveType = formData.get('saveType')
+  saveAndPublish(filename, saveType)
     .then((url) => window.open(url))
 }
 
@@ -150,6 +162,15 @@ if(shouldLoad) {
   loadPage(new URL(shouldLoad, location.href).href)
 } else {
   setPreview(genPage())
+}
+
+function downloadDataUrl(dataUrl, filename) {
+  const link = document.createElement('a');
+  link.href = dataUrl;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 async function getDriveURL() {
@@ -161,10 +182,37 @@ async function getDriveURL() {
   return await response.text()
 }
 
-async function saveAndPublish(filename) {
+async function saveAndPublish(filename, saveType) {
+  const content = genPage()
+
+	if(saveType === 'download') {
+	  const url = previewFrame.src
+	  downloadDataUrl(url, filename)
+	  return url
+	} else if(saveType === 'ipfs') {
+	  return saveIPFS(filename, content);
+	} else {
+	  return saveHyper(filename, content);
+  }
+}
+
+async function saveIPFS(filename, content) {
+  const url = new URL(filename, 'ipfs://bafyaabakaieac/').href
+  const response = await fetch(url, {
+    method: 'PUT',
+    body: content
+  })
+  if(!response.ok) {
+    throw new Error(`Failed to upload ${await response.text()}`)
+  }
+  await response.text()
+  return response.headers.get('Location')
+  return url
+}
+
+async function saveHyper(filename, content) {
   const driveURL = await getDriveURL()
   const url = new URL(filename, driveURL).href
-  const content = genPage()
   const response = await fetch(url, {
     method: 'PUT',
     body: content
