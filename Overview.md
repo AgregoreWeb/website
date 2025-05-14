@@ -8,9 +8,9 @@ If your new to Agregore or creating apps, an important page you might want to ch
 ## <ins>Features-of-Agregore</ins>
 
 ### The Distributed Web
-The Distributed Web exists as an alternative to the everyday centralized web. You can browse the decentralized web through [**IPFS**](https://ipfs.tech/), a peer to peer network that lets you locate, store and retrieve data. There are many important websites and information regaurding the distributed web that are displayed on Agregore. This includes <ins>Demos and tools</ins>, <ins>Blogs/Homepages</ins>, <ins>Magazines</ins>, <ins>Tutorials</ins> and a section to try out <ins>Other browsers</ins>. These browsers include [Peersky](https://peersky.p2plabs.xyz/), [IPFS in Brave](https://blog.ipfs.tech/2021-01-21-how-we-put-ipfs-in-brave/) and [Hybrid](https://github.com/HybridWare/hybrid-browser).
+The Distributed Web exists as an alternative to the everyday centralized web. You can browse the decentralized web through [**IPFS**](https://ipfs.tech/), a peer to peer network that lets you locate, store and retrieve data. There are many important websites and information regaurding the distributed web that are displayed on Agregore. This includes [Demos and tools](https://agregore.mauve.moe/explore#demos-and-tools), [Blogs/Homepages/Magazines](https://agregore.mauve.moe/explore#blogs--homepages--magazines), [Tutorials](https://agregore.mauve.moe/explore#tutorials) and even a section to try out [Other browsers](https://agregore.mauve.moe/explore#other-browsers). These browsers include [Peersky](https://peersky.p2plabs.xyz/), [IPFS in Brave](https://blog.ipfs.tech/2021-01-21-how-we-put-ipfs-in-brave/) and [Hybrid](https://github.com/HybridWare/hybrid-browser).
 
-Agregore also has an <ins>Extentions</ins> page called [**DScan: Own Your Identity, Own Your Data**](https://chromewebstore.google.com/detail/dscan-own-your-identity-o/idpfgkgogjjgklefnkjdpghkifbjenap). This is a tool for decentralized storage and file sharing. The files and content are then uploaded to IPFS and DScan creates decentralized QR codes which can then be shared with anyone. If you'de like to read more about DScan, click the link above.
+Agregore also has an [Extentions](https://agregore.mauve.moe/explore#extensions) page called [**DScan: Own Your Identity, Own Your Data**](https://chromewebstore.google.com/detail/dscan-own-your-identity-o/idpfgkgogjjgklefnkjdpghkifbjenap). This is a tool for decentralized storage and file sharing. The files and content are then uploaded to IPFS and DScan creates decentralized QR codes which can then be shared with anyone. If you'de like to read more about DScan, click the link above.
 
 
 ### Peer to Peer webpages
@@ -18,22 +18,23 @@ Peer to peer webpages are applications that give users the ability to share data
  of peer to peer webpages on Agregore include:
 
 
-<ins>**Drag and DropmFile Uploader**</ins>: Take a file from Finder and drop it in and it will upload it to the peer to peer web!
+**[Drag and Drop File Uploader](https://agregore.mauve.moe/docs/examples/drag-and-drop/)**: Take a file from Finder and drop it in and it will upload it to the peer to peer web!
 
-<ins>**LLM App Generator**</ins>: For this Generator you need to have AI installed. Once AI has been installed this will use the built in AI support that will generate an app for you. You simply type in what you want the app to do or what you want it to look like and the app generator will create the app and publish it to the peer to peer web.
+**[LLM App Generator](https://agregore.mauve.moe/docs/examples/llm-appgen/)**: For this Generator you need to have AI installed. Once AI has been installed this will use the built in AI support that will generate an app for you. You simply type in what you want the app to do or what you want it to look like and the app generator will create the app and publish it to the peer to peer web.
 
-<ins>**Theme Builder**</ins>: A fun feature that Agregore has is it allows you to customize your own colours for your browser! In *Theme Builder* you can change the background color, text color, Primary color and Secondary color. That way you can create your browser to the aesthetic you enjoy and fits your style!
+**[Theme Builder](https://agregore.mauve.moe/docs/examples/themebuilder)**: A fun feature that Agregore has is it allows you to customize your own colours for your browser! In *Theme Builder* you can change the background color, text color, Primary color and Secondary color. That way you can create your browser to the aesthetic you enjoy and fits your style!
 
 ### Using local AI
-Inorder to use the AI Chat, you need to have [ollama](https://ollama.com/) downloaded onto your computer. Once that is done you are able to use Agregores LLM Chat app! Go to Docs>Examples>LLM Chat and type in a conversation or question you have for the AI and within seconds the LLM Chat will have a response! 
+Inorder to use the AI Chat, you need to have [ollama](https://ollama.com/) downloaded onto your computer. Once that is done you are able to use Agregores LLM Chat app! Go to **[LLM Chat](https://agregore.mauve.moe/docs/examples/llm-chat.html)** and type in a conversation or question you have for the AI and within seconds the LLM Chat will have a response! 
 
 ### Built in AD Blockers
 When you go on to a website in a browser, you usually get a lot of pop up ads and banner ads. This can be frustrating and overwhelming to see unwanted ads/information while your browsing the web. One of the benefits to Agregore is that it has it's own built in ad blocker! This means that when you use the browser, you won't see any ads and can just focus on what your searching!
+
 ### Sharing data locally without internet
 If your sending a file to someone and it's inside a hyper url and are on the same wifi, that person will be able to load the file from you directly. This means that even if your wifi isnt connected to the internet, you or the person who wants the file, can still attain the file.
 
 ### Customizing using Web Extentions
-When you use Agregore you can customize how you want your browser to look like. This mean that when you go to a webpage, you can change how the site looks to fit your needs. Lets say you prefer to read headings or text that is purple. Well with Agregore you can do just that! Click on Agregores **Web Extention** (second button on the top right corner) and tada! The Webpage suddenly changes to the color code that you want! For more information about customizing Agregores color and style, visit **Agregore>Docs>Theme Builder**. Also you can add more extentions. Go to **Help>Open Extentions Folder** and you are able to add whatever other extetention files you want. Giving you more freedom to express your own style in your web browser!
+When you use Agregore you can customize how you want your browser to look like. This mean that when you go to a webpage, you can change how the site looks to fit your needs. Lets say you prefer to read headings or text that is purple. Well with Agregore you can do just that! Click on Agregores **Web Extention** (second button on the top right corner) and tada! The Webpage suddenly changes to the color code that you want! For more information about customizing Agregores color and style, visit **[Theming](https://agregore.mauve.moe/docs/theming#customization)**. Also you can add more extentions. Go to **Help>Open Extentions Folder** and you are able to add whatever other extetention files you want. Giving you more freedom to express your own style in your web browser!
 
 ### Sharing Code outside the browser with Command Line Interface
 Agregore has another project called *Agregore CLI*. This stands for Command Line Interface which is a place where you can write and import code without a browser.
