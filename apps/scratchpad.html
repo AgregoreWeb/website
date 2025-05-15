@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <meta lang="en">
 <meta charset="UTF-8">
@@ -25,6 +26,8 @@ h1 {
 }
 textarea, iframe {
   margin: 0px;
+  display: block;
+  width: 100%;
 }
 iframe {
   resize: vertical;
@@ -32,46 +35,31 @@ iframe {
 </style>
 <header>
 <h1>DWeb Scratchpad</h1>
-  <button
-    title="Save your scratchpad to the dweb"
-    onclick="saveDialog.showModal()"
-  >💾</button>
-  <button
-    title="Load and edit a site from a link"
-    onclick="loadDialog.showModal()"
-  >📂</button>
-  <button
-    title="Look at your saved sites"
-    onclick="window.showAllSaved()"
-  >📃</button>
-  <button
-    title="Help"
-    onclick="helpDialog.showModal()"
-  >❔</button>
+  <button title="Save your scratchpad to the dweb" onclick="saveDialog.showModal()">💾</button>
+  <button title="Load and edit a site from a link" onclick="loadDialog.showModal()">📂</button>
+  <button title="Look at your saved sites" onclick="window.showAllSaved()">📃</button>
+  <button title="Help" onclick="helpDialog.showModal()">❔</button>
 </header>
 <main id="mainContents">
 
 <iframe id="previewFrame"></iframe>
-<textarea autofocus id="htmlContent">
-<marquee>🧑‍💻HTML content here📃</marquee>
+<textarea autofocus="" id="htmlContent">&lt;marquee&gt;🧑‍💻HTML content here📃&lt;/marquee&gt;
 </textarea>
-<textarea id="cssContent">
-/*CSS here*/
+<textarea id="cssContent">/*CSS here*/
 marquee {
   color: var(--ag-theme-primary);
   font-weight: bold;
   font-size: 3em;
 }
 </textarea>
-<textarea id="jsContent">
-// JavaScript here
+<textarea id="jsContent">// JavaScript here
 console.log("Hello World!")
 </textarea>
 
 </main>
 <dialog id="saveDialog">
 <h2>Save to the dweb</h2>
-	<form id="saveForm">
+<form id="saveForm">
   <label>
     Title
     <input id="appTitle" name="title" value="Scratchpad App">
@@ -89,6 +77,7 @@ console.log("Hello World!")
     <select name="saveType">
       <option value="hyper">hyper://</option>
       <option value="ipfs">ipfs://</option>
+      <option value="ipns">ipns://</option>
       <option value="download">Download</option>
     </select>
   </label>
@@ -185,17 +174,29 @@ async function getDriveURL() {
   return await response.text()
 }
 
+async function getIPNSURL() {
+  const name = "dweb_scratchpad"
+  const response = await fetch(`ipns://localhost/?key=${name}`, { method: 'POST' });
+  if (!response.ok) {
+    throw new Error(`Failed to generate IPNS key: ${response.statusText}`);
+  }
+  await response.text()
+  return response.headers.get('Location')
+}
+
 async function saveAndPublish(filename, saveType) {
   const content = genPage()
 
-	if(saveType === 'download') {
-	  const url = previewFrame.src
-	  downloadDataUrl(url, filename)
-	  return url
-	} else if(saveType === 'ipfs') {
-	  return saveIPFS(filename, content);
-	} else {
-	  return saveHyper(filename, content);
+  if(saveType === 'download') {
+    const url = previewFrame.src
+    downloadDataUrl(url, filename)
+    return url
+  } else if(saveType === 'ipfs') {
+    return saveIPFS(filename, content);
+  } else if(saveType === 'ipns') {
+    return saveIPNS(filename, content);
+  } else {
+    return saveHyper(filename, content);
   }
 }
 
@@ -210,7 +211,6 @@ async function saveIPFS(filename, content) {
   }
   await response.text()
   return response.headers.get('Location')
-  return url
 }
 
 async function saveHyper(filename, content) {
@@ -226,6 +226,21 @@ async function saveHyper(filename, content) {
   await response.text()
   return url
 }
+
+async function saveIPNS(filename, content) {
+  const rootURL = await getIPNSURL()
+  const url = new URL(filename, rootURL).href
+  const response = await fetch(url, {
+    method: 'PUT',
+    body: content
+  })
+  if(!response.ok) {
+    throw new Error(`Failed to upload ${await response.text()}`)
+  }
+  await response.text()
+  return url
+}
+
 
 function updatePreview() {
   if(previewTimeout) clearTimeout(previewTimeout)
