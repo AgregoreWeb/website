@@ -135,6 +135,8 @@ const shouldLoad = new URL(location.href).searchParams.get('url')
 const previewReader = new FileReader()
 previewReader.onload = (e) => previewFrame.src = e.target.result
 
+let previewTimeout = null
+
 mainContents.addEventListener('input', updatePreview)
 
 loadForm.onsubmit = (e) => {
@@ -226,7 +228,10 @@ async function saveHyper(filename, content) {
 }
 
 function updatePreview() {
-  setPreview(genPage())
+  if(previewTimeout) clearTimeout(previewTimeout)
+  setTimeout(() => {
+    setPreview(genPage())
+  }, 4000)
 }
 
 async function setPreview(content) {
@@ -260,7 +265,7 @@ function extractPage(content) {
   const parser = new DOMParser()
   const doc = parser.parseFromString(content, 'text/html');
   const title = doc.title
-  const description = doc.head.querySelector('meta[name=description]')
+  const description = doc.head.querySelector('meta[name=description]').content.trim()
   const css = doc.head.querySelector('style').innerText.trim()
   const script = doc.head.querySelector('script') || doc.body.querySelector('script')
   const js = script.innerText.trim()
@@ -287,7 +292,7 @@ return `
 <meta charset="UTF-8">
 <title>${title}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="${description}">
+<meta name="description" content="${description.trim()}">
 <link rel="stylesheet" href="agregore://theme/style.css">
 <link rel="stylesheet" href="browser://theme/style.css">
 <style>

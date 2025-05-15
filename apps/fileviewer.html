@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<meta lang="en">
+<meta charset="UTF-8">
+<title>DWeb File Viewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Browse raw folders and files for p2p websites.">
+<link rel="stylesheet" href="agregore://theme/style.css">
+<link rel="stylesheet" href="browser://theme/style.css">
+<style>
+#nav {
+  display: flex;
+}
+#urlToView {
+  flex: 1;
+  margin: 0px 0.5em;
+}
+
+pre br {
+  display: unset;
+}
+</style>
+<form id="nav">
+<button id="upButton" type="button">⬆️</button>
+<input name="url" value="./" id="urlToView">
+<button type="submit">➡️</button>
+</form>
+<hr>
+<ul id="fileList"></ul>
+<pre><code id="rawView"></code></pre>
+<script type="module">
+const root = location.protocol === 'data:' ? 'hyper://agregore.mauve.moe/apps' : location.href
+const {searchParams} = new URL(root)
+
+if(searchParams.has('url')) {
+  urlToView.value = searchParams.get('url')
+}
+
+const toLoad = new URL(urlToView.value, root)
+toLoad.searchParams.set("noResolve", 'true')
+console.log('Loading', toLoad)
+
+try {
+const response = await fetch(toLoad)
+const files = await response.json()
+console.log(files)
+
+for(const name of files) {
+  if(name.startsWith('.')) continue
+  const li = document.createElement('li')
+  const a = document.createElement('a')
+  if(name.endsWith('/')) {
+    a.href = makeViewURL(new URL(name, toLoad).href)
+  } else {
+    a.target = '_blank'
+    a.href = new URL(name, toLoad)
+  }
+  a.innerText = name
+  li.appendChild(a)
+  fileList.appendChild(li)
+}
+
+} catch {
+  const response = await fetch(urlToView.value)
+  const raw = await response.text()
+  rawView.innerText = raw
+}
+
+upButton.onclick = (e) => {
+  e.preventDefault()
+  const current = urlToView.value
+  const next = current.endsWith('/') ? '../' : './'
+  location.href = makeViewURL(new URL(next, current))
+}
+
+function makeViewURL(url) {
+  const viewURL = new URL(location.href)
+  viewURL.searchParams.set('url', url)
+  return viewURL.href
+}
+</script>

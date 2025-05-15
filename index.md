@@ -32,9 +32,11 @@ Build the distributed web.
 [Download](https://github.com/AgregoreWeb/agregore-browser/releases/latest)
 [Mobile](https://github.com/AgregoreWeb/agregore-mobile/)
 
-Agregore is not just a Web-Browser, it's a Web-Weaver.
+Agregore is not just a `Web-Browser`, it's a `Web-Weaver`.
 It gives you the tools to load and author content locally without needing the cloud.
-It works offline, on local networks, and over the internet with ease.
+Instead of needing to be always connected to a server, you can load from your cache or directly from others.
+Agregore automatically reshares P2P websites with others so the more popular a site is, the faster it is to load it.
+It works offline, on local networks, and over the internet.
 Made to support a resilient and person-first foundation for software.
 
 ### Features
@@ -49,7 +51,7 @@ Made to support a resilient and person-first foundation for software.
 - New web [APIs for creating p2p sites and apps](/docs/#protocols)
 - Built in [large language model APIs](/docs/ai) using free to use local models
 
-![Screenshot showing Agregore Browser loading a hyper:// URL](hyper-url.png)
+![Screenshot showing Agregore Browser loading a hyper:// URL](screenshot.png)
 
 ### Watch the 5 Minute Intro
 
@@ -64,12 +66,12 @@ This can be done via the different protocols that Agregore supports like [BitTor
 The web contents are rendered via Chromium using the [Electron framework](https://www.electronjs.org/).
 Electron is useful since it's what allows us to publish Agregore on Windows, MacOS, and Linux.
 
-### How do I share stuff?
+### How do I make stuff?
 
 Agregore not only supports loading data through custom protocols, but it also provides APIs for uploading data into peer to peer protocols.
 This is done via the browser's [fetch()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) API which is what web developers use to talk to web servers over HTTP or HTTPS.
 
-You can create your own peer to peer website using this simple code snippet:
+You can create your own peer to peer website using this simple code snippet (open dev tools with CTRL+Shift+I):
 
 ```javascript
 // Upload your website page
@@ -81,7 +83,7 @@ response = await fetch(url, {
 window.location.href = response.headers.get('Location')
 ```
 
-For more details and demos, check out the the [Videos](videos.html) page, or read the [Fetch API Docs](https://github.com/AgregoreWeb/agregore-browser/tree/master/docs).
+Try making an app in the [DWeb Scratchpad](/apps/scratchpad.html). For more details and demos, check out the the [Videos](videos.html) page, or read the [Fetch API Docs](https://github.com/AgregoreWeb/agregore-browser/tree/master/docs).
 
 [Source Code](https://github.com/AgregoreWeb/agregore-browser)
 [Contact](mailto:agregore@mauve.moe)
