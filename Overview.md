@@ -7,20 +7,18 @@ If your new to Agregore or creating apps, an important page you might want to ch
 
 ## <ins>Features-of-Agregore</ins>
 
-### The Distributed Web
-The Distributed Web exists as an alternative to the everyday centralized web. You can browse the decentralized web through [**IPFS**](https://ipfs.tech/), a peer to peer network that lets you locate, store and retrieve data. There are many important websites and information regaurding the distributed web that are displayed on Agregore. This includes [Demos and tools](https://agregore.mauve.moe/explore#demos-and-tools), [Blogs/Homepages/Magazines](https://agregore.mauve.moe/explore#blogs--homepages--magazines), [Tutorials](https://agregore.mauve.moe/explore#tutorials) and even a section to try out [Other browsers](https://agregore.mauve.moe/explore#other-browsers). These browsers include [Peersky](https://peersky.p2plabs.xyz/), [IPFS in Brave](https://blog.ipfs.tech/2021-01-21-how-we-put-ipfs-in-brave/) and [Hybrid](https://github.com/HybridWare/hybrid-browser).
-
-Agregore also has an [Extentions](https://agregore.mauve.moe/explore#extensions) page called [**DScan: Own Your Identity, Own Your Data**](https://chromewebstore.google.com/detail/dscan-own-your-identity-o/idpfgkgogjjgklefnkjdpghkifbjenap). This is a tool for decentralized storage and file sharing. The files and content are then uploaded to IPFS and DScan creates decentralized QR codes which can then be shared with anyone. If you'de like to read more about DScan, click the link above.
+### [The Distributed Web](https://getdweb.net/ )
+The Distributed Web exists as an alternative to the everyday centralized web. You can browse the decentralized web through [**IPFS**](https://ipfs.tech/), a peer to peer network that lets you locate, store and retrieve data. These browsers include [Peersky](https://peersky.p2plabs.xyz/), [IPFS in Brave](https://blog.ipfs.tech/2021-01-21-how-we-put-ipfs-in-brave/) and [Hybrid](https://github.com/HybridWare/hybrid-browser).
 
 
-### Peer to Peer webpages
+### Peer to Peer Webapps
 Peer to peer webpages are applications that give users the ability to share data and communicate to eachother instantly and directly. Some examples 
  of peer to peer webpages on Agregore include:
 
 
 **[Drag and Drop File Uploader](https://agregore.mauve.moe/docs/examples/drag-and-drop/)**: Take a file from Finder and drop it in and it will upload it to the peer to peer web!
 
-**[LLM App Generator](https://agregore.mauve.moe/docs/examples/llm-appgen/)**: For this Generator you need to have AI installed. Once AI has been installed this will use the built in AI support that will generate an app for you. You simply type in what you want the app to do or what you want it to look like and the app generator will create the app and publish it to the peer to peer web.
+**[App Generator](https://agregore.mauve.moe/docs/examples/llm-appgen/)**: For this Generator you need to have AI installed. Once AI has been installed this will use the built in AI support that will generate an app for you. You simply type in what you want the app to do or what you want it to look like and the app generator will create the app and publish it to the peer to peer web.
 
 **[Theme Builder](https://agregore.mauve.moe/docs/examples/themebuilder)**: A fun feature that Agregore has is it allows you to customize your own colours for your browser! In *Theme Builder* you can change the background color, text color, Primary color and Secondary color. That way you can create your browser to the aesthetic you enjoy and fits your style!
 
