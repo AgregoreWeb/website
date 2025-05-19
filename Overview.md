@@ -8,7 +8,7 @@ If your new to Agregore or creating apps, an important page you might want to ch
 ## <ins>Features-of-Agregore</ins>
 
 ### [The Distributed Web](https://getdweb.net/ )
-The Distributed Web exists as an alternative to the everyday centralized web. You can browse the decentralized web through [**IPFS**](https://ipfs.tech/), a peer to peer network that lets you locate, store and retrieve data. These browsers include [Peersky](https://peersky.p2plabs.xyz/), [IPFS in Brave](https://blog.ipfs.tech/2021-01-21-how-we-put-ipfs-in-brave/) and [Hybrid](https://github.com/HybridWare/hybrid-browser).
+The Distributed Web exists as an alternative to the everyday centralized web. Instead of storing files and data in a centralized web (one server), <ins>The Distributed Web</ins> allows you to store data in mutliple servers and use peer to peer networks. This is more reliable, private and secure then the centralized web. Some browsers that use peer to peer networks rather than centralized servers are [**IPFS**](https://ipfs.tech/) or [Hypercore](https://github.com/hypercore-protocol). If you would like to see more sites that use the distibuted web click [here](http://explore.distributed.press/).
 
 
 ### Peer to Peer Webapps
@@ -18,9 +18,9 @@ Peer to peer webpages are applications that give users the ability to share data
 
 **[Drag and Drop File Uploader](https://agregore.mauve.moe/docs/examples/drag-and-drop/)**: Take a file from Finder and drop it in and it will upload it to the peer to peer web!
 
-**[App Generator](https://agregore.mauve.moe/docs/examples/llm-appgen/)**: For this Generator you need to have AI installed. Once AI has been installed this will use the built in AI support that will generate an app for you. You simply type in what you want the app to do or what you want it to look like and the app generator will create the app and publish it to the peer to peer web.
+**[LLM App Generator](https://agregore.mauve.moe/docs/examples/llm-appgen/)**: For this Generator you need to have AI installed. Once AI has been installed this will use the built in AI support that will generate an app for you. You simply type in what you want the app to do or what you want it to look like and the app generator will create the app and publish it to the peer to peer web.
 
-**[Theme Builder](https://agregore.mauve.moe/docs/examples/themebuilder)**: A fun feature that Agregore has is it allows you to customize your own colours for your browser! In *Theme Builder* you can change the background color, text color, Primary color and Secondary color. That way you can create your browser to the aesthetic you enjoy and fits your style!
+**[Theme Builder](https://agregore.mauve.moe/apps/scratchpad.html)**: A fun feature that Agregore has is it allows you to customize your own colours for your browser! In *Scratchpad* you can change the background color, text color, Primary color and Secondary color. That way you can create your browser to the aesthetic you enjoy and fits your style!
 
 ### Using local AI
 Inorder to use the AI Chat, you need to have [ollama](https://ollama.com/) downloaded onto your computer. Once that is done you are able to use Agregores LLM Chat app! Go to **[LLM Chat](https://agregore.mauve.moe/docs/examples/llm-chat.html)** and type in a conversation or question you have for the AI and within seconds the LLM Chat will have a response! 
@@ -32,7 +32,13 @@ When you go on to a website in a browser, you usually get a lot of pop up ads an
 If your sending a file to someone and it's inside a hyper url and are on the same wifi, that person will be able to load the file from you directly. This means that even if your wifi isnt connected to the internet, you or the person who wants the file, can still attain the file.
 
 ### Customizing using Web Extentions
-When you use Agregore you can customize how you want your browser to look like. This mean that when you go to a webpage, you can change how the site looks to fit your needs. Lets say you prefer to read headings or text that is purple. Well with Agregore you can do just that! Click on Agregores **Web Extention** (second button on the top right corner) and tada! The Webpage suddenly changes to the color code that you want! For more information about customizing Agregores color and style, visit **[Theming](https://agregore.mauve.moe/docs/theming#customization)**. Also you can add more extentions. Go to **Help>Open Extentions Folder** and you are able to add whatever other extetention files you want. Giving you more freedom to express your own style in your web browser!
+When you use Agregore you can customize what you want your browser to look like. This means that when you go to a webpage, you can change how the site looks to fit your needs. Lets say you prefer to read headings or text that is purple. Well with Agregore you can do just that with 3 easy parts:
+
+**1. Web Extentions:** By creating your own *Web Extension* you can add more extensions that let you change the font color or background color! Go to **Help>Open Extentions Folder** and you are able to add whatever other extetention files you want. Giving you more freedom to express your own style in your web browser!
+
+**2. Custom Styling:** Agregore lets you customize the color scheme to look however you want. Navigate to agregore://settings and set a custom background color (like red or yellow), and the welcome page and any apps will now show that color too.
+
+**3. Reader Mode Extension:** Webpages can have a bunch of extra styles and headers that get in the way of reading them. Agregore has a built in "Reader mode" extension" that shows just the contents of a page with your configured color scheme.
 
 ### Sharing Code outside the browser with Command Line Interface
 Agregore has another project called *Agregore CLI*. This stands for Command Line Interface which is a place where you can write and import code without a browser.
