@@ -23,7 +23,7 @@ Peer to peer webpages are applications that give users the ability to share data
 **[Theme Builder](https://agregore.mauve.moe/apps/scratchpad.html)**: A fun feature that Agregore has is it allows you to customize your own colours for your browser! In *Scratchpad* you can change the background color, text color, Primary color and Secondary color. That way you can create your browser to the aesthetic you enjoy and fits your style!
 
 ### Using local AI
-Inorder to use the AI Chat, you need to have [ollama](https://ollama.com/) downloaded onto your computer. Once that is done you are able to use Agregores LLM Chat app! Go to **[LLM Chat](https://agregore.mauve.moe/docs/examples/llm-chat.html)** and type in a conversation or question you have for the AI and within seconds the LLM Chat will have a response! 
+Inorder to use the AI Chat, you need to have **[ollama](https://ollama.com/)** downloaded onto your computer. Once that is done you are able to use Agregores LLM Chat app! Go to **[LLM Chat](https://agregore.mauve.moe/docs/examples/llm-chat.html)** and type in a conversation or question you have for the AI and within seconds the LLM Chat will have a response! 
 
 ### Built in AD Blockers
 When you go on to a website in a browser, you usually get a lot of pop up ads and banner ads. This can be frustrating and overwhelming to see unwanted ads/information while your browsing the web. One of the benefits to Agregore is that it has it's own built in ad blocker! This means that when you use the browser, you won't see any ads and can just focus on what your searching!
