@@ -1,11 +1,14 @@
-# What is Agregore?
+
+
+
+
+# <ins>Features-of-Agregore</ins>
+
+## Agregore Browses the Regular Web:
+## What is Agregore?
 Agregore is a browser that can be used like any other webpage. Simply go to the top where it says **agregore://welcome** and type in where you want to go. 
 >Agregore uses a search engine called <ins>DuckDuckGo</ins> inorder for you to browse the web. You can browse streaming websites, gaming websites and search information for presentaions or projects.
-### New to Agregore?
 
-If your new to Agregore or creating apps, an important page you might want to check out is the <ins>Tutorials</ins> page. This has many tutorials and tips on how to make an app, how to create a Development Environment for a site that will be hosted on IPFS, how to add a 3rd party dependancy to your app and more!
-
-## <ins>Features-of-Agregore</ins>
 
 ### [The Distributed Web](https://getdweb.net/ )
 The Distributed Web exists as an alternative to the everyday centralized web. Instead of storing files and data in a centralized web (one server), <ins>The Distributed Web</ins> allows you to store data in mutliple servers and use peer to peer networks. This is more reliable, private and secure then the centralized web. Some browsers that use peer to peer networks rather than centralized servers are [**IPFS**](https://ipfs.tech/) or [Hypercore](https://github.com/hypercore-protocol). If you would like to see more sites that use the distibuted web click [here](http://explore.distributed.press/).
@@ -20,10 +23,12 @@ Peer to peer webpages are applications that give users the ability to share data
 
 **[LLM App Generator](https://agregore.mauve.moe/docs/examples/llm-appgen/)**: For this Generator you need to have AI installed. Once AI has been installed this will use the built in AI support that will generate an app for you. You simply type in what you want the app to do or what you want it to look like and the app generator will create the app and publish it to the peer to peer web.
 
-**[Theme Builder](https://agregore.mauve.moe/apps/scratchpad.html)**: A fun feature that Agregore has is it allows you to customize your own colours for your browser! In *Scratchpad* you can change the background color, text color, Primary color and Secondary color. That way you can create your browser to the aesthetic you enjoy and fits your style!
+**[Scratchpad](http://agregore.mauve.moe/apps/scratchpad.html)**: Here you can make peer to peer apps by using HTML, CSS or JavaScript and see the preview of the app in real time! You can save the progress you've made and add it to your files or load a site somebody else published from their link.
 
 ### Using local AI
 Inorder to use the AI Chat, you need to have **[ollama](https://ollama.com/)** downloaded onto your computer. Once that is done you are able to use Agregores LLM Chat app! Go to **[LLM Chat](https://agregore.mauve.moe/docs/examples/llm-chat.html)** and type in a conversation or question you have for the AI and within seconds the LLM Chat will have a response! 
+
+Thiis is an example app that uses agregores built in language model **[API's](http://agregore.mauve.moe/docs/ai)**.
 
 ### Built in AD Blockers
 When you go on to a website in a browser, you usually get a lot of pop up ads and banner ads. This can be frustrating and overwhelming to see unwanted ads/information while your browsing the web. One of the benefits to Agregore is that it has it's own built in ad blocker! This means that when you use the browser, you won't see any ads and can just focus on what your searching!
@@ -38,10 +43,10 @@ When you use Agregore you can customize what you want your browser to look like.
 
 **2. Custom Styling:** Agregore lets you customize the color scheme to look however you want. Navigate to agregore://settings and set a custom background color (like red or yellow), and the welcome page and any apps will now show that color too.
 
-**3. Reader Mode Extension:** Webpages can have a bunch of extra styles and headers that get in the way of reading them. Agregore has a built in "Reader mode" extension" that shows just the contents of a page with your configured color scheme.
+**3. Reader Mode Extension:** Webpages can have a bunch of extra styles and headers that get in the way of reading them. Agregore has a built in "Reader mode" extension that shows just the contents of a page with your configured color scheme.
 
 ### Sharing Code outside the browser with Command Line Interface
-Agregore has another project called *Agregore CLI*. This stands for Command Line Interface which is a place where you can write and import code without a browser.
+Agregore has another project called *Agregore CLI*. This stands for Command Line Interface which is a tool which lets you run **JavaScript** without a browser and have access to agregores peer to peer protocal handlers.
 
 ### Available on Android
 Another project Agregore has developed is *Agregore Mobile*. This is a mobile version of Agregore that is available on Android! That way you can use the Agregore browser on your phone while your on the go through peer to peer and not the centralized web.
