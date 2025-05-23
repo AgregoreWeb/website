@@ -1,14 +1,11 @@
 Agregore is a browser that gives you tools to load and author content locally, without using the cloud. This page will give you a bit of information and links to some of the features that Agregore provides. It'll be discussing the <ins>Distributed Web</ins>, <ins>useing local AI</ins>, <ins>Sharing data locally</ins>, and more! To download and visit the Agregore browser click **[here](https://github.com/AgregoreWeb/agregore-browser/releases/tag/v2.12.1)**.
 
-
-
-# <ins>Features-of-Agregore</ins>
-
-## Agregore Browses the Regular Web:
+# <ins>Agregore Browses the Regular Web:</ins>
 ## What is Agregore?
 Agregore is a browser that can be used like any other webpage. Simply go to the top where it says **agregore://welcome** and type in where you want to go. 
 >Agregore uses a search engine called <ins>DuckDuckGo</ins> inorder for you to browse the web. You can browse streaming websites, gaming websites and search information for presentaions or projects.
 
+# <ins>Features-of-Agregore</ins>
 
 ### [The Distributed Web](https://getdweb.net/ )
 The Distributed Web exists as an alternative to the everyday centralized web. Instead of storing files and data in a centralized web (one server), <ins>The Distributed Web</ins> allows you to store data in mutliple servers and use peer to peer networks. This is more reliable, private and secure then the centralized web. Some browsers that use peer to peer networks rather than centralized servers are [**IPFS**](https://ipfs.tech/) or [Hypercore](https://github.com/hypercore-protocol). If you would like to see more sites that use the distibuted web click [here](http://explore.distributed.press/).
