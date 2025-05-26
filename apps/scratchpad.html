@@ -279,11 +279,11 @@ function extractPage(content) {
   console.log('Extracting', {content})
   const parser = new DOMParser()
   const doc = parser.parseFromString(content, 'text/html');
-  const title = doc.title
-  const description = doc.head.querySelector('meta[name=description]').content.trim()
-  const css = doc.head.querySelector('style').innerText.trim()
+  const title = doc.title ?? 'Unknown Page'
+  const description = doc.head.querySelector('meta[name=description]')?.content?.trim() ?? ''
+  const css = doc.head.querySelector('style')?.innerText?.trim() ?? ''
   const script = doc.head.querySelector('script') || doc.body.querySelector('script')
-  const js = script.innerText.trim()
+  const js = script?.innerText?.trim() ?? ''
 
   for(const script of doc.querySelectorAll('script')) {
     script.parentElement.removeChild(script)
