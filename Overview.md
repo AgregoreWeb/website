@@ -10,15 +10,15 @@ Agregore is a browser that can be used like any other webpage. Simply go to the 
 ### [The Distributed Web](https://getdweb.net/ )
 The Distributed Web exists as an alternative to the every day centralized web. Instead of storing files and data in a centralized web (one server), <ins>The Distributed Web</ins> allows you to store data in mutliple servers and use peer to peer networks. This is more reliable, private and secure then the centralized web. Some browsers that use peer to peer networks rather than centralized servers are [**IPFS**](https://ipfs.tech/) or [Hypercore](https://github.com/hypercore-protocol). If you would like to see more sites that use the distibuted web click [here](http://explore.distributed.press/).
 
-### Archive webpages with Webrecord:
+### Archive webpages with Webrecorder:
 When you archive a webpage, you save a copy of the site to your computer through the integrated Webrecorder extension. This can help keep your sites organized and keep things private until you want to share with others. If you would like to download Webrecorder click [here](https://webrecorder.net/archivewebpage/).
 
 ### Peer to Peer Webapps
-Peer to peer webpages are applications that give users the ability to share data and communicate to each other instantly and directly. Some examples of peer to peer webpages on Agregore include:
+Peer to peer web applications give users the ability to share data and communicate to each other instantly and directly. Some examples of peer to peer webapps on Agregore include:
 
 **[Drag and Drop File Uploader](https://agregore.mauve.moe/docs/examples/drag-and-drop/)**: Take a file from Finder and drop it in and it will upload it to the peer to peer web!
 
-**[LLM App Generator](https://agregore.mauve.moe/docs/examples/llm-appgen/)**: For this Generator you need to have AI installed. Once AI has been installed this will use the built in AI support that will generate an app for you. You simply type in what you want the app to do or what you want it to look like and the app generator will create the app and publish it to the peer to peer web.
+**[LLM App Generator](https://agregore.mauve.moe/docs/examples/llm-appgen/)**: For this Generator you need to have AI installed. This will use Agregore's built in AI support to generate an app for you. You simply type in what you want the app to do or what you want it to look like and the app generator will create the app and publish it to the peer to peer web.
 
 **[Scratchpad](http://agregore.mauve.moe/apps/scratchpad.html)**: Here you can make peer to peer apps by using HTML, CSS or JavaScript and see the preview of the app in real time! You can save the progress you've made and add it to your files or load a site somebody else published from their link.
 
