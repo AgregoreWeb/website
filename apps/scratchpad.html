@@ -112,6 +112,8 @@ console.log("Hello World!")
   <button class="closeButton" title="Close dialog" onclick="this.parentElement.close()">❌</button>
 </dialog>
 <script type="module">
+const UPDATE_DELAY = 2000
+
 window.showAllSaved = async () => {
   const url = await getDriveURL()
   window.open(url)
@@ -124,9 +126,24 @@ const shouldLoad = new URL(location.href).searchParams.get('url')
 const previewReader = new FileReader()
 previewReader.onload = (e) => previewFrame.src = e.target.result
 
+const domParser = new DOMParser()
+
 let previewTimeout = null
 
-mainContents.addEventListener('input', updatePreview)
+cssContent.addEventListener('input', updatePreview)
+htmlContent.addEventListener('input', () => {
+  const dom = domParser.parseFromString(htmlContent.value, 'text/html')
+  updatePreview(() => htmlContent.value = dom.body.innerHTML)
+})
+jsContent.addEventListener('input', () => {
+try {
+  new Function(`return async () => {\n${jsContent.value}\n}`)
+} catch (e) {
+  console.log('Unable to parse JS', e.stack)
+  return
+}
+updatePreview()
+})
 
 loadForm.onsubmit = (e) => {
   e.preventDefault(e)
@@ -242,11 +259,12 @@ async function saveIPNS(filename, content) {
 }
 
 
-function updatePreview() {
+function updatePreview(cb) {
   if(previewTimeout) clearTimeout(previewTimeout)
-  setTimeout(() => {
+  previewTimeout = setTimeout(() => {
+    if(typeof cb === 'function') cb()
     setPreview(genPage())
-  }, 4000)
+  }, UPDATE_DELAY)
 }
 
 async function setPreview(content) {
