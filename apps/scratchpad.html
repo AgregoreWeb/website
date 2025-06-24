@@ -307,7 +307,14 @@ function extractPage(content) {
     script.parentElement.removeChild(script)
   }
 
-  const html = doc.body.innerHTML.trim()
+  const templates = doc.head.querySelectorAll('template')
+
+  let templatesPrefix = ""
+  for(const template of templates) {
+    templatesPrefix += template.outerHTML + "\n"
+  }
+
+  const html = templatesPrefix + doc.body.innerHTML.trim()
 
   return {title, description, css, html, js}
 }
