@@ -6,6 +6,8 @@ Unlike other browsers that provide a chat interface, that accesses the browser, 
 
 As well, instead of onboarding you onto an expensive and [environment killing](https://impactclimate.mit.edu/2024/04/10/considering-the-environmental-impacts-of-generative-ai-to-spark-responsible-development/) cloud based LLM, we default to using a local [ollama](https://ollama.com/) install and a default 3B model that can be run locally on most consumer hardware. These models are a bit less effective at complex tasks but they take orders of magnitude less power, work fully offline (after initial setup) and keep all your conversations private.
 
+You can extend [this example app](/apps/scratchpad.html?url=/docs/examples/llm-chat.html) to create your own AI powered chat.
+
 ### Setting up ollama
 
 Before you can run local models you will want to set up [ollama](https://ollama.com/download) on your computer. In the future we may integrate it directly into Agregore, if you want this feature, please [open an issue on our Github repository](https://github.com/AgregoreWeb/agregore-browser/issues/new).
@@ -58,9 +60,27 @@ const text = await window.llm.complete('The capital of Canada is', {
       // this is optional
     maxTokens: 1337,
     // remove this and use the default unless you know what you're doing
-    temperature: 0.9, 
+    temperature: 0.9,
     stop: [" "]
 })
+```
+
+### Streaming `window.llm.chat`
+
+```javascript
+const element = document.querySelector('.content')
+
+let messages = [
+  {role: 'system', content: 'You are a friendly AI assistant that likes to ramble about cats'},
+  {role: 'user', content: 'Tell me a long-winded story so I can fall asleep.'}
+]
+
+// Instead of await, you can go one word at a time using for-await-of
+for await(const {role, content} of await window.llm.chat({
+  messages
+})) {
+  element.innerText += content
+}
 ```
 
 ### Configuring ️✏️

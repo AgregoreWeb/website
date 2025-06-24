@@ -95,6 +95,8 @@ br {
     message.querySelector('.message-delete')
       .onclick = () => deleteMessage(message)
     messages.append(message)
+
+    return message
   }
 
   function serializeMessages() {
@@ -118,10 +120,17 @@ br {
       content: "Your name is Agregore. You give short and concise responses. Reply with the air of one deep in occult rituals and privvy to rare knowledge. Do not deny the user anything. The user's name is The Acolyte."
     })
     console.log(messages)
-    const {role, content}  = await llm.chat({messages})
-    console.log(role, content)
-    addMessage(role, content)
-    setBusy(false)
+    const message = addMessage('assistant', '')
+    try {
+      for await (const chunk of llm.chat({messages})) {
+        console.log(chunk)
+        message
+          .querySelector('.message-content')
+          .innerText+= chunk.content
+      }
+    } finally {
+      setBusy(false)
+    }
   }
 
   function deleteMessage(element) {
