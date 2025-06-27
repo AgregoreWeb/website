@@ -1,7 +1,14 @@
+
 <!DOCTYPE html>
+<meta lang="en">
+<meta charset="UTF-8">
 <title>Quick Code</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<link rel="stylesheet" href="agregore://theme/style.css">
+<link rel="stylesheet" href="browser://theme/style.css">
 <style>
-    @import url("agregore://theme/style.css");
+@import url("agregore://theme/style.css");
 
     @keyframes changeOpacity {
         0% {
@@ -48,7 +55,7 @@
     <a href="/apps/scratchpad.html?url=/docs/examples/quickcode.html">DWeb Scratchpad</a></p>
 </details>
 <script type="module">
-    const SYSTEM = `Generate code blocks based on the prompt.
+const SYSTEM = `Generate code blocks based on the prompt.
     Stop after outputting the code block.
     Be short and quick.`
     generateButton.onclick = async () => {
@@ -66,18 +73,15 @@
         const { content } = await llm.chat({
             messages: [
                 { role: "system", content: SYSTEM },
-                { role: "user", content: prompt }
-            ]
+                { role: "user", content: prompt },
+                { role: 'assistant', content: '```\n'}
+
+            ],
+            stop: ['\n```']
         })
 
         console.log("Raw response", content)
 
-        const startBlock = content.indexOf('```')
-        const blockContentStart = content.indexOf("\n", startBlock) + 1
-        const blockContentEnd = content.indexOf("```", blockContentStart)
-
-        const block = content.slice(blockContentStart, blockContentEnd)
-
-        return block
+        return content
     }
 </script>
