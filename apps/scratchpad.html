@@ -32,6 +32,9 @@ textarea, iframe {
 iframe {
   resize: vertical;
 }
+.big {
+  height: 80vh;
+}
 </style>
 <header>
 <h1>DWeb Scratchpad</h1>
@@ -78,6 +81,7 @@ console.log("Hello World!")
       <option value="hyper">hyper://</option>
       <option value="ipfs">ipfs://</option>
       <option value="ipns">ipns://</option>
+      <option value="data">data://</option>
       <option value="download">Download</option>
     </select>
   </label>
@@ -97,8 +101,7 @@ console.log("Hello World!")
 </dialog>
 <dialog id="helpDialog">
   <h2>How does this work?</h2>
-  <p>
-		This is a scratchpad for making p2p apps. Enter some HTML/CSS/JavaScript and see a preview in real time. You can save the result to your collection or try to load a site somebody else published from their link.
+  <p>This is a scratchpad for making p2p apps. Enter some HTML/CSS/JavaScript and see a preview in real time. You can save the result to your collection or try to load a site somebody else published from their link.
   </p>
   <p>
     If you're new to Agregore, check out our <a href="hyper://agregore.mauve.moe/docs/">docs</a> and if you're new to web programming check out the <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core">Mozilla Developer Network</a> for tutorials and documentation on web development.
@@ -106,6 +109,7 @@ console.log("Hello World!")
   <p>
     Once you've set up Ollama you can use the <a href="hyper://agregore.mauve.moe/docs/examples/quickcode.html">Quickcode</a> AI example to help generate code snippets for you. This can help you learn new syntax like "Css for a red box that is half the screen" or "open the camera and render the video to a video tag".
   </p>
+  <p>You can double click on either the preview or the text boxes to make them take up more vertical height</p>
   <p>
     If you feel like this page should have more features try opening it within itself and tinkering with the code!
   </p>
@@ -129,6 +133,10 @@ previewReader.onload = (e) => previewFrame.src = e.target.result
 const domParser = new DOMParser()
 
 let previewTimeout = null
+
+cssContent.addEventListener('dblclick', toggleBig)
+htmlContent.addEventListener('dblclick', toggleBig)
+jsContent.addEventListener('dblclick', toggleBig)
 
 cssContent.addEventListener('input', updatePreview)
 htmlContent.addEventListener('input', () => {
@@ -173,6 +181,10 @@ if(shouldLoad) {
   setPreview(genPage())
 }
 
+function toggleBig() {
+  this.classList.toggle('big')
+}
+
 function downloadDataUrl(dataUrl, filename) {
   const link = document.createElement('a');
   link.href = dataUrl;
@@ -204,7 +216,11 @@ async function getIPNSURL() {
 async function saveAndPublish(filename, saveType) {
   const content = genPage()
 
-  if(saveType === 'download') {
+  if(saveType === 'data') {
+    const url = previewFrame.src
+    navigator.clipboard.writeText(url)
+    return url
+  } else if(saveType === 'download') {
     const url = previewFrame.src
     downloadDataUrl(url, filename)
     return url
