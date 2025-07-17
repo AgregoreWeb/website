@@ -42,6 +42,7 @@ iframe {
   <button title="Load and edit a site from a link" onclick="loadDialog.showModal()">📂</button>
   <button title="Look at your saved sites" onclick="window.showAllSaved()">📃</button>
   <button title="Help" onclick="helpDialog.showModal()">❔</button>
+  <button title="Clear" id="clearButton">🗑️</button>
 </header>
 <main id="mainContents">
 
@@ -174,10 +175,40 @@ saveForm.onsubmit = (e) => {
     .then((url) => window.open(url))
 }
 
+clearButton.onclick = () => {
+  try {
+    localStorage.removeItem('scratchpad-html')
+    localStorage.removeItem('scratchpad-js')
+    localStorage.removeItem('scratchpad-css')
+    localStorage.removeItem('scratchpad-title')
+    localStorage.removeItem('scratchpad-filename')
+    localStorage.removeItem('scratchpad-description')
+  } finally {
+    location.reload()
+  }
+}
+
 if(shouldLoad) {
   console.log("Loading", shouldLoad)
   loadPage(new URL(shouldLoad, location.href).href)
 } else {
+try {
+  if(localStorage.getItem('scratchpad-html'))
+    htmlContent.value = localStorage.getItem('scratchpad-html')
+  if(localStorage.getItem('scratchpad-css'))
+    cssContent.value = localStorage.getItem('scratchpad-css')
+  if(localStorage.getItem('scratchpad-js'))
+    jsContent.value = localStorage.getItem('scratchpad-js')
+  if(localStorage.getItem('scratchpad-title'))
+    appTitle.value = localStorage.getItem('scratchpad-title')
+  if(localStorage.getItem('scratchpad-filename'))
+    appFilename.value = localStorage.getItem('scratchpad-filename')
+  if(localStorage.getItem('scratchpad-description'))
+    appDescription.value = localStorage.getItem('scratchpad-description')
+
+} catch(e) {
+console.warn('Unable to load from localStorage', e.message)
+}
   setPreview(genPage())
 }
 
@@ -215,6 +246,14 @@ async function getIPNSURL() {
 
 async function saveAndPublish(filename, saveType) {
   const content = genPage()
+
+try {
+  localStorage.setItem('scratchpad-title', appTitle.value)
+  localStorage.setItem('scratchpad-filename', appFilename.value)
+  localStorage.setItem('scratchpad-description', appDescription.value)
+} catch(e) {
+  console.warn('Unable to save page metadata', e.message)
+}
 
   if(saveType === 'data') {
     const url = previewFrame.src
@@ -280,6 +319,9 @@ function updatePreview(cb) {
   previewTimeout = setTimeout(() => {
     if(typeof cb === 'function') cb()
     setPreview(genPage())
+    localStorage.setItem('scratchpad-html', htmlContent.value)
+    localStorage.setItem('scratchpad-css', cssContent.value)
+    localStorage.setItem('scratchpad-js', jsContent.value)
   }, UPDATE_DELAY)
 }
 
@@ -305,6 +347,14 @@ async function loadPage(url) {
   htmlContent.value = html
   cssContent.value = css
   jsContent.value = js
+
+try {
+  localStorage.setItem('scratchpad-title', appTitle.value)
+  localStorage.setItem('scratchpad-filename', appFilename.value)
+  localStorage.setItem('scratchpad-description', appDescription.value)
+} catch(e) {
+  console.warn('Unable to save page metadata', e.message)
+}
 
   setPreview(genPage())
 }
