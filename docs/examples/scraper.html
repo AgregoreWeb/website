@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<meta lang="en">
+<meta charset="UTF-8">
+<title>Scratchpad App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="My quick scratch">
+<link rel="stylesheet" href="agregore://theme/style.css">
+<link rel="stylesheet" href="browser://theme/style.css">
+<style>
+#previewBox {
+  border: 1px dashed var(--browser-theme-primary-highlight);
+  margin: 1em 0em;
+  padding: 0.5em;
+}
+</style>
+<form id="urlForm">
+  <input autofocus="" type="url" name="url" placeholder="url to scrape">
+  <input type="submit" value="Scrape">
+</form>
+<section id="previewBox" contenteditable="true"></section>
+<form id="saveForm">
+<label>
+    Save Type
+    <select name="saveType">
+      <option value="hyper">hyper://</option>
+      <option value="ipns">ipns://</option>
+    </select>
+  </label>
+  <button title="Save">💾</button>
+</form>
+<script type="module">
+let scrapedTitle = ''
+let scrapedDescription = ''
+
+document.getElementById('urlForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const url = document.querySelector('input[name="url"]').value;
+  
+  try {
+    const response = await fetch(url);
+    const text = await response.text();
+    
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+    const {title, description} = getDocumentMetadata(doc)
+    scrapedTitle = title
+    scrapedDescription = description
+    sanitizeElementTree(doc, doc.body, url)
+    document.getElementById('previewBox').innerHTML = doc.body.innerHTML;
+  } catch (error) {
+    console.error('Error fetching the URL:', error);
+  }
+});
+
+saveForm.onsubmit = async (e) => {
+  e.preventDefault()
+  const publishURL = await saveScrape()
+  window.open(publishURL)
+}
+
+function genPage({
+  title,
+  description,
+  html
+}={}) {
+return `<!DOCTYPE html>
+<meta lang="en">
+<meta charset="UTF-8">
+<title>${title}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="${description.trim()}">
+<link rel="stylesheet" href="browser://theme/style.css">
+${html}
+`
+}
+
+function getDocumentMetadata(doc) {
+  const title = doc.querySelector('title').innerText;
+  const description = doc.querySelector('meta[name="description"]').getAttribute('content');
+  return { title, description };
+}
+
+async function saveScrape() {
+  const html = previewBox.innerHTML
+  const body = genPage({
+    title: scrapedTitle,
+    description: scrapedDescription,
+    html
+  })
+  const url = urlForm.url.value
+  const saveType = saveForm.saveType.value
+
+  const rootURL = saveType === 'hyper' ? await getDriveURL() : await getIPNSURL()
+  const publishURL = urlToFile(url, rootURL)
+
+  const response = await fetch(publishURL, {
+    method: 'put',
+    body
+  })
+
+  if(!response.ok) throw new Error(`Unable to publish: ${await response.text()}`)
+
+  return publishURL
+}
+
+function urlToFile(url, rootURL) {
+  const parsedUrl = new URL(url);
+  let path = parsedUrl.pathname;
+  if (!path.endsWith('.html')) path += '.html';
+  return `${rootURL}/${parsedUrl.hostname}${path}`;
+}
+
+async function getDriveURL() {
+  const name = "scraped_sites"
+  const response = await fetch(`hyper://localhost/?key=${name}`, { method: 'POST' });
+  if (!response.ok) {
+    throw new Error(`Failed to generate Hyperdrive key: ${response.statusText}`);
+  }
+  return await response.text()
+}
+
+async function getIPNSURL() {
+  const name = "scraped_sites"
+  const response = await fetch(`ipns://localhost/?key=${name}`, { method: 'POST' });
+  if (!response.ok) {
+    throw new Error(`Failed to generate IPNS key: ${response.statusText}`);
+  }
+  await response.text()
+  return response.headers.get('Location')
+}
+
+function sanitizeElementTree(doc, element, rootURL) {
+  function isAbsolute(url) {
+    return /^(http|https):\/\//i.test(url);
+  }
+
+  function makeAbsolute(url) {
+    if (!url || isAbsolute(url)) return url;
+    return new URL(url, rootURL).href;
+  }
+
+  function traverse(node) {
+    if (node instanceof HTMLElement) {
+      if (node.tagName === 'IFRAME' || node.tagName === 'SCRIPT') {
+        node.remove();
+      } else if (['IMG', 'AUDIO', 'VIDEO'].includes(node.tagName)) {
+        const srcAttr = node.getAttribute('src');
+        if (srcAttr) node.setAttribute('src', makeAbsolute(srcAttr));
+      } else if (node.tagName === 'A' && node.hasAttribute('href')) {
+        const hrefAttr = node.getAttribute('href');
+        if (hrefAttr) node.setAttribute('href', makeAbsolute(hrefAttr));
+      }
+      for (let i = 0; i < node.attributes.length; i++) {
+        const attr = node.attributes[i];
+        if (attr.name.startsWith('on')) {
+          node.removeAttribute(attr.name);
+          i--;
+        }
+      }
+    }
+    node.childNodes.forEach(traverse);
+  }
+
+  traverse(element);
+}
+</script>

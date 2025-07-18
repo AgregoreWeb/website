@@ -17,6 +17,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 
 ### Examples
 
+- [Web scraper](./examples/scraper.html)
 - [Browser Development Environment](./examples/browser-devenv/)
 - [Drag and Drop File Uploader](./examples/drag-and-drop/)
 - [PubSub Chat](./examples/ipfs-pub-sub-chat/)
@@ -30,6 +31,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 
 ### Tutorials:
 
+- [Web scraper](./tutorials/scraper)
 - [🧱 App and tutorial making process](./tutorials/process)
 - [Theme Builder](./tutorials/themebuilder-tutorial)
 - IPFS Development Environment [Part 1](./tutorials/ipfs-browser-devenv/part-1), [Part 2](./tutorials/ipfs-browser-devenv/part-2) and [Part 3](./tutorials/ipfs-browser-devenv/part-3)
