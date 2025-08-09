@@ -1,4 +1,4 @@
-## Explore The Distributed Web - Agregore Browser
+## Explore The Distributed Web
 
 Here's a collection of useful websites on the distributed web.
 Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on our Github repo to add your own link to this page.
@@ -28,6 +28,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [IPFS](ipns:://ipfs.tech)
 - [Gemini Protocol](gemini://geminiprotocol.net/)
 - [BitTorrent](https://bittorrent.org/)
+- [Web3](web3://web3url.eth)
 
 ### Extensions:
 
@@ -61,6 +62,10 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [Peersky](https://peersky.p2plabs.xyz/)
 - [Galacteek](https://galacteek.gitlab.io/)
 - [Hybrid](https://github.com/HybridWare/hybrid-browser)
+
+### Web3 / Cryptocurrency stuff
+
+- [web3://terraformnavigator.eth/](Web3:/// terraform navigator)
 
 ---
 

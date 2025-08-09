@@ -42,8 +42,9 @@ Made to support a resilient and person-first foundation for software.
 ### Features
 
 - Browse the existing (HTTP) web like usual.
-- Browse the [Distributed Web](https://getdweb.net/) on [Hypercore](https://github.com/hypercore-protocol), [BitTorrent](http://bittorrent.org/introduction.html), and [IPFS](https://ipfs.tech/).
+- Browse the [Distributed Web](https://getdweb.net/) on [Hypercore](https://github.com/hypercore-protocol), [BitTorrent](http://bittorrent.org/introduction.html), and [IPFS](https://ipfs.tech/)
 - Browse alternate web protocols like [Gemini](https://geminiprotocol.net/)
+- Browse Etherium Smart contracts with [web3:// URLs](https://docs.web3url.io/).
 - Tracking free with a built in [Ad blocker](https://ublockorigin.com/)
 - Render [Markdown](https://www.markdownguide.org/basic-syntax/) and JSON natively.
 - Archive and save web pages for offline use via [ArchiveWeb.page](https://archiveweb.page/)
