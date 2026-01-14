@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<meta lang="en">
+<meta charset="UTF-8">
+<title>Text Editor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Edit and save text files on the dweb.">
+<link rel="stylesheet" href="agregore://theme/style.css">
+<link rel="stylesheet" href="browser://theme/style.css">
+<style>
+/* Make the top level elements fill the screen*/
+html, body {
+ margin: 0px;
+ padding: 0px;
+ width: 100%;
+ height: 100%;
+}
+
+/* Enable flexbox on the main page content*/
+body {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0.5em;
+}
+
+/* Reset heading style */
+h1 {
+  font-size: 1rem;
+  display: inline;
+}
+
+/* Have the editor fill the page */
+#editorBox {
+    flex: 1;
+}
+
+label + * {
+  display:block;
+}
+</style>
+<header>
+    <h1>Text Editor</h1>
+    <button id="saveButton" title="Save File">💾</button>
+    <button id="loadButton" title="Load File">📂</button>
+    <button id="createButton" title="Create New File">➕</button>
+</header>
+<textarea id="editorBox"></textarea>
+<dialog id="loadDialog">
+  <h2>Load file from URL</h2>
+  <form>
+    <label>URL to load from</label>
+    <input name="url" id="loadURLInput" required="">
+    <button>Load</button>
+  </form>
+</dialog>
+<dialog id="createDialog">
+  <h2>Create file</h2>
+  <form id="saveForm">
+    <label>
+      Save Type
+    </label>
+    <select name="saveType">
+      <option value="hyper">hyper://</option>
+      <option value="ipfs">ipfs://</option>
+      <option value="ipns">ipns://</option>
+    </select>
+    <label>
+      Site Name
+    </label>
+    <input name="siteName" value="notes">
+    <label>
+      File Name
+    </label>
+    <input name="fileName" value="example.txt">
+    <button>Create</button>
+  </form>
+</dialog>
+<script type="module">
+saveForm.onsubmit = async (e) => {
+  e.preventDefault()
+  const formData = new FormData(saveForm)
+  const fileName = formData.get('fileName')
+  const protocol = formData.get('saveType')
+  const siteName = formData.get('siteName')
+
+  const newFileURL = await makeFileURL(protocol, siteName, fileName)
+
+  const pageURL = new URL(window.location)
+  pageURL.searchParams.set('url', newFileURL)
+
+  window.open(pageURL)
+  createDialog.close()
+}
+
+saveButton.onclick = async () => {
+  try {
+    const url = getURLFromSearch()
+    const text = editorBox.value
+    await saveTo(url, text)
+  } catch (e) {
+    alert(e.message)
+    return
+  }
+  alert('Saved!')
+}
+
+loadButton.onclick = () => loadDialog.showModal()
+
+createButton.onclick = () => createDialog.showModal()
+
+const url = getURLFromSearch()
+
+if(url) {
+  loadURLInput.value = url
+  const text = await loadTextFromURL(url)
+  editorBox.value = text 
+} else {
+  loadDialog.showModal()
+}
+
+const IPFS_EMPTY_FOLDER = 'ipfs://bafyaabakaieac/'
+
+async function getIPNSURL(siteName) {
+  const response = await fetch(`ipns://localhost/?key=${siteName}`, { method: 'POST' });
+  if (!response.ok) {
+    throw new Error(`Failed to generate IPNS key: ${await response.text()}`);
+  }
+  await response.text()
+  return response.headers.get('Location')
+}
+
+async function getHyperURL(siteName) {
+  const response = await fetch(`hyper://localhost/?key=${siteName}`, { method: 'POST' });
+  if (!response.ok) {
+    throw new Error(`Failed to generate Hyperdrive key: ${await response.text()}`);
+  }
+  return await response.text()
+}
+
+async function makeFileURL(protocol, siteName, fileName) {
+  if(protocol === 'ipfs') {
+    // IPFS has no site name since it's immutable sites
+    return new URL(fileName, IPFS_EMPTY_FOLDER)
+  } else if(protocol === 'ipns') {
+    const base = await getIPNSURL(siteName)
+    return new URL(fileName, base)
+  } else if(protocol === 'hyper') {
+    const base = await getHyperURL(siteName)
+    return new URL(fileName, base)
+  }
+
+  throw new Error(`Invalid Protocol: ${protocol}`)
+}
+
+
+async function saveTo(url, text) {
+  const response = await fetch(url, {
+    method: 'put',
+    body: text
+  })
+
+  if(!response.ok) {
+    throw new Error(`Couldn't save text ${response.status}: ${text}`)
+  }
+  // Pull the response text out
+  await response.text()
+}
+
+function getURLFromSearch() {
+    const {searchParams} = new URL(window.location)
+    const url = searchParams.get('url')
+    return url
+}
+
+async function loadTextFromURL(url) {
+    const response = await fetch(url)
+    const text = await response.text()
+    if(!response.ok) {
+        throw new Error(`Couldn't load URL ${response.status}: ${text}`)
+    }
+    return text
+}
+
+</script>

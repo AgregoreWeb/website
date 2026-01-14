@@ -3,18 +3,19 @@
 Here's a collection of useful websites on the distributed web.
 Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on our Github repo to add your own link to this page.
 
-### Demos and tools:
+### Apps and tools:
 
 - [Agregore Docs](/docs/)
 - [DWeb Scratchpad](/apps/scratchpad.html)
 - [DWeb File Viewer](/apps/fileviewer.html)
+- [DWeb Text Editor](/apps/texteditor.html)
+- [Quick Code Snippet Generator](/docs/examples/quickcode.html)
 - [Drag and Drop File Uploads](/docs/examples/drag-and-drop/)
 - [Theme Builder](/docs/examples/themebuilder)
 - [Sutty CMS, static site generator with dweb publishing](https://sutty.nl/en/)
 - [Distributed Press Social Reader](//reader.distributed.press/)
 - [Local AI App Generator](/docs//examples/llm-appgen/)
 - [Local AI Chat Example](/docs/examples/llm-chat.html)
-- [Quick Code Snippet Generator](/docs/examples/quickcode.html)
 - [Local AI Vision Demo](/docs/examples/llm-vision.html)
 
 ### Aggregators and Search
@@ -51,6 +52,7 @@ Feel free to [submit a pull request](https://github.com/AgregoreWeb/website/) on
 - [agregore://welcome](agregore://welcome)
 - [agregore://settings](agregore://settings)
 - [agregore://history](agregore://history)
+- [agregore://sites](agregore://sites)
 - [agregore://about](agregore://about)
 - [agregore://about](agregore://404)
 - [agregore://theme/example](agregore://theme/example)

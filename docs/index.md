@@ -2,10 +2,10 @@
 
 Here are some docs to get you started with using Agregore.
 
-**🛠🚧 The following pages are WIPs and are currently being worked on! Check back every now and again for updates 🚧🛠**
-
 - [Extensions](./extensions)
 - [Theming](./theming)
+- [Frequently Asked Questions](../faq)
+- [Useful code snippets](./snippets)
 
 ### Protocols
 
@@ -31,6 +31,7 @@ Documentation for P2P protocol handlers that are supported by Agregore. A great 
 
 ### Tutorials:
 
+- [Text Editor](./tutorials/texteditor)
 - [Web scraper](./tutorials/scraper)
 - [🧱 App and tutorial making process](./tutorials/process)
 - [Theme Builder](./tutorials/themebuilder-tutorial)
