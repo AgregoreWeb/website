@@ -69,10 +69,6 @@ console.log("Hello World!")
     <input id="appTitle" name="title" value="Scratchpad App">
   </label>
   <label>
-    Filename (.html)
-    <input id="appFilename" name="filename" value="example.html">
-  </label>
-  <label>
     Description
     <textarea id="appDescription" name="description">My quick scratch</textarea>
   </label>
@@ -85,6 +81,14 @@ console.log("Hello World!")
       <option value="data">data://</option>
       <option value="download">Download</option>
     </select>
+  </label>
+  <label>
+    Save Site Name
+    <input id="appSiteName" name="siteName" value="dweb_scratchpad">
+  </label>
+  <label>
+    Filename (.html)
+    <input id="appFilename" name="filename" value="example.html">
   </label>
 	<button>Save and View</button>
 	</form>
@@ -120,7 +124,7 @@ console.log("Hello World!")
 const UPDATE_DELAY = 2000
 
 window.showAllSaved = async () => {
-  const url = await getDriveURL()
+  const url = await getHyperURL(appSiteName.value)
   window.open(url)
 }
 
@@ -171,7 +175,8 @@ saveForm.onsubmit = (e) => {
     filename+= '.html'
   }
   const saveType = formData.get('saveType')
-  saveAndPublish(filename, saveType)
+  const siteName = formData.get('siteName')
+  saveAndPublish(siteName, filename, saveType)
     .then((url) => window.open(url))
 }
 
@@ -183,6 +188,7 @@ clearButton.onclick = () => {
     localStorage.removeItem('scratchpad-title')
     localStorage.removeItem('scratchpad-filename')
     localStorage.removeItem('scratchpad-description')
+    localStorage.removeItem('scratchpad-siteName')
   } finally {
     location.reload()
   }
@@ -205,7 +211,8 @@ try {
     appFilename.value = localStorage.getItem('scratchpad-filename')
   if(localStorage.getItem('scratchpad-description'))
     appDescription.value = localStorage.getItem('scratchpad-description')
-
+  if(localStorage.getItem('scratchpad-siteName'))
+    appSiteName = localStorage.getItem('scratchpad-siteName')
 } catch(e) {
 console.warn('Unable to load from localStorage', e.message)
 }
@@ -225,18 +232,16 @@ function downloadDataUrl(dataUrl, filename) {
   document.body.removeChild(link);
 }
 
-async function getDriveURL() {
-  const name = "dweb_scratchpad"
-  const response = await fetch(`hyper://localhost/?key=${name}`, { method: 'POST' });
+async function getHyperURL(siteName) {
+  const response = await fetch(`hyper://localhost/?key=${siteName}`, { method: 'POST' });
   if (!response.ok) {
     throw new Error(`Failed to generate Hyperdrive key: ${response.statusText}`);
   }
   return await response.text()
 }
 
-async function getIPNSURL() {
-  const name = "dweb_scratchpad"
-  const response = await fetch(`ipns://localhost/?key=${name}`, { method: 'POST' });
+async function getIPNSURL(siteName) {
+  const response = await fetch(`ipns://localhost/?key=${siteName}`, { method: 'POST' });
   if (!response.ok) {
     throw new Error(`Failed to generate IPNS key: ${response.statusText}`);
   }
@@ -244,13 +249,14 @@ async function getIPNSURL() {
   return response.headers.get('Location')
 }
 
-async function saveAndPublish(filename, saveType) {
+async function saveAndPublish(siteName, filename, saveType) {
   const content = genPage()
 
 try {
   localStorage.setItem('scratchpad-title', appTitle.value)
   localStorage.setItem('scratchpad-filename', appFilename.value)
   localStorage.setItem('scratchpad-description', appDescription.value)
+  localStorage.setItem('scratchpad-siteName', siteName)
 } catch(e) {
   console.warn('Unable to save page metadata', e.message)
 }
@@ -266,9 +272,9 @@ try {
   } else if(saveType === 'ipfs') {
     return saveIPFS(filename, content);
   } else if(saveType === 'ipns') {
-    return saveIPNS(filename, content);
+    return saveIPNS(siteName, filename, content);
   } else {
-    return saveHyper(filename, content);
+    return saveHyper(siteName, filename, content);
   }
 }
 
@@ -285,8 +291,8 @@ async function saveIPFS(filename, content) {
   return response.headers.get('Location')
 }
 
-async function saveHyper(filename, content) {
-  const driveURL = await getDriveURL()
+async function saveHyper(siteName, filename, content) {
+  const driveURL = await getHyperURL(siteName)
   const url = new URL(filename, driveURL).href
   const response = await fetch(url, {
     method: 'PUT',
@@ -299,8 +305,8 @@ async function saveHyper(filename, content) {
   return url
 }
 
-async function saveIPNS(filename, content) {
-  const rootURL = await getIPNSURL()
+async function saveIPNS(siteName, filename, content) {
+  const rootURL = await getIPNSURL(siteName)
   const url = new URL(filename, rootURL).href
   const response = await fetch(url, {
     method: 'PUT',
