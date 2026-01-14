@@ -32,9 +32,9 @@ Build the distributed web.
 [Download](https://github.com/AgregoreWeb/agregore-browser/releases/latest)
 [Mobile](https://github.com/AgregoreWeb/agregore-mobile/)
 
-Agregore is not just a `Web-Browser`, it's a `Web-Weaver`.
-It gives you the tools to load and author content locally without needing the cloud.
-Instead of needing to be always connected to a server, you can load from your cache or directly from others.
+Agregore is not just a `Web-Browser`, it's a `Distributed Web-Weaver`.
+It gives you the tools to load and author content locally without needing the internet.
+Instead of needing to be always connected to a server, you can load directly from others and store sites locally for offline use.
 Agregore automatically reshares P2P websites with others so the more popular a site is, the faster it is to load it.
 It works offline, on local networks, and over the internet.
 Made to support a resilient and person-first foundation for software.
@@ -84,7 +84,7 @@ response = await fetch(url, {
 window.location.href = response.headers.get('Location')
 ```
 
-Try making an app in the [DWeb Scratchpad](/apps/scratchpad.html). For more details and demos, check out the the [Videos](videos.html) page, or read the [Fetch API Docs](https://github.com/AgregoreWeb/agregore-browser/tree/master/docs).
+Try making an app in the [DWeb Scratchpad](/apps/scratchpad.html). For more details and demos, check out the the [Videos](videos.html) page, or read the [docs](/docs/).
 
 [Source Code](https://github.com/AgregoreWeb/agregore-browser)
 [Contact](mailto:agregore@mauve.moe)
