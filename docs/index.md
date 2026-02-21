@@ -4,6 +4,7 @@ Here are some docs to get you started with using Agregore.
 
 - [Extensions](./extensions)
 - [Theming](./theming)
+- [Search Provider](./search-provider)
 - [Frequently Asked Questions](../faq)
 - [Useful code snippets](./snippets)
 
