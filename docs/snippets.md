@@ -71,6 +71,55 @@ async function getIPNSURL(siteName) {
 const IPFS_EMPTY_FOLDER = 'ipfs://bafyaabakaieac/'
 ```
 
+### Open URLs when they're dragged on the page
+
+```JavaScript
+// Needed to get drop events
+window.ondragover = (e) => {
+  const hasText = e.dataTransfer.types.includes('text/plain');
+  if(hasText) {
+    e.preventDefault();
+  }
+}
+window.ondrop = (e) => {
+  const hasText = e.dataTransfer.types.includes('text/plain');
+  if(hasText) {
+    e.preventDefault();
+    const text = e.dataTransfer.getData('text/plain')
+    const url = new URL(text, location.href)
+    const toLoad = new URL(location.href)
+    toLoad.searchParams.set('url', url)
+    window.location.href = toLoad.href
+  }
+}
+```
+
+### Check if a URL is writable
+
+```JavaScript
+async function checkWritable(url) {
+  const response = await fetch(url, {method: 'HEAD'})
+  await response.text()
+  const allow = response.headers.get('allow')
+  const writable = allow && allow.toLocaleLowerCase().includes('put')
+  return writable
+}
+```
+
+### Open the app with a URL if one wasn't provided
+
+```JavaScript
+const {searchParams} = new URL(window.location)
+const url = searchParams.get('url')
+if(!url) {
+  setTimeout(() => {
+    location.href = new URL(`hyper://agregore.mauve.moe/apps/create.html?url=${location.href}`).href
+  }, 100)
+} else {
+  loadData(url)
+}
+```
+
 ## CSS
 
 ### Import browser style
