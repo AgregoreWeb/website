@@ -19,52 +19,41 @@
 pre br {
   display: unset;
 }
+
+#rawView:empty {
+  display: none;
+}
+
+a.writable, button.writable {
+  display: none;
+}
+
+/* Only show writable elements when top level is writable */
+.writable .writable {
+  display: unset;
+}
 </style>
 <form id="nav">
-<button id="upButton" type="button">⬆️</button>
+<button id="upButton" type="button" title="Go to parent folder">⬆️</button>
 <input name="url" value="./" id="urlToView">
-<button type="submit">➡️</button>
+<button type="submit" title="Navigate to URL">➡️</button>
+<button class="writable" commandFor="createFileDialog" command="show-modal" type="button" title="Add a file">📝</button>
 </form>
 <hr>
 <ul id="fileList"></ul>
 <pre><code id="rawView"></code></pre>
+<dialog id="createFileDialog">
+  <h3>Add a new file</h3>
+  <form id="creatFileForm">
+    <input name="fileName" value="index.md">
+    <button type="submit">Open in editor</button>
+  </form>
+</dialog>
 <script type="module">
+// TODO: Add more text file types
+const TEXT_EXTENSIONS = ['md', 'txt', 'gmi', 'gemini', 'json']
 const root = location.protocol === 'data:' ? 'hyper://agregore.mauve.moe/apps' : location.href
 const {searchParams} = new URL(root)
-
-if(searchParams.has('url')) {
-  urlToView.value = searchParams.get('url')
-}
-
-const toLoad = new URL(urlToView.value, root)
-toLoad.searchParams.set("noResolve", 'true')
-console.log('Loading', toLoad)
-
-try {
-const response = await fetch(toLoad)
-const files = await response.json()
-console.log(files)
-
-for(const name of files) {
-  if(name.startsWith('.')) continue
-  const li = document.createElement('li')
-  const a = document.createElement('a')
-  if(name.endsWith('/')) {
-    a.href = makeViewURL(new URL(name, toLoad).href)
-  } else {
-    a.target = '_blank'
-    a.href = new URL(name, toLoad)
-  }
-  a.innerText = name
-  li.appendChild(a)
-  fileList.appendChild(li)
-}
-
-} catch {
-  const response = await fetch(urlToView.value)
-  const raw = await response.text()
-  rawView.innerText = raw
-}
 
 upButton.onclick = (e) => {
   e.preventDefault()
@@ -73,9 +62,131 @@ upButton.onclick = (e) => {
   location.href = makeViewURL(new URL(next, current))
 }
 
+creatFileForm.onsubmit = (e) => {
+  e.preventDefault()
+  const current = urlToView.value
+
+  let name = creatFileForm.elements.fileName.value
+
+  if(!name.includes('.')) {
+    name += '.md'
+  }
+
+  const fullURL = new URL(name, current).href
+
+  const extension = name.split('.').slice(1).join('.').toLowerCase()
+
+  if(extension.endsWith('html')) {
+    location.href = makeEditorURL('./scratchpad.html', fullURL)
+  } else if(TEXT_EXTENSIONS.includes(extension)) {
+    location.href = makeEditorURL('./texteditor.html', fullURL)
+  }
+}
+
+// Needed to get drop events
+window.ondragover = (e) => {
+  const hasText = e.dataTransfer.types.includes('text/plain');
+  if(hasText) {
+    e.preventDefault();
+  }
+}
+window.ondrop = (e) => {
+  const hasText = e.dataTransfer.types.includes('text/plain');
+  if(hasText) {
+    e.preventDefault();
+    const text = e.dataTransfer.getData('text/plain')
+    const url = new URL(text, location.href)
+    const toLoad = new URL(location.href)
+    toLoad.searchParams.set('url', url)
+    window.location.href = toLoad.href
+  }
+}
+
+if(searchParams.has('url')) {
+  urlToView.value = searchParams.get('url')
+  loadData()
+  tryShowingWritable(searchParams.get('url'))
+} else {
+  // No URL? Create one and open us again
+  const self = location.href
+  setTimeout(() => {
+    window.location.href = new URL(`./create.html?type=/&name=/&url=${self}`,self).href
+  }, 200)
+}
+
+async function tryShowingWritable(url) {
+  if(!await checkWritable(url)) return
+  document.body.classList.toggle('writable', true)
+}
+
+async function checkWritable(url) {
+  const response = await fetch(url, {method: 'HEAD'})
+  await response.text()
+  const allow = response.headers.get('allow')
+  const writable = allow && allow.toLocaleLowerCase().includes('put')
+  return writable
+}
+
+async function loadData() {
+  const toLoad = new URL(urlToView.value, root)
+  toLoad.searchParams.set("noResolve", 'true')
+  console.log('Loading', toLoad)
+
+  if(toLoad.pathname === '/') {
+    upButton.style.display = 'none'
+  }
+
+  try {
+    const response = await fetch(toLoad)
+    const files = await response.json()
+
+    for(const name of files) {
+      if(name.startsWith('.')) continue
+      const fullURL = new URL(name, toLoad).href
+      const li = document.createElement('li')
+      const a = document.createElement('a')
+      if(name.endsWith('/')) {
+        a.href = makeViewURL(fullURL)
+      } else {
+        a.target = '_blank'
+        a.href = fullURL
+      }
+      a.innerText = name
+      li.appendChild(a)
+
+      const extension = name.split('.').slice(1).join('.').toLowerCase()
+      if(extension.endsWith('html')) {
+        li.appendChild(editButtonFor('./scratchpad.html', fullURL))
+      } else if(TEXT_EXTENSIONS.includes(extension)) {
+        li.appendChild(editButtonFor('./texteditor.html', fullURL))
+      }
+
+      fileList.appendChild(li)
+    }
+  } catch (e) {
+    console.error(e)
+    const response = await fetch(urlToView.value)
+    const raw = await response.text()
+    rawView.innerText = raw
+  }
+}
+
 function makeViewURL(url) {
   const viewURL = new URL(location.href)
   viewURL.searchParams.set('url', url)
   return viewURL.href
+}
+
+function editButtonFor(editor, url) {
+  const editButton = document.createElement('a')
+  editButton.href = makeEditorURL(editor, url)
+  editButton.innerText = '✏️'
+  editButton.classList.add('writable')
+  editButton.title = 'Open in file editor'
+  return editButton
+}
+
+function makeEditorURL(editor, url) {
+  return new URL(`${editor}?url=${url}`, location)
 }
 </script>

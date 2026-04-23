@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<meta lang="en">
+<meta charset="UTF-8">
+<title>Create or Open a Resource</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create a file or open a URL and pass it to a different web app.
+
+Used by other apps as a "open dialog".
+
+The final URL is passed to the `url` parameter of the viewer.
+
+You can specify the viewer to use by specifying it in the `url` search param on this page. Like `?url=foo.html`">
+<link rel="stylesheet" href="agregore://theme/style.css">
+<link rel="stylesheet" href="browser://theme/style.css">
+<style>
+#saveForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#loadForm {
+  display: inline;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+}
+
+section {
+  max-width: var(--ag-theme-max-width);
+  display: block;
+  margin: 0 auto;
+}
+</style>
+<h2>Create or Open a Resource</h2>
+<section>
+  <button commandfor="saveFormDialog" command="show-modal">Create</button>or open:
+  <form id="loadForm">
+    <input id="loadURL" placeholder="Paste your link">
+  </form>
+</section>
+<details>
+<summary>What is this?</summary>
+<h3>For Spellcasters:</h3>
+
+Create a new file or open an existing one and pass it to a different web app.
+
+If you want to open an existing resource you can either paste a link into the text box, type one in and press enter, or drag a link anywhere onto the page.
+
+Otherwise you can use the Create form to make a new one.
+
+<h3>For Spellweavers:</h3>
+
+This is used by other apps as an <code>open dialog</code> so they don't have to make one themselves..
+
+The final URL is passed to the <code>url</code> parameter of whatever app requested it.
+
+You can specify the viewer to use by specifying it in the <code>url</code> search param on this page.
+Like <code>?url=foo.html</code>.
+You can specify a default name with the <code>name</code> parameter.
+You can specify a required file extension with the <code>type</code> parameter.
+</details>
+<dialog id="saveFormDialog">
+<form id="saveForm">
+  <h2>Create a resource</h2>
+  <label>
+    Protocol
+    <select name="protocol">
+      <option value="hyper">hyper://</option>
+      <option value="ipfs">ipfs://</option>
+      <option value="ipns">ipns://</option>
+    </select>
+  </label>
+  <label>
+    Storage Name
+    <input name="location" value="default">
+  </label>
+  <label>
+    Filename And Path
+    <input name="filename" value="index.md">
+  </label>
+  <button>Create And View</button>
+</form>
+</dialog>
+
+<script type="module">
+const {searchParams} = new URL(location.href)
+
+const preferViewer = searchParams.get('url')
+const preferFileType = searchParams.get('type') || ''
+const preferFileName = searchParams.get('name') || ''
+
+if(preferFileName) {
+  saveForm.elements.filename.value = preferFileName
+}
+
+const byProtocol = {
+  hyper: getHyperURL,
+  ipfs: getIPFSURL,
+  ipns: getIPNSURL,
+}
+
+// Needed to get drop events
+window.ondragover = (e) => {
+  const hasText = e.dataTransfer.types.includes('text/plain');
+  if(hasText) {
+    e.preventDefault();
+  }
+}
+window.ondrop = (e) => {
+  const hasText = e.dataTransfer.types.includes('text/plain');
+  if(hasText) {
+    e.preventDefault();
+    const text = e.dataTransfer.getData('text/plain')
+    const url = new URL(text, location.href)
+    loadAndView(url.href)
+  }
+}
+
+saveForm.onsubmit = (e) => {
+  e.preventDefault()
+  createAndView()
+}
+
+loadForm.onsubmit = (e) => {
+  e.preventDefault()
+  const url = new URL(loadURL.value, location.href)
+  loadAndView(url.href)
+}
+
+loadURL.onpaste = (event) => {
+  const pasted = event.clipboardData.getData('text')
+  const url = new URL(pasted, location.href)
+  loadAndView(url.href)
+}
+
+function loadAndView(url) {
+  if(preferFileType && !url.toLowerCase().endsWith(preferFileType)) {
+    return alert(`The viewer expects a ${preferFileType} extension on the file`)
+  }
+  
+  const viewer = viewerFor(url)
+
+  // Allow relative URLs for viewer
+  const final = new URL(viewer, location.href)
+  final.searchParams.set('url', url)
+  window.location.href = final.href
+
+}
+
+async function createAndView() {
+  const formValues = saveForm.elements;
+
+  // Get the specific input elements
+  const protocol = formValues.protocol.value;
+  const location = formValues.location.value;
+  let filename = formValues.filename.value;
+
+  if(preferFileName && !filename.toLowerCase().endsWith(preferFileName.toLowerCase())) {
+    filename += preferFileName
+  }
+  
+  const root = await byProtocol[protocol](location)
+  const full = new URL(filename, root).href
+
+  loadAndView(full)
+}
+
+function viewerFor(full) {
+let viewer = preferViewer
+  if(!viewer) {
+    if(full.toLowerCase().endsWith('html')) {
+      viewer = 'hyper://agregore.mauve.moe/apps/scratchpad.html'
+    } else {
+      viewer = 'hyper://agregore.mauve.moe/apps/texteditor.html'
+    }
+  }
+
+  return viewer
+}
+
+async function getHyperURL(siteName) {
+  const response = await fetch(`hyper://localhost/?key=${siteName}`, { method: 'POST' });
+  if (!response.ok) {
+    throw new Error(`Failed to generate Hyperdrive key: ${response.statusText}`);
+  }
+  return await response.text()
+}
+
+async function getIPNSURL(siteName) {
+  const response = await fetch(`ipns://localhost/?key=${siteName}`, { method: 'POST' });
+  if (!response.ok) {
+    throw new Error(`Failed to generate IPNS key: ${response.statusText}`);
+  }
+  await response.text()
+  return response.headers.get('Location')
+}
+
+async function getIPFSURL() {
+  return 'ipfs://bafyaabakaieac/'
+}
+
+
+</script>
