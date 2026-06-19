@@ -37,7 +37,8 @@ a.writable, button.writable {
 <button id="upButton" type="button" title="Go to parent folder">⬆️</button>
 <input name="url" value="./" id="urlToView">
 <button type="submit" title="Navigate to URL">➡️</button>
-<button class="writable" commandFor="createFileDialog" command="show-modal" type="button" title="Add a file">📝</button>
+  <button class="writable" commandFor="createFileDialog" command="show-modal" type="button" title="Add a file">📝</button>
+  <button class="writable" commandFor="folderUploadDialog" command="show-modal" type="button" title="Upload folder">📂</button>
 </form>
 <hr>
 <ul id="fileList"></ul>
@@ -47,6 +48,13 @@ a.writable, button.writable {
   <form id="creatFileForm">
     <input name="fileName" value="index.md">
     <button type="submit">Open in editor</button>
+  </form>
+</dialog>
+<dialog id="folderUploadDialog">
+  <h3>Upload files</h3>
+  <form id="folderUploadForm">
+    <input type="file" multiple />
+    <button type="submit">Upload</button>
   </form>
 </dialog>
 <script type="module">
@@ -81,6 +89,17 @@ creatFileForm.onsubmit = (e) => {
   } else if(TEXT_EXTENSIONS.includes(extension)) {
     location.href = makeEditorURL('./texteditor.html', fullURL)
   }
+}
+
+folderUploadForm.onsubmit = async (e) => {
+  e.preventDefault()
+  const fileInput = folderUploadForm.querySelector('input[type="file"]')
+  if(!fileInput.files.length) return
+
+  const formdata = new FormData()
+  for(const file of fileInput.files) formdata.append('file', file)
+  await fetch(urlToView.value, { method: 'put', body: formdata })
+  location.reload()
 }
 
 // Needed to get drop events
